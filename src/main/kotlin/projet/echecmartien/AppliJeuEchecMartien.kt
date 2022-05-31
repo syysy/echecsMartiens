@@ -3,8 +3,7 @@ package projet.echecmartien
 import javafx.application.Application
 
 import javafx.stage.Stage
-import projet.echecmartien.modele.Deplacement
-import projet.echecmartien.modele.Plateau
+import projet.echecmartien.modele.*
 
 class AppliJeuEchecMartien: Application() {
     override fun start(primaryStage: Stage) {
@@ -16,8 +15,19 @@ class AppliJeuEchecMartien: Application() {
 
 fun main(){
     //Application.launch(AppliJeuEchecMartien::class.java)
+    val jeu = Jeu()
     val p = Plateau()
-    println(p)
+    val j1 = Joueur("Mar")
+    val j2 = Joueur("Tin")
+    jeu.initialiserPartie(j1,j2,5)
+    println(jeu.getJoueurCourant()!!.nom)
+    jeu.changeJoueurCourant()
+    println(jeu.getJoueurCourant()!!.nom)
+    println(jeu.plateau.getCases()[0][7].getJoueur()!!.nom)
+    jeu.deplacer(3,5,3,4)
+    jeu.deplacer(3,4,3,3)
+    println(jeu.plateau.getCases()[3][3].getJoueur()!!.nom)
+    println(jeu.plateau)
 }
 
 
