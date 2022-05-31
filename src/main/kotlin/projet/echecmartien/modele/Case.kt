@@ -44,4 +44,20 @@ class Case {
         this.estLibre = pion == null
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (other !is Case){
+            return false
+        }
+        if (this.estLibre != other.estLibre){
+            return false
+        }
+        if (this.joueur != other.joueur){
+            return false
+        }
+        if (this.pion != other.pion){
+            return false
+        }
+        return true
+    }
+
 }
