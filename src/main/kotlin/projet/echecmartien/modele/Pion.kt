@@ -34,4 +34,17 @@ abstract class Pion {
 		}
 		throw DeplacementException()
 	}
+
+	override fun equals(other: Any?): Boolean {
+		if (other is MoyenPion && this is MoyenPion){
+			return true
+		}
+		if (other is GrandPion && this is GrandPion){
+			return true
+		}
+		if (other is PetitPion && this is PetitPion){
+			return true
+		}
+		return false
+	}
 }

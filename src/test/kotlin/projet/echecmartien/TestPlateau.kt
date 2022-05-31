@@ -2,10 +2,7 @@ package projet.echecmartien
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import projet.echecmartien.modele.Case
-import projet.echecmartien.modele.Coordonnee
-import projet.echecmartien.modele.Deplacement
-import projet.echecmartien.modele.Plateau
+import projet.echecmartien.modele.*
 
 class TestPlateau {
 
@@ -36,7 +33,8 @@ class TestPlateau {
     fun testPlateau2() {
         val plateau = Plateau()
         val case = Case()
+        case.setPion(GrandPion())
         plateau.initialiser()
-        Assertions.assertEquals(Case(),plateau.getCases()[0][0])
+        Assertions.assertEquals(case,plateau.getCases()[0][0])
     }
 }
