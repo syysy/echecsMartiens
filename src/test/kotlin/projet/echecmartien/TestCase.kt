@@ -10,6 +10,7 @@ class TestCase{
     var case1 = Case()
     var case2 = Case()
     var case3 = Case()
+    var caseLib = Case()
 
     init{
         case1.setPion(GrandPion())
@@ -34,5 +35,11 @@ class TestCase{
         assertTrue(case2.getPion() is GrandPion)
         assertTrue(case2.getPion() is MoyenPion)
         assertTrue(case3.getPion() is PetitPion)
+    }
+
+    @Test
+    fun testLibre(){
+        assert(caseLib.estLibre())
+        assertFalse(case1.estLibre())
     }
 }
