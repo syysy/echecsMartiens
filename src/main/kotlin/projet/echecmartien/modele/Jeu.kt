@@ -1,5 +1,7 @@
 package projet.echecmartien.modele
 
+import projet.echecmartien.exceptions.DeplacementException
+
 
 class Jeu : InterfaceJeu{
 
@@ -108,10 +110,11 @@ class Jeu : InterfaceJeu{
         joueur[1] = joueur2
         initialiserJoueur(joueur1,joueur2)
         this.nombreCoupsSansPriseMax = nombreCoupsSansPriseMax
+        plateau.initialiser()
     }
 
     override fun deplacementPossible(coordOrigineX: Int, coordOrigineY: Int): Boolean {
-        return (coordOrigineX < 0 || coordOrigineX > plateau.getTailleHorizontale() || coordOrigineY < 0 || coordOrigineY > plateau.getTailleVerticale())
+        return (coordOrigineX >= 0 && coordOrigineX < plateau.getTailleHorizontale() && coordOrigineY >= 0 && coordOrigineY < plateau.getTailleVerticale())
     }
 
     override fun deplacementPossible(
@@ -159,6 +162,9 @@ class Jeu : InterfaceJeu{
             }
             plateau.getCases()[coordDestinationX][coordDestinationY].setPion(plateau.getCases()[coordOrigineX][coordOrigineY].getPion())
             plateau.getCases()[coordOrigineX][coordOrigineY].setPion(null)
+            print(plateau)
+        }else{
+            throw DeplacementException()
         }
     }
 
