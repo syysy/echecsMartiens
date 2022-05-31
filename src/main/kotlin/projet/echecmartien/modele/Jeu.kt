@@ -1,17 +1,15 @@
 package projet.echecmartien.modele
 
-import projet.echecmartien.exceptions.DeplacementException
 
-
-class Jeu() : InterfaceJeu{
+class Jeu : InterfaceJeu{
 
     private var coordOrigine : Coordonnee? = null
     private var nombreCoupsSansPrise = 0
-    private var nombreCoupsSansPriseMax = 10
+    private var nombreCoupsSansPriseMax = 0
     private var coordDest : Coordonnee? = null
     private var pionArriveDeZone : Pion? = null
     private var joueurCourant : Joueur? = null
-    private var joueur = arrayOf<Joueur>(Joueur(""), Joueur(""))
+    private var joueur = arrayOf(Joueur(""), Joueur(""))
     private var plateau = Plateau()
 
     fun getNombreCoupsMax():Int{
@@ -98,10 +96,10 @@ class Jeu() : InterfaceJeu{
      *
      */
     fun changeJoueurCourant() {
-        if (joueurCourant == joueur[0]){
-            joueurCourant = joueur[1]
+        joueurCourant = if (joueurCourant == joueur[0]){
+            joueur[1]
         }else{
-            joueurCourant = joueur[0]
+            joueur[0]
         }
     }
 
@@ -153,6 +151,7 @@ class Jeu() : InterfaceJeu{
         if (deplacementPossible(coordOrigineX,coordOrigineY,coordDestinationX,coordDestinationY,this.joueurCourant)){
             if (!plateau.getCases()[coordDestinationX][coordDestinationY].estLibre()){
                 this.joueurCourant!!.ajouterPionCaptures(plateau.getCases()[coordDestinationX][coordDestinationY].getPion()!!)
+            }else{
                 this.nombreCoupsSansPrise += 1
             }
             plateau.getCases()[coordDestinationX][coordDestinationY].setPion(plateau.getCases()[coordOrigineX][coordOrigineY].getPion())

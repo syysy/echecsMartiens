@@ -1,7 +1,6 @@
 package projet.echecmartien.modele
 
 import projet.echecmartien.librairie.GeneralData
-import kotlin.math.sign
 
 
 class Plateau {
