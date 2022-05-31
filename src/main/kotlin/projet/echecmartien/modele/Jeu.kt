@@ -139,7 +139,7 @@ class Jeu : InterfaceJeu{
             val ourPion = plateau.getCases()[coordOrigineX][coordOrigineY].getPion()
             val chemin = ourPion!!.getDeplacement(dep)
             for (i in chemin) {
-                if (!plateau.getCases()[i.getX()][i.getY()].estLibre()) {
+                if (!plateau.getCases()[i.getX()][i.getY()].estLibre() || plateau.getCases()[i.getX()][i.getY()].getJoueur() == joueurCourant) {
                     return false
                 }
             }
