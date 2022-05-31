@@ -2,7 +2,7 @@ package projet.echecmartien.modele
 
 
 
-class Case() {
+class Case {
     private var estLibre = true
     private var joueur : Joueur? = null
     private var pion : Pion? = null
@@ -41,6 +41,7 @@ class Case() {
      */
     fun setPion(pion: Pion?) {
        this.pion = pion
+        this.estLibre = pion == null
     }
 
 }
