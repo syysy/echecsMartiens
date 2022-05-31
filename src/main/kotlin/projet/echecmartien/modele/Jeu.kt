@@ -145,6 +145,7 @@ class Jeu() : InterfaceJeu{
         if (deplacementPossible(coordOrigineX,coordOrigineY,coordDestinationX,coordDestinationY,this.joueurCourant)){
             if (!plateau.getCases()[coordDestinationX][coordDestinationY].estLibre()){
                 this.joueurCourant!!.ajouterPionCaptures(plateau.getCases()[coordDestinationX][coordDestinationY].getPion()!!)
+                this.nombreCoupsSansPrise += 1
             }
             plateau.getCases()[coordDestinationX][coordDestinationY].setPion(plateau.getCases()[coordOrigineX][coordOrigineY].getPion())
             plateau.getCases()[coordOrigineX][coordOrigineY].setPion(null)
