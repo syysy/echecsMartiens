@@ -18,6 +18,6 @@ class TestPion {
 
     @Test
     fun testDeplacement(){
-        assertEquals(listOf(Coordonnee(1,3),Coordonnee(1,4)),pion1.getDeplacemeent(Deplacement(Coordonnee(1,2),Coordonnee(1,5))))
+        assertEquals(listOf(Coordonnee(1,3),Coordonnee(1,4)),pion1.getDeplacement(Deplacement(Coordonnee(1,2),Coordonnee(1,5))))
     }
 }
