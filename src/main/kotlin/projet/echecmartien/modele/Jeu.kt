@@ -139,7 +139,9 @@ class Jeu() : InterfaceJeu{
                     return false
                 }
             }
-            return true
+
+            return !(plateau.getCases()[coordOrigineX][coordOrigineY].getPion() === this.pionArriveDeZone && ((coordOrigineX >= 4 && coordOrigineY < 4) || (coordOrigineX < 4 && coordOrigineY >= 4)))
+
         }
         return false
     }
@@ -155,9 +157,6 @@ class Jeu() : InterfaceJeu{
             }
             plateau.getCases()[coordDestinationX][coordDestinationY].setPion(plateau.getCases()[coordOrigineX][coordOrigineY].getPion())
             plateau.getCases()[coordOrigineX][coordOrigineY].setPion(null)
-
-
-
         }
     }
 
