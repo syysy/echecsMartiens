@@ -1,6 +1,7 @@
 package projet.echecmartien.modele
 
 import projet.echecmartien.librairie.GeneralData
+import kotlin.math.sign
 
 
 class Plateau {
@@ -74,5 +75,43 @@ class Plateau {
 
     }
 
+    override fun toString(): String {
+        var printing = "┏"
+        for (j in 0 until tailleHorizontale){
+            if (j == tailleHorizontale-1){
+                printing += "━┓\n"
+            }else{
+                printing += "━┳"
+            }
+        }
+        for (i in 0 until tailleVerticale){
+            for (j in 0 until tailleHorizontale) {
+                printing += "┃${if (cases[j][i].getPion() == null){0}else{cases[j][i].getPion()!!.getScore()}}"
+            }
+            printing += "┃\n"
+            if (i != tailleVerticale-1) {
+                if (i == tailleVerticale/2-1){
+                    printing += "┣═"
+                    for (j in 1 until tailleHorizontale) {
+                        printing += "╪═"
+                    }
+                    printing += "┫\n"
+                }else {
+                    printing += "┣━"
+                    for (j in 1 until tailleHorizontale) {
+                        printing += "╋━"
+                    }
+                    printing += "┫\n"
+                }
+            } else {
+                printing += "┗━"
+                for (j in 1 until tailleHorizontale) {
+                    printing += "┻━"
+                }
+                printing += "┛\n"
+            }
+        }
+        return printing
+    }
 
 }

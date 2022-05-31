@@ -33,6 +33,7 @@ class TestJoueur{
             }
             println("")
         }
+        println(plateau)
     }
 
 
