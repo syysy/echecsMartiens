@@ -130,6 +130,9 @@ class Jeu : InterfaceJeu{
             if (!dep.estHorizontal() && !dep.estVertical() && !dep.estDiagonal()) {
                 return false
             }
+            if (plateau.getCases()[coordDestinationX][coordDestinationY].getPion() != null && plateau.getCases()[coordDestinationX][coordDestinationY].getJoueur() == joueurCourant){
+                return false
+            }
             val ourPion = plateau.getCases()[coordOrigineX][coordOrigineY].getPion()
             val chemin = ourPion!!.getDeplacement(dep)
             for (i in chemin) {
