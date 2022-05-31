@@ -19,6 +19,9 @@ class TestJoueur{
         assertEquals("toto", joueur1.getPseudo())
     }
 
+    @Test
+    fun testJoueur(){
 
+    }
 
 }

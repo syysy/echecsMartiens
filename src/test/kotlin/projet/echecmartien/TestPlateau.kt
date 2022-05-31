@@ -6,16 +6,15 @@ import projet.echecmartien.modele.*
 
 class TestPlateau {
 
+    private val plateau = Plateau()
     @Test
     fun testPlateau() {
-        val plateau = Plateau()
         plateau.initialiser()
         println(plateau)
     }
 
     @Test
     fun testPlateauTailleHor() {
-        val plateau = Plateau()
         plateau.initialiser()
         val res = plateau.getTailleHorizontale()
         Assertions.assertEquals(4,res)
@@ -23,7 +22,6 @@ class TestPlateau {
 
     @Test
     fun testPlateauTailleVer() {
-        val plateau = Plateau()
         plateau.initialiser()
         val res = plateau.getTailleVerticale()
         Assertions.assertEquals(8,res)
@@ -31,7 +29,6 @@ class TestPlateau {
 
     @Test
     fun testPlateau2() {
-        val plateau = Plateau()
         val case = Case()
         case.setPion(GrandPion())
         plateau.initialiser()
