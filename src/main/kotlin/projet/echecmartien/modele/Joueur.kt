@@ -53,4 +53,10 @@ class Joueur(nom : String) {
         return res
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other){
+            return true
+        }else return other is Joueur && this.nom == other.nom
+    }
+
 }
