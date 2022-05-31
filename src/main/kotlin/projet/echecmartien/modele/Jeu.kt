@@ -67,7 +67,7 @@ class Jeu : InterfaceJeu{
      * @paral joueur2 second joueur
      */
     private fun initialiserJoueur(joueur1: Joueur, joueur2: Joueur) {
-        val compt = 0
+        var compt = 0
         for (i in this.plateau.getCases()){
             if (compt < 4){
                 for (j in i){
@@ -78,6 +78,7 @@ class Jeu : InterfaceJeu{
                     j.setJoueur(joueur2)
                 }
             }
+            compt += 1
         }
         joueurCourant = joueur1
     }
@@ -124,7 +125,7 @@ class Jeu : InterfaceJeu{
         coordDestinationY: Int,
         joueur: Joueur?
     ): Boolean {
-        if (plateau.getCases()[coordOrigineX][coordOrigineY].estLibre() && plateau.getCases()[coordOrigineX][coordOrigineY].getJoueur() != joueurCourant){
+        if (plateau.getCases()[coordOrigineX][coordOrigineY].estLibre() || plateau.getCases()[coordOrigineX][coordOrigineY].getJoueur() != joueurCourant){
             return false
         }
         if (deplacementPossible(coordOrigineX,coordOrigineY) && deplacementPossible(coordDestinationX,coordDestinationY)) {
