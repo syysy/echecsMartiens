@@ -57,4 +57,21 @@ class TestDeplacement {
         Assertions.assertTrue(deplacement.estHorizontal())
         Assertions.assertFalse(deplacement.estDiagonal())
     }
+
+    @Test
+    fun testDeplacementVerticale(){
+        val deplacement = Deplacement(Coordonnee(0,3),Coordonnee(0,2))
+        deplacement.estVertical()
+        Assertions.assertTrue(deplacement.estVertical())
+        Assertions.assertFalse(deplacement.estHorizontal())
+    }
+
+    @Test
+    fun testDeplacementVerticalePos(){
+        val deplacement = Deplacement(Coordonnee(0,3),Coordonnee(0,4))
+        deplacement.estVerticalPositif()
+        Assertions.assertTrue(deplacement.estVerticalPositif())
+        Assertions.assertFalse(deplacement.estHorizontal())
+    }
+
 }
