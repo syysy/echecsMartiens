@@ -19,24 +19,6 @@ class TestJoueur{
         assertEquals("toto", joueur1.getPseudo())
     }
 
-    @Test
-    fun testPlato() {
-        var plateau = Plateau()
-        plateau.initialiser()
-        for (i in plateau.getCases()){
-            for (j in i){
-                if (j.getPion() == null){
-                    print(0)
-                }else{
-                    print(j.getPion()!!.getScore())
-                }
-            }
-            println("")
-        }
-        println(plateau)
-    }
-
-
 
 
 }

@@ -72,7 +72,6 @@ class Plateau {
      */
     fun getCases(): Array<Array<Case>> {
         return cases
-
     }
 
     override fun toString(): String {
