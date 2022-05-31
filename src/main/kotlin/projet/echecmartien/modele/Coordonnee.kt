@@ -25,6 +25,19 @@ class Coordonnee(x : Int, y : Int) {
        return "x = $x,y = $y"
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (other !is Coordonnee){
+            return false
+        }
+        if (this.x != other.x){
+            return false
+        }
+        if (this.y != other.y){
+            return false
+        }
+        return true
+    }
+
 
 
 

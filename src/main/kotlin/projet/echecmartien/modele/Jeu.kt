@@ -14,6 +14,10 @@ class Jeu() : InterfaceJeu{
     private var joueur = arrayOf<Joueur>(Joueur(""), Joueur(""))
     private var plateau = Plateau()
 
+    fun getNombreCoupsMax():Int{
+        return nombreCoupsSansPriseMax
+    }
+
     /**
      * getter
      * @return la coordonnée origine du déplacement
@@ -63,7 +67,7 @@ class Jeu() : InterfaceJeu{
      * @paral joueur2 second joueur
      */
     private fun initialiserJoueur(joueur1: Joueur, joueur2: Joueur) {
-        var compt = 0
+        val compt = 0
         for (i in this.plateau.getCases()){
             if (compt < 4){
                 for (j in i){
@@ -75,6 +79,7 @@ class Jeu() : InterfaceJeu{
                 }
             }
         }
+        joueurCourant = joueur1
     }
 
     /**

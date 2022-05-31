@@ -85,7 +85,7 @@ class Plateau {
         }
         for (i in 0 until tailleVerticale){
             for (j in 0 until tailleHorizontale) {
-                printing += "┃${if (cases[j][i].getPion() == null){0}else{cases[j][i].getPion()!!.getScore()}}"
+                printing += "┃${if (cases[j][i].getPion() == null){" "}else{cases[j][i].getPion()!!.getScore()}}"
             }
             printing += "┃\n"
             if (i != tailleVerticale-1) {
