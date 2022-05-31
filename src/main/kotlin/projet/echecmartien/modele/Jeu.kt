@@ -124,7 +124,7 @@ class Jeu : InterfaceJeu{
         coordDestinationY: Int,
         joueur: Joueur?
     ): Boolean {
-        if (plateau.getCases()[coordOrigineX][coordOrigineY].estLibre()){
+        if (plateau.getCases()[coordOrigineX][coordOrigineY].estLibre() && plateau.getCases()[coordOrigineX][coordOrigineY].getJoueur() != joueurCourant){
             return false
         }
         if (deplacementPossible(coordOrigineX,coordOrigineY) && deplacementPossible(coordDestinationX,coordDestinationY)) {
@@ -162,7 +162,6 @@ class Jeu : InterfaceJeu{
             }
             plateau.getCases()[coordDestinationX][coordDestinationY].setPion(plateau.getCases()[coordOrigineX][coordOrigineY].getPion())
             plateau.getCases()[coordOrigineX][coordOrigineY].setPion(null)
-            print(plateau)
         }else{
             throw DeplacementException()
         }
