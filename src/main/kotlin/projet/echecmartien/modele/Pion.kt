@@ -24,16 +24,9 @@ abstract class Pion {
 	 *
 	 * @throws DeplacementException est levée si le déplacement n'est pas possible
 	 */
-	fun getDeplacemeent(deplacement : Deplacement) : List<Coordonnee>{
-		if (deplacement.estHorizontal()){
-			return deplacement.getCheminHorizontal()
-		}else if (deplacement.estVertical()) {
-			return deplacement.getCheminVertical()
-		}else if (deplacement.estDiagonal()){
-			return deplacement.getCheminDiagonal()
-		}
-		throw DeplacementException()
-	}
+
+	abstract fun getDeplacement(deplacement : Deplacement) : List<Coordonnee>
+
 
 	override fun equals(other: Any?): Boolean {
 		if (other is MoyenPion && this is MoyenPion){

@@ -220,5 +220,12 @@ class Deplacement(origine : Coordonnee, destination : Coordonnee) {
         return res
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        return (other is Deplacement && origine == other.origine && destination == other.destination)
+    }
+
+
+
 
 }

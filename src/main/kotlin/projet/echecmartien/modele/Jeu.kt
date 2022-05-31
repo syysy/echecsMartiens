@@ -118,28 +118,29 @@ class Jeu() : InterfaceJeu{
         coordDestinationY: Int,
         joueur: Joueur?
     ): Boolean {
-        if (deplacementPossible(coordOrigineX,coordOrigineY) && deplacementPossible(coordDestinationX,coordDestinationY)){
-            val dep = Deplacement(Coordonnee(coordOrigineX,coordOrigineY),
-                Coordonnee(coordDestinationX,coordDestinationY)
-            )
-            if (!dep.estHorizontal() && !dep.estVertical() && !dep.estDiagonal()){
+        if (plateau.getCases()[coordOrigineX][coordOrigineY].estLibre()){
+            return false
+        }
+        if (deplacementPossible(coordOrigineX,coordOrigineY) && deplacementPossible(coordDestinationX,coordDestinationY)) {
+            val dep =
+                Deplacement(Coordonnee(coordOrigineX, coordOrigineY), Coordonnee(coordDestinationX, coordDestinationY))
+            if (!dep.estHorizontal() && !dep.estVertical() && !dep.estDiagonal()) {
                 return false
             }
             val ourPion = plateau.getCases()[coordOrigineX][coordOrigineY].getPion()
-            if (ourPion is PetitPion){
-                return (dep.longueur() == 1 && dep.estDiagonal())
-            }else if (ourPion is MoyenPion){
-                return (dep.longueur() <= 2)
-            }else if (ourPion is GrandPion){
-                return true
-            }else{
-                throw DeplacementException()
+            val chemin = ourPion!!.getDeplacement(dep)
+            for (i in chemin) {
+                if (!plateau.getCases()[i.getX()][i.getY()].estLibre()) {
+                    return false
+                }
             }
-
-        }else{
-            return false
+            return true
         }
+        return false
     }
+
+
+
 
     override fun deplacer(coordOrigineX: Int, coordOrigineY: Int, coordDestinationX: Int, coordDestinationY: Int) {
         if (deplacementPossible(coordOrigineX,coordOrigineY,coordDestinationX,coordDestinationY,this.joueurCourant)){
