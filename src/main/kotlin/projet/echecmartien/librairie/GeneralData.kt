@@ -16,7 +16,6 @@ class GeneralData {
     val tableau = Array(TAILLEHORIZONTALE) { Array(TAILLEVERTICALE, { EnumPion.LIBRE }) }
 
     init {
-
         tableau[2][0]= EnumPion.MOYENPION
         tableau[1][1]= EnumPion.MOYENPION
         tableau[0][2]= EnumPion.MOYENPION
