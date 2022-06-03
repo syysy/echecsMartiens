@@ -1,20 +1,25 @@
 package projet.echecmartien
 
 import javafx.application.Application
+import javafx.scene.Scene
 
 import javafx.stage.Stage
 import projet.echecmartien.modele.*
+import projet.echecmartien.vue.MainVue
 
 class AppliJeuEchecMartien: Application() {
     override fun start(primaryStage: Stage) {
-      
-
+        val vue = MainVue()
+        val scene = Scene(vue, 350.0, 350.0)
+        primaryStage.title="TD5B MVC"
+        primaryStage.scene=scene
+        primaryStage.show()
     }
 
 }
 
 fun main(){
-    //Application.launch(AppliJeuEchecMartien::class.java)
+    Application.launch(AppliJeuEchecMartien::class.java)
     val jeu = Jeu()
     val p = Plateau()
     val j1 = Joueur("Mar")
