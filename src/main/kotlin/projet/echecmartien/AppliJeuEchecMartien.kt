@@ -19,7 +19,7 @@ class AppliJeuEchecMartien: Application() {
 }
 
 fun main(){
-    //Application.launch(AppliJeuEchecMartien::class.java)
+    Application.launch(AppliJeuEchecMartien::class.java)
     val jeu = Jeu()
     val p = Plateau()
     val j1 = Joueur("Mar")
