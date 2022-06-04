@@ -79,8 +79,6 @@ class Jeu : InterfaceJeu{
         }
         }
         joueurCourant = joueur1
-        changeJoueurCourant()
-        changeJoueurCourant()
     }
 
     /**
