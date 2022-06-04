@@ -1,7 +1,9 @@
 package projet.echecmartien.vue
 
+import javafx.geometry.HPos
 import javafx.geometry.Insets
 import javafx.geometry.Pos
+import javafx.geometry.VPos
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
@@ -9,6 +11,7 @@ import javafx.scene.layout.BorderPane
 import javafx.scene.layout.ColumnConstraints
 import javafx.scene.layout.FlowPane
 import javafx.scene.layout.GridPane
+import javafx.scene.layout.RowConstraints
 import javafx.scene.layout.VBox
 import javafx.scene.paint.Color
 import javafx.scene.text.Font
@@ -35,6 +38,12 @@ class MainVue: BorderPane() {
         // Zone du centre
 
         val gridPaneCenter = GridPane()
+        val contrainteLine3 = RowConstraints()
+        val contrainteLine1 = RowConstraints()
+        val contrainteLine2 = RowConstraints()
+        val contrainteColumn1 = ColumnConstraints()
+        contrainteColumn1.halignment = HPos.CENTER
+        contrainteLine3.valignment = VPos.CENTER
         val textFieldPseudo1 = TextField("Joueur 1")
         textFieldPseudo1.alignment = Pos.CENTER
         val textFieldPseudo2 = TextField("Joueur 2")
@@ -48,6 +57,8 @@ class MainVue: BorderPane() {
         gridPaneCenter.vgap = 10.0
         gridPaneCenter.alignment = Pos.CENTER
         gridPaneCenter.padding = Insets(30.0)
+        gridPaneCenter.rowConstraints.addAll(contrainteLine1,contrainteLine2,contrainteLine3)
+        gridPaneCenter.columnConstraints.add(contrainteColumn1)
 
         this.center = gridPaneCenter
 
