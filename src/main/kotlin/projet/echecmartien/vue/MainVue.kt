@@ -1,5 +1,7 @@
 package projet.echecmartien.vue
 
+import javafx.event.ActionEvent
+import javafx.event.EventHandler
 import javafx.geometry.HPos
 import javafx.geometry.Insets
 import javafx.geometry.Pos
@@ -23,6 +25,9 @@ class MainVue: BorderPane() {
     val loadButton = Button("Charger une partie")
     val botButton = Button("Jouer contre un robot")
     val rulesButton = Button("Règles")
+    var textFieldPseudo1 : TextField
+    var textFieldPseudo2 : TextField
+    var playButton : Button
 
     init {
         // Titre en haut
@@ -44,11 +49,11 @@ class MainVue: BorderPane() {
         val contrainteColumn1 = ColumnConstraints()
         contrainteColumn1.halignment = HPos.CENTER
         contrainteLine3.valignment = VPos.CENTER
-        val textFieldPseudo1 = TextField("Joueur 1")
+        textFieldPseudo1 = TextField("Joueur 1")
         textFieldPseudo1.alignment = Pos.CENTER
-        val textFieldPseudo2 = TextField("Joueur 2")
+        textFieldPseudo2 = TextField("Joueur 2")
         textFieldPseudo2.alignment = Pos.CENTER
-        val playButton = Button("Jouer")
+        playButton = Button("Jouer")
         playButton.alignment = Pos.CENTER
         gridPaneCenter.style ="-fx-font-size : 15 ;-fx-font-weight :bold;   -fx-border-color:lightgray "
         gridPaneCenter.add(textFieldPseudo1,0,1)
@@ -59,7 +64,6 @@ class MainVue: BorderPane() {
         gridPaneCenter.padding = Insets(30.0)
         gridPaneCenter.rowConstraints.addAll(contrainteLine1,contrainteLine2,contrainteLine3)
         gridPaneCenter.columnConstraints.add(contrainteColumn1)
-
         this.center = gridPaneCenter
 
 
@@ -78,5 +82,11 @@ class MainVue: BorderPane() {
         val vboxRight = VBox()
         vboxRight.padding = Insets(0.0,0.0,0.0,40.0)
         this.right = vboxRight
+
     }
+
+    fun fixeListenerBouton(bouton: Button, action: EventHandler<ActionEvent>) {
+        bouton.onAction = action
+    }
+
 }
