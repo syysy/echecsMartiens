@@ -12,7 +12,7 @@ class ControleurRetour(vue : MainVue) : EventHandler<ActionEvent> {
     }
 
     override fun handle(p0: ActionEvent?) {
-        vue.textFieldPseudo2.text = "Joueur 2"
+        vue.textFieldPseudo2.text = vue.savePseudo2
         vue.textFieldPseudo2.style = "-fx-background-color:white ; -fx-border-color:lightgray"
         vue.textFieldPseudo2.isEditable = true
         vue.botButton.text = "Jouer contre un robot"

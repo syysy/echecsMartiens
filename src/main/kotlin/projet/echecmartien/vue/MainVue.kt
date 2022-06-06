@@ -27,9 +27,11 @@ class MainVue: BorderPane() {
     val rulesButton = Button("Règles")
     var textFieldPseudo1 : TextField
     var textFieldPseudo2 : TextField
+    var savePseudo2 : String
     var playButton : Button
 
     init {
+
         // Titre en haut
         val flowPaneTop = FlowPane()
         val labelTop = Label("Echecs Martiens")
@@ -53,6 +55,7 @@ class MainVue: BorderPane() {
         textFieldPseudo1.alignment = Pos.CENTER
         textFieldPseudo2 = TextField("Joueur 2")
         textFieldPseudo2.alignment = Pos.CENTER
+        savePseudo2 = textFieldPseudo2.text
         playButton = Button("Jouer")
         playButton.alignment = Pos.CENTER
         gridPaneCenter.style ="-fx-font-size : 15 ;-fx-font-weight :bold;   -fx-border-color:lightgray "
@@ -82,7 +85,6 @@ class MainVue: BorderPane() {
         val vboxRight = VBox()
         vboxRight.padding = Insets(0.0,0.0,0.0,40.0)
         this.right = vboxRight
-
     }
 
     fun fixeListenerBouton(bouton: Button, action: EventHandler<ActionEvent>) {
