@@ -12,7 +12,7 @@ class Jeu : InterfaceJeu{
     private var pionArriveDeZone : Pion? = null
     private var joueurCourant : Joueur? = null
     private var joueur = arrayOf(Joueur(""), Joueur(""))
-    private var plateau = Plateau()
+    var plateau = Plateau()
 
     fun getNombreCoupsMax():Int{
         return nombreCoupsSansPriseMax
@@ -67,17 +67,16 @@ class Jeu : InterfaceJeu{
      * @paral joueur2 second joueur
      */
     private fun initialiserJoueur(joueur1: Joueur, joueur2: Joueur) {
-        val compt = 0
-        for (i in this.plateau.getCases()){
-            if (compt < 4){
-                for (j in i){
-                    j.setJoueur(joueur1)
+        for (i in 0 until plateau.getTailleVerticale()){
+            if (i < 4){
+                for (j in 0 until plateau.getTailleHorizontale()){
+                    plateau.getCases()[j][i].setJoueur(joueur1)
                 }
             }else{
-                for (j in i){
-                    j.setJoueur(joueur2)
+                for (j in 0 until plateau.getTailleHorizontale()){
+                    plateau.getCases()[j][i].setJoueur(joueur2)
                 }
-            }
+        }
         }
         joueurCourant = joueur1
     }
@@ -124,7 +123,7 @@ class Jeu : InterfaceJeu{
         coordDestinationY: Int,
         joueur: Joueur?
     ): Boolean {
-        if (plateau.getCases()[coordOrigineX][coordOrigineY].estLibre() && plateau.getCases()[coordOrigineX][coordOrigineY].getJoueur() != joueurCourant){
+        if (plateau.getCases()[coordOrigineX][coordOrigineY].estLibre() || plateau.getCases()[coordOrigineX][coordOrigineY].getJoueur() != joueurCourant){
             return false
         }
         if (deplacementPossible(coordOrigineX,coordOrigineY) && deplacementPossible(coordDestinationX,coordDestinationY)) {
@@ -144,7 +143,7 @@ class Jeu : InterfaceJeu{
                 }
             }
 
-            return !(plateau.getCases()[coordOrigineX][coordOrigineY].getPion() === this.pionArriveDeZone && ((coordOrigineX >= 4 && coordOrigineY < 4) || (coordOrigineX < 4 && coordOrigineY >= 4)))
+            return !(plateau.getCases()[coordOrigineX][coordOrigineY].getPion() === this.pionArriveDeZone && ((coordDestinationY >= 4 && coordOrigineY < 4) || (coordDestinationY < 4 && coordOrigineY >= 4)))
 
         }
         return false
