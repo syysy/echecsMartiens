@@ -94,6 +94,61 @@ class MainVue: BorderPane() {
         bouton.onAction = action
     }
 
+    fun originUpdate() {
+        // Titre en haut
+        val flowPaneTop = FlowPane()
+        labelTop.font = Font.font("Tahoma", FontWeight.BOLD, FontPosture.REGULAR, 20.0)
+        labelTop.textFill = Color.BLACK
+        flowPaneTop.alignment = Pos.CENTER
+        labelTop.padding = Insets(30.0,0.0,30.0,0.0)
+        flowPaneTop.children.add(labelTop)
+        this.top = flowPaneTop
+
+        // Zone du centre
+
+        val gridPaneCenter = GridPane()
+        val contrainteLine3 = RowConstraints()
+        val contrainteLine1 = RowConstraints()
+        val contrainteLine2 = RowConstraints()
+        val contrainteColumn1 = ColumnConstraints()
+        contrainteColumn1.halignment = HPos.CENTER
+        contrainteLine3.valignment = VPos.CENTER
+        textFieldPseudo1 = TextField("Joueur 1")
+        textFieldPseudo1.alignment = Pos.CENTER
+        textFieldPseudo2 = TextField("Joueur 2")
+        textFieldPseudo2.alignment = Pos.CENTER
+        savePseudo2 = textFieldPseudo2.text
+        playButton = Button("Jouer")
+        playButton.alignment = Pos.CENTER
+        gridPaneCenter.style ="-fx-font-size : 15 ;-fx-font-weight :bold;   -fx-border-color:lightgray "
+        gridPaneCenter.add(textFieldPseudo1,0,1)
+        gridPaneCenter.add(textFieldPseudo2,0,2)
+        gridPaneCenter.add(playButton,0,3)
+        gridPaneCenter.vgap = 10.0
+        gridPaneCenter.alignment = Pos.CENTER
+        gridPaneCenter.padding = Insets(30.0)
+        gridPaneCenter.rowConstraints.addAll(contrainteLine1,contrainteLine2,contrainteLine3)
+        gridPaneCenter.columnConstraints.add(contrainteColumn1)
+        this.center = gridPaneCenter
+
+
+        // Boutons en bas
+        val flowPaneBoutons=FlowPane()
+        flowPaneBoutons.hgap=10.0
+        flowPaneBoutons.alignment = Pos.CENTER
+        flowPaneBoutons.padding=Insets(30.0,0.0,40.0,0.0)
+        flowPaneBoutons.children.addAll(loadButton,botButton,rulesButton)
+        this.bottom=flowPaneBoutons
+
+        // Vbox côtés
+        val vboxLeft = VBox()
+        vboxLeft.padding = Insets(0.0,40.0,0.0,0.0)
+        this.left = vboxLeft
+        val vboxRight = VBox()
+        vboxRight.padding = Insets(0.0,0.0,0.0,40.0)
+        this.right = vboxRight
+    }
+
     fun rulesUpdate() {
         this.labelTop = Label("Règles de l'échec martien")
         this.center = Label("PREPARATION\n" +
@@ -117,5 +172,9 @@ class MainVue: BorderPane() {
                 "\n" +
                 "Le gagnant est évidement le joueur qui à le plus de points")
         this.buttonBottomRules = Button("Retour")
+        val neoFlow = FlowPane()
+        this.bottom = neoFlow
+        neoFlow.children.add(buttonBottomRules)
+        neoFlow.padding = Insets(50.0,0.0,50.0,500.0)
     }
 }
