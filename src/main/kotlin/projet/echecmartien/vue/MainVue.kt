@@ -21,6 +21,7 @@ import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
 
+
 class MainVue: BorderPane() {
 
     val loadButton = Button("Charger une partie")
@@ -95,7 +96,7 @@ class MainVue: BorderPane() {
 
     fun rulesUpdate() {
         this.labelTop = Label("Règles de l'échec martien")
-        this.center = TextArea("PREPARATION\n" +
+        this.center = Label("PREPARATION\n" +
                 "Disposez les 18 pions comme sur la figure ci-contre.\n" +
                 "Un joueur identifie ses pièces par leur position à un instant donné.\n" +
                 "Le damier est divisé en 2 zones, une pour chaque joueur. Toute pièce dans la zone d'un joueur est la sienne.\n" +

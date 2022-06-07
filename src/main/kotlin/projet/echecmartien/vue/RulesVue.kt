@@ -4,6 +4,7 @@ import javafx.scene.control.Label
 import javafx.scene.control.TextArea
 import javafx.scene.layout.BorderPane
 
+
 class RulesVue: BorderPane() {
     private val textRegles : TextArea
 
