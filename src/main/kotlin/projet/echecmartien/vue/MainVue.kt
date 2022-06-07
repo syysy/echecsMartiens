@@ -75,7 +75,8 @@ class MainVue: BorderPane() {
         flowPaneBoutons.hgap=10.0
         flowPaneBoutons.alignment = Pos.CENTER
         flowPaneBoutons.padding=Insets(30.0,0.0,40.0,0.0)
-        flowPaneBoutons.children.addAll(loadButton,botButton,rulesButton)
+
+        flowPaneBoutons.children.addAll(loadButton,rulesButton,botButton)
         this.bottom=flowPaneBoutons
 
         // Vbox côtés
