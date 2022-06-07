@@ -26,8 +26,8 @@ class AppliJeuEchecMartien: Application() {
         //val background = Background(bImg)
         //vue.background = background
         vue.rulesButton.setOnAction {
-            primaryStage.height = 800.0
-            primaryStage.width = 1400.0
+            primaryStage.height = 500.0
+            primaryStage.width = 1080.0
             primaryStage.centerOnScreen()
             vue.rulesUpdate()
         }
