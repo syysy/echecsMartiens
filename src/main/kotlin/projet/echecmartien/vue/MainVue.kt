@@ -8,7 +8,6 @@ import javafx.geometry.Pos
 import javafx.geometry.VPos
 import javafx.scene.control.Button
 import javafx.scene.control.Label
-import javafx.scene.control.TextArea
 import javafx.scene.control.TextField
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.ColumnConstraints
@@ -20,7 +19,6 @@ import javafx.scene.paint.Color
 import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
-import projet.echecmartien.controleurs.ControleurRetourRules
 
 
 class MainVue: BorderPane() {
@@ -79,7 +77,9 @@ class MainVue: BorderPane() {
         flowPaneBoutons.hgap=10.0
         flowPaneBoutons.alignment = Pos.CENTER
         flowPaneBoutons.padding=Insets(30.0,0.0,40.0,0.0)
-        flowPaneBoutons.children.addAll(loadButton,botButton,rulesButton)
+        buttonBottomRules.isDisable = true
+        buttonBottomRules.isVisible = false
+        flowPaneBoutons.children.addAll(loadButton,botButton,rulesButton, buttonBottomRules)
         this.bottom=flowPaneBoutons
 
         // Vbox côtés
@@ -138,7 +138,9 @@ class MainVue: BorderPane() {
         flowPaneBoutons.hgap=10.0
         flowPaneBoutons.alignment = Pos.CENTER
         flowPaneBoutons.padding=Insets(30.0,0.0,40.0,0.0)
-        flowPaneBoutons.children.addAll(loadButton,botButton,rulesButton)
+        buttonBottomRules.isDisable = true
+        buttonBottomRules.isVisible = false
+        flowPaneBoutons.children.addAll(loadButton,botButton,rulesButton,buttonBottomRules)
         this.bottom=flowPaneBoutons
 
         // Vbox côtés
@@ -172,11 +174,11 @@ class MainVue: BorderPane() {
                 "Une fois la partie finie (plus de pions à capturer car ils sont tous capturés ou plus aucunes prises n'est possibles), on compte 3 points par grand pion capturés, 2 par moyen et 1 par petit.\n" +
                 "\n" +
                 "Le gagnant est évidement le joueur qui à le plus de points")
-        this.buttonBottomRules = Button("Retour")
+        this.buttonBottomRules.isDisable = false
+        this.buttonBottomRules.isVisible = true
         val neoFlow = FlowPane()
         this.bottom = neoFlow
         neoFlow.children.add(buttonBottomRules)
         neoFlow.padding = Insets(50.0,0.0,50.0,500.0)
-        fixeListenerBouton(buttonBottomRules,ControleurRetourRules(this))
     }
 }

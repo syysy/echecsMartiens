@@ -2,13 +2,10 @@ package projet.echecmartien
 
 import javafx.application.Application
 import javafx.scene.Scene
-import javafx.scene.layout.*
 
 import javafx.stage.Stage
 import projet.echecmartien.controleurs.ControleurBot
-import projet.echecmartien.controleurs.ControleurRetourRules
 import projet.echecmartien.controleurs.ControleurRules
-import projet.echecmartien.modele.*
 import projet.echecmartien.vue.MainVue
 
 class AppliJeuEchecMartien: Application() {
@@ -33,6 +30,7 @@ class AppliJeuEchecMartien: Application() {
             primaryStage.height = 500.0
             primaryStage.width = 350.0
             primaryStage.centerOnScreen()
+            vue.originUpdate()
          }
         val scene = Scene(vue,500.0,350.0)
         primaryStage.title="TD5B MVC"
