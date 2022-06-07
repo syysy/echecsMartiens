@@ -19,7 +19,7 @@ class AppliJeuEchecMartien: Application() {
           //  BackgroundSize.DEFAULT)
         //val background = Background(bImg)
         //vue.background = background
-        val scene = Scene(vue, 350.0, 350.0)
+        val scene = Scene(vue, 500.0, 350.0)
         primaryStage.title="TD5B MVC"
         primaryStage.scene=scene
         primaryStage.show()
