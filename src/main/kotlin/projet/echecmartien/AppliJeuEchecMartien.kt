@@ -28,11 +28,11 @@ class AppliJeuEchecMartien: Application() {
         }
         vue.buttonBottomRules.setOnAction {
             primaryStage.height = 500.0
-            primaryStage.width = 350.0
+            primaryStage.width = 400.0
             primaryStage.centerOnScreen()
             vue.originUpdate()
          }
-        val scene = Scene(vue,500.0,350.0)
+        val scene = Scene(vue,350.0,500.0)
         primaryStage.title="TD5B MVC"
         primaryStage.scene=scene
         primaryStage.show()

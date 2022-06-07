@@ -79,7 +79,8 @@ class MainVue: BorderPane() {
         flowPaneBoutons.padding=Insets(30.0,0.0,40.0,0.0)
         buttonBottomRules.isDisable = true
         buttonBottomRules.isVisible = false
-        flowPaneBoutons.children.addAll(loadButton,botButton,rulesButton, buttonBottomRules)
+        buttonBottomRules.isCancelButton = true
+        flowPaneBoutons.children.addAll(loadButton,botButton,rulesButton)
         this.bottom=flowPaneBoutons
 
         // Vbox côtés
@@ -96,6 +97,7 @@ class MainVue: BorderPane() {
     }
 
     fun originUpdate() {
+        this.labelTop = Label("Echecs Martiens")
         // Titre en haut
         val flowPaneTop = FlowPane()
         labelTop.font = Font.font("Tahoma", FontWeight.BOLD, FontPosture.REGULAR, 20.0)
@@ -139,8 +141,9 @@ class MainVue: BorderPane() {
         flowPaneBoutons.alignment = Pos.CENTER
         flowPaneBoutons.padding=Insets(30.0,0.0,40.0,0.0)
         buttonBottomRules.isDisable = true
+        buttonBottomRules.isCancelButton = true
         buttonBottomRules.isVisible = false
-        flowPaneBoutons.children.addAll(loadButton,botButton,rulesButton,buttonBottomRules)
+        flowPaneBoutons.children.addAll(loadButton,botButton,rulesButton)
         this.bottom=flowPaneBoutons
 
         // Vbox côtés
