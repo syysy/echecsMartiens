@@ -20,6 +20,7 @@ import javafx.scene.paint.Color
 import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
+import projet.echecmartien.controleurs.ControleurRetourRules
 
 
 class MainVue: BorderPane() {
@@ -32,7 +33,7 @@ class MainVue: BorderPane() {
     var savePseudo2 : String
     var playButton : Button
     var labelTop = Label("Echecs Martiens")
-    var buttonBottomRules : Button = Button()
+    var buttonBottomRules  = Button("Retour")
 
     init {
 
@@ -176,5 +177,6 @@ class MainVue: BorderPane() {
         this.bottom = neoFlow
         neoFlow.children.add(buttonBottomRules)
         neoFlow.padding = Insets(50.0,0.0,50.0,500.0)
+        fixeListenerBouton(buttonBottomRules,ControleurRetourRules(this))
     }
 }
