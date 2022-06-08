@@ -6,6 +6,7 @@ import javafx.scene.layout.BorderPane
 
 import javafx.stage.Stage
 import projet.echecmartien.controleurs.ControleurBot
+import projet.echecmartien.controleurs.ControleurPlayButton
 import projet.echecmartien.controleurs.ControleurRules
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
@@ -31,7 +32,7 @@ class AppliJeuEchecMartien: Application() {
         }
         vue.playButton.setOnAction {
             primaryStage.height = 920.0
-            primaryStage.width = 1080.0
+            primaryStage.width = 500.0
             primaryStage.centerOnScreen()
             vue.jeuUpdate()
         }

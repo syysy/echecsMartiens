@@ -15,6 +15,7 @@ import javafx.scene.shape.Circle
 import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
+import projet.echecmartien.controleurs.ControleurPlayButton
 
 
 class MainVue: BorderPane() {
@@ -149,6 +150,7 @@ class MainVue: BorderPane() {
         val vboxRight = VBox()
         vboxRight.padding = Insets(0.0,0.0,0.0,40.0)
         this.right = vboxRight
+        this.fixeListenerBouton(this.playButton, ControleurPlayButton(this))
     }
 
     fun rulesUpdate() {
