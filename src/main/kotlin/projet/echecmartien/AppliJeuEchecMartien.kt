@@ -12,42 +12,34 @@ import projet.echecmartien.vue.MainVue
 
 class AppliJeuEchecMartien: Application() {
     override fun start(primaryStage: Stage) {
-        var boolVue = false
-        for (i in 2 downTo 0){
-            if (!boolVue){
-                val vue = MainVue()
-                vue.fixeListenerBouton(vue.botButton,ControleurBot(vue))
-                vue.fixeListenerBouton(vue.rulesButton,ControleurRules(vue))
 
-                vue.rulesButton.setOnAction {
-                    primaryStage.height = 500.0
-                    primaryStage.width = 1080.0
-                    primaryStage.centerOnScreen()
-                    vue.rulesUpdate()
-                }
-                vue.buttonBottomRules.setOnAction {
-                    primaryStage.height = 500.0
-                    primaryStage.width = 400.0
-                    primaryStage.centerOnScreen()
-                    vue.originUpdate()
-                }
-                vue.playButton.setOnAction {
-                    boolVue = true
-                }
+        val vue = MainVue()
+        vue.fixeListenerBouton(vue.botButton,ControleurBot(vue))
+        vue.fixeListenerBouton(vue.rulesButton,ControleurRules(vue))
 
-                val scene = Scene(vue,350.0,500.0)
-                primaryStage.title="TD5B MVC"
-                primaryStage.scene=scene
-                primaryStage.show()
-            }else{
-                val vue = JeuVue()
-                val scene = Scene(vue,350.0,700.0)
-                primaryStage.title="TD5B MVC"
-                primaryStage.scene=scene
-                primaryStage.show()
-            }
+        vue.rulesButton.setOnAction {
+            primaryStage.height = 500.0
+            primaryStage.width = 1080.0
+            primaryStage.centerOnScreen()
+            vue.rulesUpdate()
+        }
+        vue.buttonBottomRules.setOnAction {
+            primaryStage.height = 500.0
+            primaryStage.width = 400.0
+            primaryStage.centerOnScreen()
+            vue.originUpdate()
+        }
+        vue.playButton.setOnAction {
+            primaryStage.height = 920.0
+            primaryStage.width = 1080.0
+            primaryStage.centerOnScreen()
+            vue.jeuUpdate()
         }
 
+        val scene = Scene(vue,400.0,500.0)
+        primaryStage.title="TD5B MVC"
+        primaryStage.scene=scene
+        primaryStage.show()
 
     }
 }
