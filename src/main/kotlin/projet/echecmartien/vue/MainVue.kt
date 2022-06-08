@@ -8,7 +8,6 @@ import javafx.geometry.Pos
 import javafx.geometry.VPos
 import javafx.scene.control.Button
 import javafx.scene.control.Label
-import javafx.scene.control.TextArea
 import javafx.scene.control.TextField
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.ColumnConstraints
@@ -32,7 +31,7 @@ class MainVue: BorderPane() {
     var savePseudo2 : String
     var playButton : Button
     var labelTop = Label("Echecs Martiens")
-    var buttonBottomRules : Button = Button()
+    var buttonBottomRules  = Button("Retour")
 
     init {
 
@@ -78,6 +77,9 @@ class MainVue: BorderPane() {
         flowPaneBoutons.hgap=10.0
         flowPaneBoutons.alignment = Pos.CENTER
         flowPaneBoutons.padding=Insets(30.0,0.0,40.0,0.0)
+        buttonBottomRules.isDisable = true
+        buttonBottomRules.isVisible = false
+        buttonBottomRules.isCancelButton = true
         flowPaneBoutons.children.addAll(loadButton,botButton,rulesButton)
         this.bottom=flowPaneBoutons
 
@@ -92,6 +94,65 @@ class MainVue: BorderPane() {
 
     fun fixeListenerBouton(bouton: Button, action: EventHandler<ActionEvent>) {
         bouton.onAction = action
+    }
+
+    fun originUpdate() {
+        this.labelTop = Label("Echecs Martiens")
+        // Titre en haut
+        val flowPaneTop = FlowPane()
+        labelTop.font = Font.font("Tahoma", FontWeight.BOLD, FontPosture.REGULAR, 20.0)
+        labelTop.textFill = Color.BLACK
+        flowPaneTop.alignment = Pos.CENTER
+        labelTop.padding = Insets(30.0,0.0,30.0,0.0)
+        flowPaneTop.children.add(labelTop)
+        this.top = flowPaneTop
+
+        // Zone du centre
+
+        val gridPaneCenter = GridPane()
+        val contrainteLine3 = RowConstraints()
+        val contrainteLine1 = RowConstraints()
+        val contrainteLine2 = RowConstraints()
+        val contrainteColumn1 = ColumnConstraints()
+        contrainteColumn1.halignment = HPos.CENTER
+        contrainteLine3.valignment = VPos.CENTER
+        textFieldPseudo1 = TextField("Joueur 1")
+        textFieldPseudo1.alignment = Pos.CENTER
+        textFieldPseudo2 = TextField("Joueur 2")
+        textFieldPseudo2.alignment = Pos.CENTER
+        savePseudo2 = textFieldPseudo2.text
+        playButton = Button("Jouer")
+        playButton.alignment = Pos.CENTER
+        gridPaneCenter.style ="-fx-font-size : 15 ;-fx-font-weight :bold;   -fx-border-color:lightgray "
+        gridPaneCenter.add(textFieldPseudo1,0,1)
+        gridPaneCenter.add(textFieldPseudo2,0,2)
+        gridPaneCenter.add(playButton,0,3)
+        gridPaneCenter.vgap = 10.0
+        gridPaneCenter.alignment = Pos.CENTER
+        gridPaneCenter.padding = Insets(30.0)
+        gridPaneCenter.rowConstraints.addAll(contrainteLine1,contrainteLine2,contrainteLine3)
+        gridPaneCenter.columnConstraints.add(contrainteColumn1)
+        this.center = gridPaneCenter
+
+
+        // Boutons en bas
+        val flowPaneBoutons=FlowPane()
+        flowPaneBoutons.hgap=10.0
+        flowPaneBoutons.alignment = Pos.CENTER
+        flowPaneBoutons.padding=Insets(30.0,0.0,40.0,0.0)
+        buttonBottomRules.isDisable = true
+        buttonBottomRules.isCancelButton = true
+        buttonBottomRules.isVisible = false
+        flowPaneBoutons.children.addAll(loadButton,botButton,rulesButton)
+        this.bottom=flowPaneBoutons
+
+        // Vbox côtés
+        val vboxLeft = VBox()
+        vboxLeft.padding = Insets(0.0,40.0,0.0,0.0)
+        this.left = vboxLeft
+        val vboxRight = VBox()
+        vboxRight.padding = Insets(0.0,0.0,0.0,40.0)
+        this.right = vboxRight
     }
 
     fun rulesUpdate() {
@@ -116,6 +177,11 @@ class MainVue: BorderPane() {
                 "Une fois la partie finie (plus de pions à capturer car ils sont tous capturés ou plus aucunes prises n'est possibles), on compte 3 points par grand pion capturés, 2 par moyen et 1 par petit.\n" +
                 "\n" +
                 "Le gagnant est évidement le joueur qui à le plus de points")
-        this.buttonBottomRules = Button("Retour")
+        this.buttonBottomRules.isDisable = false
+        this.buttonBottomRules.isVisible = true
+        val neoFlow = FlowPane()
+        this.bottom = neoFlow
+        neoFlow.children.add(buttonBottomRules)
+        neoFlow.padding = Insets(50.0,0.0,50.0,500.0)
     }
 }
