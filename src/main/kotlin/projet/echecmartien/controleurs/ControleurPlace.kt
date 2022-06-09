@@ -11,8 +11,9 @@ class ControleurPlace(vue :JeuVue) : EventHandler<MouseEvent>{
     private val vue = vue
 
     override fun handle(event: MouseEvent) {
-        var select = GridPane.getRowIndex(event.source as Node)
-        vue.grille.
+        var row = GridPane.getRowIndex(event.source as Node)
+        var column = GridPane.getColumnIndex(event.source as Node)
+        print(vue.grille.children)
     }
 
 
