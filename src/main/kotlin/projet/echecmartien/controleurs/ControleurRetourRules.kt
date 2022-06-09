@@ -7,26 +7,23 @@ import javafx.scene.Scene
 import javafx.stage.Stage
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
+import projet.echecmartien.vue.RulesVue
 
-class ControleurRetourRules(vue: Parent, primaryStage: Stage): EventHandler<ActionEvent> {
-    val vue : Parent
+class ControleurRetourRules(oldVue: MainVue, primaryStage: Stage): EventHandler<ActionEvent> {
+
     val primaryStage : Stage
+    val vue : MainVue
 
     init {
-        this.vue = vue
         this.primaryStage = primaryStage
+        this.vue = oldVue
     }
 
     override fun handle(p0: ActionEvent?) {
+        primaryStage.scene = Scene(vue,400.0,500.0)
         primaryStage.centerOnScreen()
-        if (vue is MainVue){
-            vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,primaryStage))
-            vue.fixeListenerBouton(vue.botButton,ControleurBot(vue,primaryStage))
-            primaryStage.scene = Scene(vue,400.0,500.0)
-        }
-        if (vue is JeuVue){
-            primaryStage.scene = Scene(vue,500.0,920.0)
-            vue.fixeListenerBouton(vue.boutonReset,ControleurReset(MainVue(),primaryStage))
-        }
+        vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,primaryStage))
+        vue.fixeListenerBouton(vue.botButton,ControleurBot(vue,primaryStage))
+        vue.fixeListenerBouton(vue.rulesButton,ControleurRules(RulesVue(),primaryStage))
     }
 }

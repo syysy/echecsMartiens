@@ -21,12 +21,13 @@ class ControleurPlayButton(oldVue: MainVue, primaryStage: Stage): EventHandler<A
 
     override fun handle(p0: ActionEvent?) {
         val newVue = JeuVue()
-        primaryStage.scene = Scene(newVue,500.0,920.0)
+        val scene = Scene(newVue,500.0,920.0)
+        primaryStage.scene = scene
         primaryStage.centerOnScreen()
         newVue.joueur1.text = oldVue.textFieldPseudo1.text
         newVue.joueur2.text = oldVue.textFieldPseudo2.text
         newVue.fixeListenerBouton(newVue.boutonReset,ControleurReset(MainVue(),primaryStage))
-        newVue.fixeListenerBouton(newVue.boutonRegles,ControleurRules(RulesVue(),primaryStage))
+        newVue.fixeListenerBouton(newVue.boutonRegles,ControleurRulesJeu(RulesVue(),primaryStage))
     }
 
 }
