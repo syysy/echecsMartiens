@@ -2,16 +2,23 @@ package projet.echecmartien.controleurs
 
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
-import projet.echecmartien.vue.MainVue
+import javafx.scene.Scene
+import javafx.stage.Stage
+import projet.echecmartien.AppliJeuEchecMartien
+import projet.echecmartien.vue.JeuVue
 
-class ControleurPlayButton(vue : MainVue): EventHandler<ActionEvent> {
-    val vue : MainVue
+class ControleurPlayButton(vue: JeuVue, primaryStage: Stage): EventHandler<ActionEvent> {
+    val vue : JeuVue
+    val primaryStage : Stage
 
     init {
         this.vue = vue
+        this.primaryStage = primaryStage
     }
 
     override fun handle(p0: ActionEvent?) {
-        vue.jeuUpdate()
+        primaryStage.scene = Scene(vue,500.0,920.0)
+        primaryStage.centerOnScreen()
     }
+
 }
