@@ -20,7 +20,7 @@ class ControleurReset(vue: MainVue, primaryStage: Stage): EventHandler<ActionEve
     override fun handle(p0: ActionEvent?) {
         primaryStage.scene = Scene(vue,400.0,500.0)
         primaryStage.centerOnScreen()
-        vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(JeuVue(),primaryStage))
+        vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,primaryStage))
         vue.fixeListenerBouton(vue.botButton,ControleurBot(vue,primaryStage))
         vue.fixeListenerBouton(vue.rulesButton,ControleurRules(RulesVue(),primaryStage))
     }

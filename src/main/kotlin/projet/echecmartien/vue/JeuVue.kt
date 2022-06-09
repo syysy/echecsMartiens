@@ -7,12 +7,15 @@ import javafx.geometry.Pos
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
+import javafx.scene.input.MouseEvent
 import javafx.scene.layout.*
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
+import projet.echecmartien.controleurs.ControleurPlace
+import projet.echecmartien.modele.Jeu
 
 class JeuVue() : BorderPane() {
     var labelTop = Label("Echecs Martiens")
@@ -91,15 +94,45 @@ class JeuVue() : BorderPane() {
                 grille.style = "-fx-border-color : blue;-border-width:1"
                 var cercle = Circle()
                 cercle.radius = 30.0
+                fixeListenerCase(cercle,ControleurPlace(this))
                 grille.add(cercle,i,j)
             }
         }
 
         this.padding = Insets(10.0)
 
-
     }
-    
+
+    fun initialisationJeu(){
+        val jeu = Jeu()
+    }
+
+    fun fixeListenerCase(case : Circle, action: EventHandler<MouseEvent>) {
+        case.onMouseClicked = action
+    }
+
+
+    fun setAsGrandPion(pion : Circle){
+        pion.radius = 30.0
+    }
+
+    fun setAsMoyenPion(pion : Circle){
+        pion.radius = 20.0
+    }
+
+    fun setAsPetitPion(pion : Circle){
+        pion.radius = 10.0
+    }
+
+    fun setAsNull(pion : Circle){
+        pion.radius = 0.0
+    }
+
+
+
+
+
+
     fun fixeListenerBouton(bouton: Button, action: EventHandler<ActionEvent>) {
         bouton.onAction = action
     }

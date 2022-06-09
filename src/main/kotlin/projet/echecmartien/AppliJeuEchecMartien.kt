@@ -18,7 +18,7 @@ class AppliJeuEchecMartien: Application() {
         val vue = MainVue()
         vue.fixeListenerBouton(vue.botButton,ControleurBot(vue,primaryStage))
         vue.fixeListenerBouton(vue.rulesButton,ControleurRules(RulesVue(),primaryStage))
-        vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(JeuVue(),primaryStage))
+        vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,primaryStage))
         vue.fixeListenerBouton(vue.buttonBottomRules, ControleurRetourRules(vue,primaryStage))
         val scene = Scene(vue,400.0,500.0)
         primaryStage.title="TD5B MVC"
