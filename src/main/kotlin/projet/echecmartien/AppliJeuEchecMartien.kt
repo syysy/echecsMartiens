@@ -23,12 +23,19 @@ class AppliJeuEchecMartien: Application() {
             primaryStage.width = 1080.0
             primaryStage.centerOnScreen()
             vue.rulesUpdate()
+
         }
         vue.buttonBottomRules.setOnAction {
             primaryStage.height = 500.0
             primaryStage.width = 400.0
             primaryStage.centerOnScreen()
             vue.originUpdate()
+            vue.playButton.setOnAction {
+                primaryStage.height = 920.0
+                primaryStage.width = 500.0
+                primaryStage.centerOnScreen()
+                vue.jeuUpdate()
+            }
         }
         vue.playButton.setOnAction {
             primaryStage.height = 920.0
