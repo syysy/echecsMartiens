@@ -1,5 +1,7 @@
 package projet.echecmartien.vue
 
+import javafx.event.ActionEvent
+import javafx.event.EventHandler
 import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.control.Button
@@ -94,9 +96,9 @@ class JeuVue() : BorderPane() {
         }
 
         this.padding = Insets(10.0)
-
-
     }
-
+    fun fixeListenerBouton(bouton: Button, action: EventHandler<ActionEvent>) {
+        bouton.onAction = action
+    }
 
 }
