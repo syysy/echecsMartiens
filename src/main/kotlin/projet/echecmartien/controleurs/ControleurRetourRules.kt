@@ -2,18 +2,21 @@ package projet.echecmartien.controleurs
 
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
+import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.stage.Stage
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
+import projet.echecmartien.vue.RulesVue
 
-class ControleurRetourRules(vue: MainVue, primaryStage: Stage): EventHandler<ActionEvent> {
-    val vue : MainVue
+class ControleurRetourRules(oldVue: MainVue, primaryStage: Stage): EventHandler<ActionEvent> {
+
     val primaryStage : Stage
+    val vue : MainVue
 
     init {
-        this.vue = vue
         this.primaryStage = primaryStage
+        this.vue = oldVue
     }
 
     override fun handle(p0: ActionEvent?) {
@@ -21,5 +24,6 @@ class ControleurRetourRules(vue: MainVue, primaryStage: Stage): EventHandler<Act
         primaryStage.centerOnScreen()
         vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,primaryStage))
         vue.fixeListenerBouton(vue.botButton,ControleurBot(vue,primaryStage))
+        vue.fixeListenerBouton(vue.rulesButton,ControleurRules(RulesVue(),primaryStage))
     }
 }
