@@ -2,7 +2,6 @@ package projet.echecmartien
 
 import javafx.application.Application
 import javafx.scene.Scene
-import javafx.scene.layout.BorderPane
 
 import javafx.stage.Stage
 import projet.echecmartien.controleurs.ControleurBot
@@ -23,7 +22,6 @@ class AppliJeuEchecMartien: Application() {
             primaryStage.width = 1080.0
             primaryStage.centerOnScreen()
             vue.rulesUpdate()
-
         }
         vue.buttonBottomRules.setOnAction {
             primaryStage.height = 500.0
@@ -37,12 +35,7 @@ class AppliJeuEchecMartien: Application() {
                 vue.jeuUpdate()
             }
         }
-        vue.playButton.setOnAction {
-            primaryStage.height = 920.0
-            primaryStage.width = 500.0
-            primaryStage.centerOnScreen()
-            vue.jeuUpdate()
-        }
+        vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(JeuVue(),primaryStage))
 
         val scene = Scene(vue,400.0,500.0)
         primaryStage.title="TD5B MVC"

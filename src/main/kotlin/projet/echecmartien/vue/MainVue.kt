@@ -15,7 +15,6 @@ import javafx.scene.shape.Circle
 import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
-import projet.echecmartien.controleurs.ControleurPlayButton
 
 
 class MainVue: BorderPane() {
@@ -150,7 +149,7 @@ class MainVue: BorderPane() {
         val vboxRight = VBox()
         vboxRight.padding = Insets(0.0,0.0,0.0,40.0)
         this.right = vboxRight
-        
+
     }
 
     fun rulesUpdate() {
@@ -183,36 +182,36 @@ class MainVue: BorderPane() {
         neoFlow.padding = Insets(50.0,0.0,50.0,500.0)
     }
 
+    val centre = VBox()
+    val info1 = HBox()
+    val info2 = HBox()
+    val joueur1 = Label("joueur1")
+    val joueur2 = Label("joueur2")
+    val point1 = Label("0 points")
+    val point2 = Label("0 points")
+
+    val pions1 = VBox()
+    val grand1 = Circle()
+    val moyen1 = Circle()
+    val petit1 = Circle()
+
+    val pions2 = VBox()
+    val grand2 = Circle()
+    val moyen2 = Circle()
+    val petit2 = Circle()
+
+    val grille = GridPane()
+
+    val bot = GridPane()
+    val compteTour = Label("Tour 1")
+    val boutonCharge = Button("Charger")
+    val boutonSave = Button("Save")
+    val boutonRegles = Button("Règles")
+    val boutonReset = Button("Reset")
+
     fun jeuUpdate(){
-        var labelTop = Label("Echecs Martiens")
 
-        val centre = VBox()
-        val info1 = HBox()
-        val info2 = HBox()
-        val joueur1 = Label("joueur1")
-        val joueur2 = Label("joueur2")
-        val point1 = Label("0 points")
-        val point2 = Label("0 points")
-
-        val pions1 = VBox()
-        val grand1 = Circle()
-        val moyen1 = Circle()
-        val petit1 = Circle()
-
-        val pions2 = VBox()
-        val grand2 = Circle()
-        val moyen2 = Circle()
-        val petit2 = Circle()
-
-        val grille = GridPane()
-
-        val bot = GridPane()
-        val compteTour = Label("Tour 1")
-        val boutonCharge = Button("Charger")
-        val boutonSave = Button("Save")
-        val boutonRegles = Button("Règles")
-        val boutonReset = Button("Reset")
-
+        this.labelTop = Label("Echecs Martiens")
         // Titre en haut
         val flowPaneTop = FlowPane()
         labelTop.font = Font.font("Tahoma", FontWeight.BOLD, FontPosture.REGULAR, 20.0)
