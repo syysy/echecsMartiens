@@ -98,6 +98,29 @@ class JeuVue() : BorderPane() {
                 grille.add(case,i,j)
             }
         }
+        for (i in 0 until 4){
+            for (j in 0 until 8){
+                val case = Button()
+                case.maxHeight = Double.MAX_VALUE
+                case.maxWidth = Double.MAX_VALUE
+
+                grille.style = "-fx-border-color : blue;-border-width:1"
+                var cercle = Circle()
+                cercle.radius = 30.0
+                grille.add(cercle,i,j)
+                grille.add(case,i,j)
+            }
+        }
+        
+        val colonne1 = ColumnConstraints()
+        val colonne2 = ColumnConstraints()
+        val colonne3 = ColumnConstraints()
+        val colonne4 = ColumnConstraints()
+        colonne1.percentWidth = 25.0
+        colonne2.percentWidth = 25.0
+        colonne3.percentWidth = 25.0
+        colonne4.percentWidth = 25.0
+        grille.columnConstraints.addAll(colonne1,colonne2,colonne3,colonne4)
 
         this.padding = Insets(10.0)
 

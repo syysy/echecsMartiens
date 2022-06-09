@@ -29,6 +29,7 @@ class MainVue: BorderPane() {
     var playButton : Button
     var labelTop = Label("Echecs Martiens")
     var buttonBottomRules  = Button("Retour")
+    val gridPaneCenter = GridPane()
 
     init {
 
@@ -104,9 +105,9 @@ class MainVue: BorderPane() {
         flowPaneTop.children.add(labelTop)
         this.top = flowPaneTop
 
+
         // Zone du centre
 
-        val gridPaneCenter = GridPane()
         val contrainteLine3 = RowConstraints()
         val contrainteLine1 = RowConstraints()
         val contrainteLine2 = RowConstraints()
@@ -130,7 +131,6 @@ class MainVue: BorderPane() {
         gridPaneCenter.rowConstraints.addAll(contrainteLine1,contrainteLine2,contrainteLine3)
         gridPaneCenter.columnConstraints.add(contrainteColumn1)
         this.center = gridPaneCenter
-
 
         // Boutons en bas
         val flowPaneBoutons=FlowPane()
@@ -183,8 +183,35 @@ class MainVue: BorderPane() {
         neoFlow.padding = Insets(50.0,0.0,50.0,500.0)
     }
 
+    val centre = VBox()
+    val info1 = HBox()
+    val info2 = HBox()
+    val joueur1 = Label("joueur1")
+    val joueur2 = Label("joueur2")
+    val point1 = Label("0 points")
+    val point2 = Label("0 points")
+
+    val pions1 = VBox()
+    val grand1 = Circle()
+    val moyen1 = Circle()
+    val petit1 = Circle()
+
+    val pions2 = VBox()
+    val grand2 = Circle()
+    val moyen2 = Circle()
+    val petit2 = Circle()
+
+    val grille = GridPane()
+
+    val bot = GridPane()
+    val compteTour = Label("Tour 1")
+    val boutonCharge = Button("Charger")
+    val boutonSave = Button("Save")
+    val boutonRegles = Button("Règles")
+    val boutonReset = Button("Reset")
+
     fun jeuUpdate(){
-        var labelTop = Label("Echecs Martiens")
+        labelTop.text = "Echec Martiens"
 
         val centre = VBox()
         val info1 = HBox()
@@ -221,7 +248,6 @@ class MainVue: BorderPane() {
         labelTop.padding = Insets(30.0,0.0,30.0,0.0)
         flowPaneTop.children.add(labelTop)
         this.top = flowPaneTop
-
         pions1.children.addAll(grand1,moyen1,petit1)
         pions2.children.addAll(grand2,moyen2,petit2)
         this.left = pions1
@@ -257,18 +283,25 @@ class MainVue: BorderPane() {
         for (i in 0 until 4){
             for (j in 0 until 8){
                 val case = Button()
-                case.isVisible = false
-                case.maxHeight = 30.0
-                case.maxWidth = 30.0
+                case.maxHeight = Double.MAX_VALUE
+                case.maxWidth = Double.MAX_VALUE
+
                 grille.style = "-fx-border-color : blue;-border-width:1"
                 var cercle = Circle()
-                cercle.radius = 10.0
-
+                cercle.radius = 30.0
                 grille.add(cercle,i,j)
                 grille.add(case,i,j)
                 }
             }
-
+        val colonne1 = ColumnConstraints()
+        val colonne2 = ColumnConstraints()
+        val colonne3 = ColumnConstraints()
+        val colonne4 = ColumnConstraints()
+        colonne1.percentWidth = 25.0
+        colonne2.percentWidth = 25.0
+        colonne3.percentWidth = 25.0
+        colonne4.percentWidth = 25.0
+        grille.columnConstraints.addAll(colonne1,colonne2,colonne3,colonne4)
         this.padding = Insets(10.0)
 
 
