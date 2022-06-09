@@ -142,7 +142,6 @@ class Jeu : InterfaceJeu{
                     return false
                 }
             }
-
             return !(plateau.getCases()[coordOrigineX][coordOrigineY].getPion() === this.pionArriveDeZone && ((coordDestinationY >= 4 && coordOrigineY < 4) || (coordDestinationY < 4 && coordOrigineY >= 4)))
 
         }

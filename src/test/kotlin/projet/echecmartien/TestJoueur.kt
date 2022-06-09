@@ -41,4 +41,13 @@ internal class TestJoueur {
         joueur1.ajouterPionCaptures(gPion)
         assertTrue( joueur1.calculerScore() == 5)
     }
+
+    @Test
+    fun testEquals() {
+        val joueur1 = Joueur("Patrick")
+        val joueur2 = Joueur("Patou")
+        assertFalse(joueur1.equals(joueur2))
+        assertFalse(joueur1.equals("Jojo"))
+        assertTrue(joueur1.equals(joueur1))
+    }
 }

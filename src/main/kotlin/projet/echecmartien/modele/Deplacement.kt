@@ -113,7 +113,7 @@ class Deplacement(origine : Coordonnee, destination : Coordonnee) {
      * @return true si le déplacement est positif en X et Y, false sinon
      */
     fun estDiagonalPositifXPositifY(): Boolean{
-        return origine.getY() < destination.getY() && origine.getX()<destination.getX()
+        return origine.getY() < destination.getY() && origine.getX()<destination.getX() && destination.getY() - origine.getY() == destination.getX() - origine.getX()
     }
     /**
      * méthode qui permet de déterminer si le sens d'un déplacement diagonal est négatif en X et positif en Y
@@ -121,7 +121,7 @@ class Deplacement(origine : Coordonnee, destination : Coordonnee) {
      * @return true si le déplacement est négatif en X et positif en Y, false sinon
      */
     fun estDiagonalNegatifXPositifY(): Boolean{
-        return origine.getY() < destination.getY() && origine.getX()>destination.getX()
+        return origine.getY() < destination.getY() && origine.getX()>destination.getX() && destination.getY() - origine.getY() == origine.getX() - destination.getX()
     }
 
     /**
@@ -131,7 +131,7 @@ class Deplacement(origine : Coordonnee, destination : Coordonnee) {
      * @return true si le déplacement est positif en X et négatif en Y, false sinon
      */
     fun estDiagonalPositifXNegatifY(): Boolean{
-        return origine.getY() > destination.getY() && origine.getX()<destination.getX()
+        return origine.getY() > destination.getY() && origine.getX()<destination.getX() && destination.getX() - origine.getX() == origine.getY() - destination.getY()
     }
 
     /**
@@ -140,7 +140,7 @@ class Deplacement(origine : Coordonnee, destination : Coordonnee) {
      * @return true si le déplacement est négatif en X et négatif en Y, false sinon
      */
     fun estDiagonalNegatifXNegatifY(): Boolean{
-        return origine.getY() > destination.getY() && origine.getX()>destination.getX()
+        return origine.getY() > destination.getY() && origine.getX()>destination.getX() && origine.getX() - destination.getX() == origine.getY() - destination.getY()
     }
 
     /**
@@ -183,7 +183,7 @@ class Deplacement(origine : Coordonnee, destination : Coordonnee) {
             }
         }else{
             for (i in 1 until longueur()){
-                res.add(Coordonnee(origine.getX()-i,origine.getY()))
+                res.add(Coordonnee(origine.getX()+i,origine.getY()))
             }
         }
         return res
