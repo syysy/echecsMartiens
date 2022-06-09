@@ -24,7 +24,6 @@ class AppliJeuEchecMartien: Application() {
         primaryStage.title="TD5B MVC"
         primaryStage.scene=scene
         primaryStage.show()
-
     }
 }
 
