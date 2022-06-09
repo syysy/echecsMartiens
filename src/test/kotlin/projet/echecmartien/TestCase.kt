@@ -22,7 +22,6 @@ class TestCase{
         case3.setJoueur(null)
     }
 
-
     @Test
     fun testJoueur(){
         assertEquals(Joueur("maurice"),case1.getJoueur())
