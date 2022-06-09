@@ -1,16 +1,22 @@
 package projet.echecmartien.vue
 
+import javafx.event.ActionEvent
+import javafx.event.EventHandler
+import javafx.geometry.Insets
+import javafx.geometry.Pos
+import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextArea
 import javafx.scene.layout.BorderPane
+import javafx.scene.layout.FlowPane
 
 
 class RulesVue: BorderPane() {
-    private val textRegles : TextArea
-
+    private val textRegles : Label
+    var buttonBottomRules  = Button("Retour")
     init {
         val labelTop = Label("Règles de l'échec martien")
-        textRegles = TextArea("PREPARATION\n" +
+        textRegles = Label("PREPARATION\n" +
                 "Disposez les 18 pions comme sur la figure ci-contre.\n" +
                 "Un joueur identifie ses pièces par leur position à un instant donné.\n" +
                 "Le damier est divisé en 2 zones, une pour chaque joueur. Toute pièce dans la zone d'un joueur est la sienne.\n" +
@@ -32,5 +38,17 @@ class RulesVue: BorderPane() {
                 "Le gagnant est évidement le joueur qui à le plus de points")
         this.top = labelTop
         this.center = textRegles
+        this.buttonBottomRules.isDisable = false
+        this.buttonBottomRules.isVisible = true
+        val neoFlow = FlowPane()
+        this.bottom = neoFlow
+        neoFlow.children.add(buttonBottomRules)
+        neoFlow.padding = Insets(50.0,0.0,50.0,0.0)
+        labelTop.alignment = Pos.CENTER
+        textRegles.alignment = Pos.CENTER
+        neoFlow.alignment = Pos.CENTER
+    }
+    fun fixeListenerBouton(bouton: Button, action: EventHandler<ActionEvent>) {
+        bouton.onAction = action
     }
 }

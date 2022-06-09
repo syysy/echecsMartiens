@@ -6,6 +6,7 @@ import javafx.scene.Scene
 import javafx.stage.Stage
 import projet.echecmartien.AppliJeuEchecMartien
 import projet.echecmartien.vue.JeuVue
+import projet.echecmartien.vue.MainVue
 
 class ControleurPlayButton(vue: JeuVue, primaryStage: Stage): EventHandler<ActionEvent> {
     val vue : JeuVue
@@ -19,6 +20,7 @@ class ControleurPlayButton(vue: JeuVue, primaryStage: Stage): EventHandler<Actio
     override fun handle(p0: ActionEvent?) {
         primaryStage.scene = Scene(vue,500.0,920.0)
         primaryStage.centerOnScreen()
+        vue.fixeListenerBouton(vue.boutonReset,ControleurReset(MainVue(),primaryStage))
     }
 
 }
