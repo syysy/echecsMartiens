@@ -10,7 +10,7 @@ class TestPlateau {
     @Test
     fun testPlateau() {
         plateau.initialiser()
-        println(plateau)
+        // println(plateau)
     }
 
     @Test

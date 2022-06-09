@@ -1,8 +1,10 @@
 package projet.echecmartien.modele
 
+import com.sun.jdi.connect.Connector
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -87,9 +89,6 @@ internal class TestJeu {
         val joueur1 = jeuTest.getJoueurCourant()
         jeuTest.changeJoueurCourant()
         val joueur2 = jeuTest.getJoueurCourant()
-        println(jeuTest.plateau.getCases()[0][0].getJoueur()!!.nom)
-        println(jeuTest.plateau.getCases()[0][7].getJoueur()!!.nom)
-        println(jeuTest.plateau.getCases()[3][0].getJoueur()!!.nom)
         assertEquals(joueur1,Joueur("Râ"))
         assertEquals(joueur2,Joueur("Dio"))
         assertEquals(160,jeuTest.getNombreCoupsMax())
@@ -136,17 +135,43 @@ internal class TestJeu {
     }
 
     @ParameterizedTest
-    @MethodSource("coordProvider")
-    fun testThrows(coord1X : Int,coord1Y : Int, coord2X : Int, coord2Y: Int) {
-        org.junit.jupiter.api.assertThrows<DeplacementException>({ jeuTest.deplacer(coord1X,coord1Y,coord2X,coord2Y) })
+    @MethodSource("intCoordProvider")
+    fun testThrowsDeplacer(coord1X : Int,coord1Y : Int,coord2X : Int,coord2Y : Int){
+        jeuTest.initialiserPartie(Joueur("Râ"), Joueur("Dio"),12)
+        assertThrows<Exception> { jeuTest.deplacer(coord1X, coord1Y, coord2X, coord2Y) }
     }
     companion object{
         @JvmStatic
-        fun coordProvider(): Stream<Arguments?>?{
+        fun intCoordProvider() : Stream<Arguments?>?{
             return Stream.of(
-                Arguments.of(-1,1,2,2),
-                Arguments.of(1,1,5,3),
-                Arguments.of(7,10,9,5)
+
+                // Arguments à l'extérieur d'un plateau
+
+                Arguments.of(-1,1,1,1),
+                Arguments.of(1,-1,1,1),
+                Arguments.of(1,1,-1,1),
+                Arguments.of(1,1,1,-1),
+                Arguments.of(4,1,1,1),
+                Arguments.of(1,8,1,1),
+                Arguments.of(1,1,4,1),
+                Arguments.of(1,1,1,8),
+                Arguments.of(3,3,1,1),
+
+                // Arguments relatifs à un Grand Pion
+
+                Arguments.of(0,0,1,1),
+                Arguments.of(0,0,1,2),
+                Arguments.of(0,0,3,3),
+
+                // Arguments relatifs à un Moyen Pion
+
+                Arguments.of(0,2,0,5),
+                Arguments.of(0,2,1,4),
+
+                // Arguments relatifs à un Petit Pion
+
+                Arguments.of(2,2,2,3),
+                Arguments.of(2,2,4,4)
             )
         }
     }
