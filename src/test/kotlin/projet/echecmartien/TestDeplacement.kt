@@ -86,5 +86,4 @@ class TestDeplacement {
         Assertions.assertFalse(deplacement.estHorizontal())
         Assertions.assertFalse(deplacement.estDiagonal())
     }
-
 }
