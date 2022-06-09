@@ -5,11 +5,12 @@ import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.scene.control.TextInputDialog
 import javafx.stage.Stage
+import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
 import java.io.FileWriter
 
-class ControleurSave(vue: MainVue, primaryStage: Stage): EventHandler<ActionEvent> {
-    val vue : MainVue
+class ControleurSave(vue: JeuVue, primaryStage: Stage): EventHandler<ActionEvent> {
+    val vue : JeuVue
     val primaryStage : Stage
 
     init {
@@ -23,13 +24,9 @@ class ControleurSave(vue: MainVue, primaryStage: Stage): EventHandler<ActionEven
         dialog.contentText = "Nom :"
         val result = dialog.showAndWait()
         if (result.isPresent){
-            serialiser(result.get())
+            val message = Message(result.get(),"${vue.joueur1.text},${vue.joueur2.text} ")
+            message.serialiser("sauvegarde/${result.get()}.json")
         }
     }
-    fun serialiser(nomFichier : String) {
-        val writer = FileWriter(nomFichier)
-        Gson().toJson(this, writer)
-        writer.flush()
-        writer.close()
-    }
+
 }
