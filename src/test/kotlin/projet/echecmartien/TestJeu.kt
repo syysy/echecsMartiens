@@ -3,6 +3,11 @@ package projet.echecmartien.modele
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
+import projet.echecmartien.exceptions.DeplacementException
+import java.util.stream.Stream
 
 internal class TestJeu {
 
@@ -128,5 +133,21 @@ internal class TestJeu {
         joueur1.ajouterPionCaptures(GrandPion())
         joueur2.ajouterPionCaptures(PetitPion())
         assertEquals(joueur1,jeuTest.joueurVainqueur())
+    }
+
+    @ParameterizedTest
+    @MethodSource("coordProvider")
+    fun testThrows(coord1X : Int,coord1Y : Int, coord2X : Int, coord2Y: Int) {
+        org.junit.jupiter.api.assertThrows<DeplacementException>({ jeuTest.deplacer(coord1X,coord1Y,coord2X,coord2Y) })
+    }
+    companion object{
+        @JvmStatic
+        fun coordProvider(): Stream<Arguments?>?{
+            return Stream.of(
+                Arguments.of(-1,1,2,2),
+                Arguments.of(1,1,5,3),
+                Arguments.of(7,10,9,5)
+            )
+        }
     }
 }
