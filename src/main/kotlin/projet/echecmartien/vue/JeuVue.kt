@@ -2,8 +2,11 @@ package projet.echecmartien.vue
 
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
+import javafx.geometry.HPos
 import javafx.geometry.Insets
 import javafx.geometry.Pos
+import javafx.scene.Group
+import javafx.scene.Node
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
@@ -15,7 +18,7 @@ import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
 import projet.echecmartien.controleurs.ControleurPlace
-import projet.echecmartien.modele.Jeu
+import projet.echecmartien.modele.*
 
 class JeuVue() : BorderPane() {
     var labelTop = Label("Echecs Martiens")
@@ -96,15 +99,74 @@ class JeuVue() : BorderPane() {
                 cercle.radius = 30.0
                 fixeListenerCase(cercle,ControleurPlace(this))
                 grille.add(cercle,i,j)
+                if (j == 3){
+                    cercle.style = "-fx-size:20px"
+                }
             }
         }
 
-        this.padding = Insets(10.0)
+        val colonne1 = ColumnConstraints()
+        val colonne2 = ColumnConstraints()
+        val colonne3 = ColumnConstraints()
+        val colonne4 = ColumnConstraints()
+        val ligne1 = RowConstraints()
+        val ligne2 = RowConstraints()
+        val ligne3 = RowConstraints()
+        val ligne4 = RowConstraints()
+        val ligne5 = RowConstraints()
+        val ligne6 = RowConstraints()
+        val ligne7 = RowConstraints()
+        val ligne8 = RowConstraints()
+        colonne1.percentWidth = 25.0
+        colonne2.percentWidth = 25.0
+        colonne3.percentWidth = 25.0
+        colonne4.percentWidth = 25.0
+        ligne1.percentHeight = 100.0/8
+        ligne2.percentHeight = 100.0/8
+        ligne3.percentHeight = 100.0/8
+        ligne4.percentHeight = 100.0/8
+        ligne5.percentHeight = 100.0/8
+        ligne6.percentHeight = 100.0/8
+        ligne7.percentHeight = 100.0/8
+        ligne8.percentHeight = 100.0/8
+        colonne1.halignment = HPos.CENTER
+        colonne2.halignment = HPos.CENTER
+        colonne3.halignment = HPos.CENTER
+        colonne4.halignment = HPos.CENTER
+        grille.vgap = 5.0
 
+
+        grille.columnConstraints.addAll(colonne1,colonne2,colonne3,colonne4)
+        grille.rowConstraints.addAll(ligne1,ligne2,ligne3,ligne4,ligne5,ligne6,ligne7,ligne8)
+        grille.isGridLinesVisible = true
+        this.padding = Insets(10.0)
+        initialisationJeu()
     }
 
     fun initialisationJeu(){
         val jeu = Jeu()
+        var row : Int
+        var column : Int
+        jeu.initialiserPartie(Joueur(joueur1.text), Joueur(joueur2.text),jeu.getNombreCoupsMax())
+        for (i in grille.children){
+            if (i !is Group){
+                row = GridPane.getColumnIndex(i)
+                column = GridPane.getRowIndex(i)
+                if (i is Circle){
+                    if (jeu.plateau.getCases()[row][column].getPion() is MoyenPion){
+                        setAsMoyenPion(i)
+                    }else if (jeu.plateau.getCases()[row][column].getPion() is GrandPion){
+                        setAsGrandPion(i)
+                    }else if (jeu.plateau.getCases()[row][column].getPion() is PetitPion){
+                        setAsPetitPion(i)
+                    }else{
+                        setAsNull(i)
+                    }
+
+                }
+            }
+
+        }
     }
 
     fun fixeListenerCase(case : Circle, action: EventHandler<MouseEvent>) {
@@ -114,18 +176,23 @@ class JeuVue() : BorderPane() {
 
     fun setAsGrandPion(pion : Circle){
         pion.radius = 30.0
+        pion.fill = Color.BLACK
     }
 
     fun setAsMoyenPion(pion : Circle){
         pion.radius = 20.0
+        pion.fill = Color.BLACK
+
     }
 
     fun setAsPetitPion(pion : Circle){
         pion.radius = 10.0
+        pion.fill = Color.BLACK
     }
 
     fun setAsNull(pion : Circle){
-        pion.radius = 0.0
+        pion.radius = 30.0
+        pion.fill = Color.WHITE
     }
 
 

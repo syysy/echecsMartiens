@@ -7,6 +7,7 @@ import javafx.stage.Stage
 import projet.echecmartien.AppliJeuEchecMartien
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
+import projet.echecmartien.vue.RulesVue
 
 class ControleurPlayButton(oldVue: MainVue, primaryStage: Stage): EventHandler<ActionEvent> {
 
@@ -25,6 +26,7 @@ class ControleurPlayButton(oldVue: MainVue, primaryStage: Stage): EventHandler<A
         newVue.joueur1.text = oldVue.textFieldPseudo1.text
         newVue.joueur2.text = oldVue.textFieldPseudo2.text
         newVue.fixeListenerBouton(newVue.boutonReset,ControleurReset(MainVue(),primaryStage))
+        newVue.fixeListenerBouton(newVue.boutonRegles,ControleurRules(RulesVue(),primaryStage))
     }
 
 }
