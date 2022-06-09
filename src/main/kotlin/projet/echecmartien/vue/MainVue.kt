@@ -150,7 +150,7 @@ class MainVue: BorderPane() {
         val vboxRight = VBox()
         vboxRight.padding = Insets(0.0,0.0,0.0,40.0)
         this.right = vboxRight
-        this.fixeListenerBouton(this.playButton, ControleurPlayButton(this))
+        
     }
 
     fun rulesUpdate() {
