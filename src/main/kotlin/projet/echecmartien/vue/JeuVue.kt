@@ -7,15 +7,12 @@ import javafx.geometry.Pos
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
-import javafx.scene.input.MouseEvent
 import javafx.scene.layout.*
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
-import projet.echecmartien.controleurs.ControleurPlace
-import projet.echecmartien.modele.Jeu
 
 class JeuVue() : BorderPane() {
     var labelTop = Label("Echecs Martiens")
@@ -91,46 +88,25 @@ class JeuVue() : BorderPane() {
 
         for (i in 0 until 4){
             for (j in 0 until 8){
-                var cercle = Circle()
+                val case = Button()
+                case.isVisible = false
+                case.maxHeight = 30.0
+                case.maxWidth = 30.0
                 grille.style = "-fx-border-color : blue;-border-width:1"
-                cercle.radius = 30.0
-                fixeListenercase(cercle,ControleurPlace(this))
+                var cercle = Circle()
+                cercle.radius = 10.0
+
                 grille.add(cercle,i,j)
+                grille.add(case,i,j)
             }
         }
-        val colonne1 = ColumnConstraints()
-        val colonne2 = ColumnConstraints()
-        val colonne3 = ColumnConstraints()
-        val colonne4 = ColumnConstraints()
-        colonne1.percentWidth = 25.0
-        colonne2.percentWidth = 25.0
-        colonne3.percentWidth = 25.0
-        colonne4.percentWidth = 25.0
-        grille.columnConstraints.addAll(colonne1,colonne2,colonne3,colonne4)
+
         this.padding = Insets(10.0)
 
     }
-
-    fun fixeListenercase(case: Circle, action: EventHandler<MouseEvent>) {
-        case.onMouseClicked = action
+    fun fixeListenerBouton(bouton: Button, action: EventHandler<ActionEvent>) {
+        bouton.onAction = action
     }
 
-    fun initialisePartie(){
-        val jeu = Jeu()
-        jeu.initialiserPartie()
-    }
-
-    fun setAsGrandPion(pion: Circle){
-        pion.radius = 30.0
-    }
-    fun setAsMoyenPion(pion: Circle){
-        pion.radius = 20.0
-    }
-    fun setAsPetitPion(pion: Circle){
-        pion.radius = 10.0
-    }
-    fun setAsNull(pion: Circle){
-        pion.radius = 0.0
-    }
 
 }
