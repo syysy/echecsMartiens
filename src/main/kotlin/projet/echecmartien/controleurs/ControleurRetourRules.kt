@@ -9,20 +9,21 @@ import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
 import projet.echecmartien.vue.RulesVue
 
+class ControleurRetourRules(oldVue: MainVue, primaryStage: Stage): EventHandler<ActionEvent> {
 
-class ControleurRules(vue: RulesVue, primaryStage: Stage): EventHandler<ActionEvent> {
-    val vue : RulesVue
     val primaryStage : Stage
+    val vue : MainVue
 
     init {
-        this.vue = vue
         this.primaryStage = primaryStage
+        this.vue = oldVue
     }
 
     override fun handle(p0: ActionEvent?) {
-        primaryStage.scene = Scene(vue,1080.0,500.0)
+        primaryStage.scene = Scene(vue,400.0,500.0)
         primaryStage.centerOnScreen()
-        vue.fixeListenerBouton(vue.buttonBottomRules,ControleurRetourRules(MainVue(),primaryStage))
+        vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,primaryStage))
+        vue.fixeListenerBouton(vue.botButton,ControleurBot(vue,primaryStage))
+        vue.fixeListenerBouton(vue.rulesButton,ControleurRules(RulesVue(),primaryStage))
     }
 }
-

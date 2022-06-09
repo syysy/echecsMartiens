@@ -6,37 +6,20 @@ import javafx.scene.Scene
 import javafx.stage.Stage
 import projet.echecmartien.controleurs.ControleurBot
 import projet.echecmartien.controleurs.ControleurPlayButton
+import projet.echecmartien.controleurs.ControleurRetourRules
 import projet.echecmartien.controleurs.ControleurRules
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
+import projet.echecmartien.vue.RulesVue
 
 class AppliJeuEchecMartien: Application() {
     override fun start(primaryStage: Stage) {
 
         val vue = MainVue()
-        vue.fixeListenerBouton(vue.botButton,ControleurBot(vue))
-        vue.fixeListenerBouton(vue.rulesButton,ControleurRules(vue))
-
-        vue.rulesButton.setOnAction {
-            primaryStage.height = 500.0
-            primaryStage.width = 1080.0
-            primaryStage.centerOnScreen()
-            vue.rulesUpdate()
-        }
-        vue.buttonBottomRules.setOnAction {
-            primaryStage.height = 500.0
-            primaryStage.width = 400.0
-            primaryStage.centerOnScreen()
-            vue.originUpdate()
-            vue.playButton.setOnAction {
-                primaryStage.height = 920.0
-                primaryStage.width = 500.0
-                primaryStage.centerOnScreen()
-                vue.jeuUpdate()
-            }
-        }
-        vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(JeuVue(),primaryStage))
-
+        vue.fixeListenerBouton(vue.botButton,ControleurBot(vue,primaryStage))
+        vue.fixeListenerBouton(vue.rulesButton,ControleurRules(RulesVue(),primaryStage))
+        vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,primaryStage))
+        vue.fixeListenerBouton(vue.buttonBottomRules, ControleurRetourRules(vue,primaryStage))
         val scene = Scene(vue,400.0,500.0)
         primaryStage.title="TD5B MVC"
         primaryStage.scene=scene
