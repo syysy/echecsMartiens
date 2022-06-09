@@ -3,6 +3,7 @@ package projet.echecmartien
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
 import projet.echecmartien.modele.*
 
 class TestCase{
@@ -40,5 +41,10 @@ class TestCase{
     fun testLibre(){
         assert(caseLib.estLibre())
         assertFalse(case1.estLibre())
+    }
+
+    @Test
+    fun caseEquals(){
+        assertFalse(caseLib.equals(case1))
     }
 }
