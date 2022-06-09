@@ -69,7 +69,27 @@ class TestPion {
             return Stream.of(
                 // Petit Pion
                 // Déplacement Vertical
-                Arguments.of()
+                Arguments.of(Deplacement(Coordonnee(1,2),Coordonnee(1,3)),PetitPion()),
+                // Déplacement Horizontal
+                Arguments.of(Deplacement(Coordonnee(1,2), Coordonnee(2,2)),PetitPion()),
+                // Déplacement en dehors
+                Arguments.of(Deplacement(Coordonnee(0,0), Coordonnee(-1,-1)),PetitPion()),
+                // Déplacement trop long
+                Arguments.of(Deplacement(Coordonnee(0,0), Coordonnee(2,2)),PetitPion()),
+
+                // Moyen Pion
+                // Déplacement en L
+                Arguments.of(Deplacement(Coordonnee(0,0),Coordonnee(1,2)),MoyenPion()),
+                // Déplacement en dehors
+                Arguments.of(Deplacement(Coordonnee(0,0),Coordonnee(-2,-2)),MoyenPion()),
+                // Déplacement trop long
+                Arguments.of(Deplacement(Coordonnee(0,0),Coordonnee(3,3)),MoyenPion()),
+
+                // Grand Pion
+                // Déplacement en L
+                Arguments.of(Deplacement(Coordonnee(0,0),Coordonnee(1,3)),GrandPion()),
+                // Déplacement en dehors
+                Arguments.of(Deplacement(Coordonnee(0,0),Coordonnee(-2,-2)),GrandPion())
             )
         }
     }
