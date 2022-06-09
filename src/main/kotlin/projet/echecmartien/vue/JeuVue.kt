@@ -1,7 +1,5 @@
 package projet.echecmartien.vue
 
-import javafx.event.ActionEvent
-import javafx.event.EventHandler
 import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.control.Button
@@ -88,24 +86,16 @@ class JeuVue() : BorderPane() {
 
         for (i in 0 until 4){
             for (j in 0 until 8){
-                val case = Button()
-                case.isVisible = false
-                case.maxHeight = 30.0
-                case.maxWidth = 30.0
                 grille.style = "-fx-border-color : blue;-border-width:1"
                 var cercle = Circle()
-                cercle.radius = 10.0
-
+                cercle.radius = 30.0
                 grille.add(cercle,i,j)
-                grille.add(case,i,j)
             }
         }
 
         this.padding = Insets(10.0)
 
-    }
-    fun fixeListenerBouton(bouton: Button, action: EventHandler<ActionEvent>) {
-        bouton.onAction = action
+
     }
 
 
