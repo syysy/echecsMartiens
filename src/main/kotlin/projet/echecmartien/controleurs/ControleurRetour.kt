@@ -17,5 +17,6 @@ class ControleurRetour(vue : MainVue) : EventHandler<ActionEvent> {
         vue.textFieldPseudo2.isEditable = true
         vue.botButton.text = "Jouer contre un robot"
         vue.fixeListenerBouton(vue.botButton,ControleurBot(vue))
+        vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue))
     }
 }

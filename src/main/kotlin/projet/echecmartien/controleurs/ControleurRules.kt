@@ -15,5 +15,6 @@ class ControleurRules(vue : MainVue): EventHandler<ActionEvent> {
     override fun handle(p0: ActionEvent?) {
         vue.rulesUpdate()
         vue.fixeListenerBouton(vue.buttonBottomRules,ControleurRetour(vue))
+        vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue))
     }
 }
