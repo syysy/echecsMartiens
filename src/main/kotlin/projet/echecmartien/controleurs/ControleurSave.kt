@@ -17,5 +17,11 @@ class ControleurSave(vue: MainVue, primaryStage: Stage): EventHandler<ActionEven
 
     override fun handle(p0: ActionEvent?) {
         val dialog = TextInputDialog()
+        dialog.title = " Entrez un nom de fichier"
+        dialog.contentText = "Nom :"
+        val result = dialog.showAndWait()
+        if (result.isPresent){
+            
+        }
     }
 }
