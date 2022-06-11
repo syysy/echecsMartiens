@@ -96,7 +96,7 @@ class JeuVue() : BorderPane() {
             for (j in 0 until 8){
                 grille.style = "-fx-border-color : blue;-border-width:1"
                 var cercle = Circle()
-                cercle.radius = 30.0
+                cercle.radius = 20.0
                 fixeListenerCase(cercle,ControleurPlace(this))
                 grille.add(cercle,i,j)
                 if (j == 3){
@@ -175,23 +175,23 @@ class JeuVue() : BorderPane() {
 
 
     fun setAsGrandPion(pion : Circle){
-        pion.radius = 30.0
+        pion.radius = 20.0
         pion.fill = Color.BLACK
     }
 
     fun setAsMoyenPion(pion : Circle){
-        pion.radius = 20.0
+        pion.radius = 10.0
         pion.fill = Color.BLACK
 
     }
 
     fun setAsPetitPion(pion : Circle){
-        pion.radius = 10.0
+        pion.radius = 5.0
         pion.fill = Color.BLACK
     }
 
     fun setAsNull(pion : Circle){
-        pion.radius = 30.0
+        pion.radius = 20.0
         pion.fill = Color.WHITE
     }
 

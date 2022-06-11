@@ -21,7 +21,7 @@ class ControleurPlayButton(oldVue: MainVue, primaryStage: Stage): EventHandler<A
 
     override fun handle(p0: ActionEvent?) {
         val newVue = JeuVue()
-        val scene = Scene(newVue,500.0,920.0)
+        val scene = Scene(newVue,500.0,800.0)
         primaryStage.scene = scene
         primaryStage.centerOnScreen()
         newVue.joueur1.text = oldVue.textFieldPseudo1.text
