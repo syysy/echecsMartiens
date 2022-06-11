@@ -3,6 +3,7 @@ package projet.echecmartien
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
 import projet.echecmartien.modele.*
 
 class TestCase{
@@ -20,7 +21,6 @@ class TestCase{
         case2.setJoueur(Joueur("Pierre"))
         case3.setJoueur(null)
     }
-
 
     @Test
     fun testJoueur(){
@@ -41,5 +41,20 @@ class TestCase{
     fun testLibre(){
         assert(caseLib.estLibre())
         assertFalse(case1.estLibre())
+    }
+
+    @Test
+    fun caseEquals(){
+        val casePion = Case()
+        val caseEgal = Case()
+        casePion.setJoueur(Joueur("maurice"))
+        casePion.setPion(PetitPion())
+        caseEgal.setPion(GrandPion())
+        caseEgal.setJoueur(Joueur("maurice"))
+        assertFalse(caseLib.equals(case1))
+        assertFalse(caseLib.equals("feur"))
+        assertFalse(case1.equals(case2))
+        assertFalse(case1.equals(casePion))
+        assertTrue(case1.equals(caseEgal))
     }
 }

@@ -2,8 +2,13 @@ package projet.echecmartien
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
 import projet.echecmartien.modele.Coordonnee
 import projet.echecmartien.modele.Deplacement
+import java.util.stream.Stream
 
 class TestDeplacement {
     @Test
@@ -86,5 +91,4 @@ class TestDeplacement {
         Assertions.assertFalse(deplacement.estHorizontal())
         Assertions.assertFalse(deplacement.estDiagonal())
     }
-
 }

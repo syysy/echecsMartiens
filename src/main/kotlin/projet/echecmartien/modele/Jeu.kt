@@ -7,7 +7,7 @@ class Jeu : InterfaceJeu{
 
     private var coordOrigine : Coordonnee? = null
     private var nombreCoupsSansPrise = 0
-    private var nombreCoupsSansPriseMax = 0
+    private var nombreCoupsSansPriseMax = 10
     private var coordDest : Coordonnee? = null
     private var pionArriveDeZone : Pion? = null
     private var joueurCourant : Joueur? = null
@@ -142,7 +142,6 @@ class Jeu : InterfaceJeu{
                     return false
                 }
             }
-
             return !(plateau.getCases()[coordOrigineX][coordOrigineY].getPion() === this.pionArriveDeZone && ((coordDestinationY >= 4 && coordOrigineY < 4) || (coordDestinationY < 4 && coordOrigineY >= 4)))
 
         }
