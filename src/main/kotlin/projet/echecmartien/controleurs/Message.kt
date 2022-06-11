@@ -4,10 +4,10 @@ import com.google.gson.Gson
 import java.io.FileReader
 import java.io.FileWriter
 
-class Message (titre :String, contenu : String) {
+open class Message (titre :String, contenu : String) {
 
-    private var titre: String
-    private var contenu: String
+    var titre: String
+    var contenu: String
 
     init {
         this.titre = titre
