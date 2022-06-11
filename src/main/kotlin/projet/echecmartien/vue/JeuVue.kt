@@ -142,13 +142,13 @@ class JeuVue() : BorderPane() {
         grille.rowConstraints.addAll(ligne1,ligne2,ligne3,ligne4,ligne5,ligne6,ligne7,ligne8)
         grille.isGridLinesVisible = true
         this.padding = Insets(10.0)
-        initialisationJeu()
     }
 
     fun initialisationJeu(){
         var row : Int
         var column : Int
-        jeu.initialiserPartie(Joueur(joueur1.text), Joueur(joueur2.text),jeu.getNombreCoupsMax())
+        jeu.initialiserPartie(Joueur(this.joueur1.text), Joueur(this.joueur2.text),jeu.getNombreCoupsMax())
+        playerTurn()
         for (i in grille.children){
             if (i !is Group){
                 row = GridPane.getColumnIndex(i)
@@ -201,11 +201,33 @@ class JeuVue() : BorderPane() {
 
 
 
-
-
-
     fun fixeListenerBouton(bouton: Button, action: EventHandler<ActionEvent>) {
         bouton.onAction = action
     }
 
+    fun update(){
+        for (i in 0 until 8){
+            for (j in 0 until 4){
+                if (this.jeu.plateau.getCases()[j][i].getPion() == null){
+                    (this.grille.children[j*(this.grille.rowCount)+i] as Circle).fill = Color.WHITE
+
+                }else{
+                    (this.grille.children[j*(this.grille.rowCount)+i] as Circle).fill = Color.BLACK
+                }
+            }
+        }
+
+    }
+
+    fun playerTurn(){
+        println("Joueur courant : ${jeu.getJoueurCourant()!!.nom}")
+        println(Joueur(this.joueur1.text).nom)
+        if (Joueur(this.joueur1.text) == jeu.getJoueurCourant()){
+            this.joueur1.style = "-fx-font-weight : bold;"
+            this.joueur2.style = ""
+        }else{
+            this.joueur2.style = "-fx-font-weight : bold;"
+            this.joueur1.style = ""
+        }
+    }
 }
