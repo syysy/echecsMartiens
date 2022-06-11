@@ -2,6 +2,7 @@ package projet.echecmartien.vue
 
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
+import javafx.event.EventType
 import javafx.geometry.HPos
 import javafx.geometry.Insets
 import javafx.geometry.Pos
@@ -50,6 +51,8 @@ class JeuVue() : BorderPane() {
     val boutonRegles = Button("Règles")
     val boutonReset = Button("Reset")
 
+    val jeu = Jeu()
+
     init{
         // Titre en haut
         val flowPaneTop = FlowPane()
@@ -97,7 +100,6 @@ class JeuVue() : BorderPane() {
                 grille.style = "-fx-border-color : blue;-border-width:1"
                 var cercle = Circle()
                 cercle.radius = 20.0
-                fixeListenerCase(cercle,ControleurPlace(this))
                 grille.add(cercle,i,j)
                 if (j == 3){
                     cercle.style = "-fx-size:20px"
@@ -144,7 +146,6 @@ class JeuVue() : BorderPane() {
     }
 
     fun initialisationJeu(){
-        val jeu = Jeu()
         var row : Int
         var column : Int
         jeu.initialiserPartie(Joueur(joueur1.text), Joueur(joueur2.text),jeu.getNombreCoupsMax())
@@ -177,22 +178,25 @@ class JeuVue() : BorderPane() {
     fun setAsGrandPion(pion : Circle){
         pion.radius = 20.0
         pion.fill = Color.BLACK
+        fixeListenerCase(pion,ControleurPlace(this))
     }
 
     fun setAsMoyenPion(pion : Circle){
         pion.radius = 10.0
         pion.fill = Color.BLACK
-
+        fixeListenerCase(pion,ControleurPlace(this))
     }
 
     fun setAsPetitPion(pion : Circle){
         pion.radius = 5.0
         pion.fill = Color.BLACK
+        fixeListenerCase(pion,ControleurPlace(this))
     }
 
     fun setAsNull(pion : Circle){
         pion.radius = 20.0
         pion.fill = Color.WHITE
+        pion.removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(this))
     }
 
 

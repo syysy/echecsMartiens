@@ -5,6 +5,7 @@ import javafx.event.EventHandler
 import javafx.scene.Scene
 import javafx.stage.Stage
 import projet.echecmartien.AppliJeuEchecMartien
+import projet.echecmartien.modele.Jeu
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
 import projet.echecmartien.vue.RulesVue
@@ -20,6 +21,7 @@ class ControleurPlayButton(oldVue: MainVue, primaryStage: Stage): EventHandler<A
     }
 
     override fun handle(p0: ActionEvent?) {
+
         val newVue = JeuVue()
         val scene = Scene(newVue,500.0,800.0)
         primaryStage.scene = scene

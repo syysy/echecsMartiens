@@ -8,6 +8,7 @@ import projet.echecmartien.controleurs.ControleurBot
 import projet.echecmartien.controleurs.ControleurPlayButton
 import projet.echecmartien.controleurs.ControleurRetourRules
 import projet.echecmartien.controleurs.ControleurRules
+import projet.echecmartien.modele.Jeu
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
 import projet.echecmartien.vue.RulesVue
@@ -16,6 +17,7 @@ class AppliJeuEchecMartien: Application() {
     override fun start(primaryStage: Stage) {
 
         val vue = MainVue()
+        val modele = Jeu()
         vue.fixeListenerBouton(vue.botButton,ControleurBot(vue,primaryStage))
         vue.fixeListenerBouton(vue.rulesButton,ControleurRules(RulesVue(),primaryStage))
         vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,primaryStage))

@@ -20,7 +20,7 @@ class Deplacement(origine : Coordonnee, destination : Coordonnee) {
 
 
     /**
-     * getter
+     * gettery
      * @return la destination de ce déplacement
      */
     fun getDestination():Coordonnee{
