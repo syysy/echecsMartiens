@@ -20,7 +20,7 @@ class ControleurRetourRulesJeu (vue: JeuVue, primaryStage: Stage): EventHandler<
     }
 
     override fun handle(p0: ActionEvent?) {
-        primaryStage.scene = Scene(vue,500.0,920.0)
+        primaryStage.scene = Scene(vue,500.0,800.0)
         primaryStage.centerOnScreen()
         vue.fixeListenerBouton(vue.boutonReset,ControleurReset(MainVue(),primaryStage))
         vue.fixeListenerBouton(vue.boutonRegles,ControleurRulesJeu(RulesVue(),primaryStage))
