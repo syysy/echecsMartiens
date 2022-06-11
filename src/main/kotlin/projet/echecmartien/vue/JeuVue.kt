@@ -209,9 +209,14 @@ class JeuVue() : BorderPane() {
         for (i in 0 until 8){
             for (j in 0 until 4){
                 if (this.jeu.plateau.getCases()[j][i].getPion() == null){
-                    (this.grille.children[j*(this.grille.rowCount)+i] as Circle).fill = Color.WHITE
+                    setAsNull(this.grille.children[j*(this.grille.rowCount)+i] as Circle)
 
                 }else{
+                    if (jeu.plateau.getCases()[j][i].getJoueur() == jeu.getJoueurCourant()){
+                        fixeListenerCase(this.grille.children[j*(this.grille.rowCount)+i] as Circle,ControleurPlace(this))
+                    }else{
+                        (this.grille.children[j*(this.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(this))
+                    }
                     (this.grille.children[j*(this.grille.rowCount)+i] as Circle).fill = Color.BLACK
                 }
             }
