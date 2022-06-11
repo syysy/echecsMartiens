@@ -21,7 +21,7 @@ class ControleurPlayButton(oldVue: MainVue, primaryStage: Stage): EventHandler<A
     }
 
     override fun handle(p0: ActionEvent?) {
-
+        val modele = Jeu()
         val newVue = JeuVue()
         val scene = Scene(newVue,500.0,800.0)
         primaryStage.scene = scene
@@ -31,7 +31,7 @@ class ControleurPlayButton(oldVue: MainVue, primaryStage: Stage): EventHandler<A
         newVue.initialisationJeu()
         newVue.fixeListenerBouton(newVue.boutonReset,ControleurReset(MainVue(),primaryStage))
         newVue.fixeListenerBouton(newVue.boutonRegles,ControleurRulesJeu(RulesVue(),primaryStage))
-        newVue.fixeListenerBouton(newVue.boutonSave,ControleurSave(newVue,primaryStage))
+        newVue.fixeListenerBouton(newVue.boutonSave,ControleurSave(newVue,modele,primaryStage))
     }
 
 }

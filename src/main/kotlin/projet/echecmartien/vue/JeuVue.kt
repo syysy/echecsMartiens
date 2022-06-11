@@ -29,8 +29,10 @@ class JeuVue() : BorderPane() {
     val info2 = HBox()
     val joueur1 = Label("joueur1")
     val joueur2 = Label("joueur2")
-    val point1 = Label("0 points")
-    val point2 = Label("0 points")
+    var pts1 = Label("0")
+    var pts2 = Label("0")
+    val point1 = Label(" points")
+    val point2 = Label(" points")
 
     val pions1 = VBox()
     val grand1 = Circle()
@@ -69,10 +71,14 @@ class JeuVue() : BorderPane() {
         this.right = pions2
 
         // Centre
-        info1.children.addAll(joueur1,point1)
+        val points1box =HBox()
+        points1box.children.addAll(pts1,point1)
+        val points2box =HBox()
+        points2box.children.addAll(pts2,point2)
+        info1.children.addAll(joueur1,points1box)
         info1.spacing = 160.0
         info1.padding = Insets(10.0)
-        info2.children.addAll(joueur2,point2)
+        info2.children.addAll(joueur2,points2box)
         info2.spacing = 160.0
         info2.padding = Insets(10.0)
         centre.children.addAll(info1,grille,info2)

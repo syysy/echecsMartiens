@@ -33,6 +33,18 @@ class ControleurDeplace(vue :JeuVue) : EventHandler<MouseEvent>{
         }else if (type == 3){
             vue.setAsGrandPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle)
         }
+        var nbpts1 = 0
+        var nbpts2 = 0
+        if (vue.jeu.plateau.getCases()[column][row].estLibre() == false && vue.jeu.plateau.getCases()[column][row].getJoueur() != vue.jeu.getJoueurCourant()){
+            if (vue.jeu.getJoueurCourant()!!.nom == vue.joueur1.text){
+                nbpts1 += 1
+                vue.pts1.text = nbpts1.toString()
+            }
+            if (vue.jeu.getJoueurCourant()!!.nom == vue.joueur2.text){
+                nbpts2 += 1
+                vue.pts2.text += nbpts2.toString()
+            }
+        }
         vue.jeu.changeJoueurCourant()
         vue.update()
         vue.compteTour.text = "Tour ${vue.compteTour.text[vue.compteTour.text.length-1]+1}"
