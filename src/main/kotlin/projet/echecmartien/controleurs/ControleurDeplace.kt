@@ -17,8 +17,32 @@ class ControleurDeplace(vue :JeuVue) : EventHandler<MouseEvent>{
     private val vue = vue
 
     override fun handle(event: MouseEvent) {
-        var row = GridPane.getRowIndex(event.source as Node)
-        var column = GridPane.getColumnIndex(event.source as Node)
-
+        val row = GridPane.getRowIndex(event.source as Node)
+        val column = GridPane.getColumnIndex(event.source as Node)
+        vue.jeu.setCoordDestinationDeplacement(Coordonnee(column,row))
+        val originCords = vue.jeu.getCoordOrigineDeplacement()!!
+        val originRow = originCords.getY()
+        val originColumn = originCords.getX()
+        val type = vue.jeu.plateau.getCases()[originColumn][originRow].getPion()!!.getScore()
+        vue.jeu.deplacer(originColumn,originRow,column,row)
+        vue.setAsNull(vue.grille.children[originColumn*(vue.grille.rowCount)+originRow] as Circle)
+        print(vue.jeu.plateau.getCases()[originColumn][originRow].estLibre())
+        if (type == 1){
+            vue.setAsPetitPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle)
+        }else if (type == 2){
+            vue.setAsMoyenPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle)
+        }else if (type == 3){
+            vue.setAsGrandPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle)
+        }
+        for (i in 0 until 8){
+            for (j in 0 until 4){
+                if (vue.jeu.plateau.getCases()[j][i].getPion() == null){
+                    (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.WHITE
+                }else{
+                    vue.fixeListenerCase((vue.grille.children[j*(vue.grille.rowCount)+i] as Circle),ControleurPlace(vue))
+                    (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.BLACK
+                }
+            }
+        }
     }
 }
