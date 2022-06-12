@@ -5,6 +5,7 @@ import javafx.event.EventHandler
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.stage.Stage
+import projet.echecmartien.modele.Jeu
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
 import projet.echecmartien.vue.RulesVue
@@ -28,6 +29,6 @@ class ControleurRetourRules(oldVue: MainVue, primaryStage: Stage): EventHandler<
         new.fixeListenerBouton(new.playButton,ControleurPlayButton(new,primaryStage))
         new.fixeListenerBouton(new.botButton,ControleurBot(new,primaryStage))
         new.fixeListenerBouton(new.rulesButton,ControleurRules(new,primaryStage))
-        new.fixeListenerBouton(new.loadButton,ControleurChargerSave(new,primaryStage))
+        new.fixeListenerBouton(new.loadButton,ControleurChargerSave(new, Jeu(), primaryStage))
     }
 }
