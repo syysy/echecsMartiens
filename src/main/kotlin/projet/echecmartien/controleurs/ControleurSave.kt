@@ -1,14 +1,12 @@
 package projet.echecmartien.controleurs
 
-import com.google.gson.Gson
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.scene.control.TextInputDialog
 import javafx.stage.Stage
 import projet.echecmartien.modele.Jeu
 import projet.echecmartien.vue.JeuVue
-import projet.echecmartien.vue.MainVue
-import java.io.FileWriter
+
 
 open class ControleurSave(vue: JeuVue, modele : Jeu ,primaryStage: Stage): EventHandler<ActionEvent> {
 

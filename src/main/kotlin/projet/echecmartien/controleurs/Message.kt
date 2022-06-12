@@ -37,7 +37,7 @@ open class Message (titre : String,
 
     fun serialiser(nomFichier: String) {
         val writer = FileWriter(nomFichier)
-        Gson().toJson(this, writer)
+        Gson().toJson(this.toString(), writer)
         writer.flush()
         writer.close()
     }
