@@ -51,8 +51,11 @@ class ControleurDeplace(vue :JeuVue,modele : Jeu) : EventHandler<MouseEvent>{
         val originRow = originCords.getY()
         val originColumn = originCords.getX()
         val type = jeu.plateau.getCases()[originColumn][originRow].getPion()!!.getScore()
-        val typePris = jeu.plateau.getCases()[originColumn][originRow].getPion()!!.getScore()
-        jeu.deplacer(originColumn,originRow,column,row)
+        var typePris = 0
+        if (jeu.plateau.getCases()[column][row].getPion() != null){
+            typePris = jeu.plateau.getCases()[column][row].getPion()!!.getScore()
+            jeu.getJoueurCourant()!!.pionCapture.add(jeu.plateau.getCases()[column][row].getPion()!!)
+        }
         setAsNull(vue.grille.children[originColumn*(vue.grille.rowCount)+originRow] as Circle)
         if (type == 1){
             setAsPetitPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle)
@@ -61,12 +64,13 @@ class ControleurDeplace(vue :JeuVue,modele : Jeu) : EventHandler<MouseEvent>{
         }else if (type == 3){
             setAsGrandPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle)
         }
+        jeu.deplacer(originColumn,originRow,column,row)
         if (jeu.plateau.getCases()[column][row].estLibre() == false && jeu.plateau.getCases()[column][row].getJoueur() != jeu.getJoueurCourant()){
             if (jeu.getJoueurCourant()!!.nom == vue.joueur1.text){
-                vue.point1.text = "${vue.point1.text[1]+type} Points"
+                vue.point1.text = "${vue.point1.text[1]+typePris} Points"
             }
             if (jeu.getJoueurCourant()!!.nom == vue.joueur2.text){
-                vue.point2.text = "${vue.point2.text[1]+type} Points"
+                vue.point2.text = "${vue.point2.text[1]+typePris} Points"
             }
         }
         jeu.changeJoueurCourant()
@@ -86,8 +90,8 @@ class ControleurDeplace(vue :JeuVue,modele : Jeu) : EventHandler<MouseEvent>{
                 }
             }
         }
-
-        vue.compteTour.text = "Tour ${vue.compteTour.text[vue.compteTour.text.length-1]+1}"
+        vue.nbTour += 1
+        vue.compteTour.text = "Tour ${vue.nbTour}"
         //playerturn
         if (Joueur(vue.joueur1.text) == jeu.getJoueurCourant()){
             vue.joueur1.style = "-fx-font-weight : bold;"

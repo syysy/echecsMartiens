@@ -59,7 +59,7 @@ class JeuVue() : BorderPane() {
     val boutonReset = Button("Reset")
 
 
-    var nbTour = 0
+    var nbTour = 1
 
     init{
         // Titre en haut

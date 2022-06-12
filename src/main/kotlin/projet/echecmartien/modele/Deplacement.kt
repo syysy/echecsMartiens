@@ -177,13 +177,13 @@ class Deplacement(origine : Coordonnee, destination : Coordonnee) {
      */
     fun getCheminHorizontal(): List<Coordonnee> {
         var res = mutableListOf<Coordonnee>()
-        if (estVerticalPositif()){
+        if (estHorizontalPositif()){
             for (i in 1 until longueur()){
-                res.add(Coordonnee(origine.getX()-i,origine.getY()))
+                res.add(Coordonnee(origine.getX()+i,origine.getY()))
             }
         }else{
             for (i in 1 until longueur()){
-                res.add(Coordonnee(origine.getX()+i,origine.getY()))
+                res.add(Coordonnee(origine.getX()-i,origine.getY()))
             }
         }
         return res
@@ -223,6 +223,10 @@ class Deplacement(origine : Coordonnee, destination : Coordonnee) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         return (other is Deplacement && origine == other.origine && destination == other.destination)
+    }
+
+    override fun toString(): String {
+        return "$origine,$destination"
     }
 
 
