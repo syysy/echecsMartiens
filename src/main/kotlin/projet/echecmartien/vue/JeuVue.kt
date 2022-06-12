@@ -46,6 +46,9 @@ class JeuVue() : BorderPane() {
     val moyen2 = Circle()
     val petit2 = Circle()
 
+    val listej1 = mutableSetOf<Pion>()
+    val listej2 = mutableSetOf<Pion>()
+
     val grille = GridPane()
 
     val bot = GridPane()
@@ -68,10 +71,6 @@ class JeuVue() : BorderPane() {
         flowPaneTop.children.add(labelTop)
         this.top = flowPaneTop
 
-        this.pions1.children.addAll(grand1,moyen1,petit1)
-        this.pions2.children.addAll(grand2,moyen2,petit2)
-        this.left = pions1
-        this.right = pions2
 
         // Centre
         val points1box =HBox()
@@ -156,9 +155,52 @@ class JeuVue() : BorderPane() {
 
 
         // Compte des pions sur les côtés
-        val hboxLeft = HBox()
+        val leftgrid = GridPane()
+        val vboxLeft1 = VBox()
+        val petit = Circle()
+        petit.radius = 5.0
+        val moyen = Circle()
+        moyen.radius = 10.0
+        val grand = Circle()
+        grand.radius = 20.0
+        vboxLeft1.children.addAll(petit,moyen,grand)
+        vboxLeft1.alignment = Pos.BOTTOM_CENTER
+        vboxLeft1.spacing = 10.0
+        leftgrid.padding = Insets(330.0,0.0,0.0,10.0)
+        val vboxLeft2 = VBox()
+        val nbPetit = Label("0")
+        val nbMoyen = Label("0")
+        val nbGrand = Label("0")
+        vboxLeft2.spacing = 18.0
+        vboxLeft2.children.addAll(nbPetit,nbMoyen,nbGrand)
+        leftgrid.hgap = 10.0
+        leftgrid.add(vboxLeft1,0,0)
+        leftgrid.add(vboxLeft2,1,0)
+        this.left = leftgrid
 
-
+        val rightgrid = GridPane()
+        val vboxRight1 = VBox()
+        val petit2 = Circle()
+        petit2.radius = 5.0
+        val moyen2 = Circle()
+        moyen2.radius = 10.0
+        val grand2 = Circle()
+        grand2.radius = 20.0
+        vboxRight1.children.addAll(grand2,moyen2,petit2)
+        vboxRight1.alignment = Pos.TOP_CENTER
+        vboxRight1.spacing = 13.0
+        vboxRight1.padding = Insets(75.0,0.0,0.0,0.0)
+        val vboxRight2 = VBox()
+        val nbPetit2 = Label("0")
+        val nbMoyen2 = Label("0")
+        val nbGrand2 = Label("0")
+        vboxRight2.spacing = 18.0
+        vboxRight2.padding = Insets(90.0,0.0,0.0,0.0)
+        vboxRight2.children.addAll(nbGrand2,nbMoyen2,nbPetit2)
+        rightgrid.hgap = 10.0
+        rightgrid.add(vboxRight1,1,0)
+        rightgrid.add(vboxRight2,0,0)
+        this.right = rightgrid
 
     }
 
