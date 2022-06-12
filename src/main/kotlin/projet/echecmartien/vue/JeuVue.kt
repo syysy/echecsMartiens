@@ -58,8 +58,9 @@ class JeuVue() : BorderPane() {
     val boutonRegles = Button("Règles")
     val boutonReset = Button("Reset")
 
-    var jeu = Jeu()
-    var saveJeu : Jeu
+
+    var nbTour = 0
+
     init{
         // Titre en haut
         val flowPaneTop = FlowPane()
@@ -103,8 +104,6 @@ class JeuVue() : BorderPane() {
         bot.alignment = Pos.CENTER
         this.bottom = bot
 
-        saveJeu = jeu
-        saveJeu.plateau = jeu.plateau
 
         for (i in 0 until 4){
             for (j in 0 until 8){
@@ -205,60 +204,14 @@ class JeuVue() : BorderPane() {
 
     }
 
-    fun initialisationJeu(){
-        var row : Int
-        var column : Int
-        jeu.initialiserPartie(Joueur(this.joueur1.text), Joueur(this.joueur2.text),jeu.getNombreCoupsMax())
-        playerTurn()
-        for (i in grille.children){
-            if (i !is Group){
-                row = GridPane.getColumnIndex(i)
-                column = GridPane.getRowIndex(i)
-                if (i is Circle){
-                    if (jeu.plateau.getCases()[row][column].getPion() is MoyenPion){
-                        setAsMoyenPion(i)
-                    }else if (jeu.plateau.getCases()[row][column].getPion() is GrandPion){
-                        setAsGrandPion(i)
-                    }else if (jeu.plateau.getCases()[row][column].getPion() is PetitPion){
-                        setAsPetitPion(i)
-                    }else{
-                        setAsNull(i)
-                    }
 
-                }
-            }
-
-        }
-    }
 
     fun fixeListenerCase(case : Circle, action: EventHandler<MouseEvent>) {
         case.onMouseClicked = action
     }
 
 
-    fun setAsGrandPion(pion : Circle){
-        pion.radius = 20.0
-        pion.fill = Color.BLACK
-        fixeListenerCase(pion,ControleurPlace(this))
-    }
 
-    fun setAsMoyenPion(pion : Circle){
-        pion.radius = 10.0
-        pion.fill = Color.BLACK
-        fixeListenerCase(pion,ControleurPlace(this))
-    }
-
-    fun setAsPetitPion(pion : Circle){
-        pion.radius = 5.0
-        pion.fill = Color.BLACK
-        fixeListenerCase(pion,ControleurPlace(this))
-    }
-
-    fun setAsNull(pion : Circle){
-        pion.radius = 20.0
-        pion.fill = Color.WHITE
-        pion.removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(this))
-    }
 
 
 
@@ -266,34 +219,7 @@ class JeuVue() : BorderPane() {
         bouton.onAction = action
     }
 
-    fun update(){
-        for (i in 0 until 8){
-            for (j in 0 until 4){
-                if (this.jeu.plateau.getCases()[j][i].getPion() == null){
-                    setAsNull(this.grille.children[j*(this.grille.rowCount)+i] as Circle)
 
-                }else{
-                    if (jeu.plateau.getCases()[j][i].getJoueur() == jeu.getJoueurCourant()){
-                        fixeListenerCase(this.grille.children[j*(this.grille.rowCount)+i] as Circle,ControleurPlace(this))
-                    }else{
-                        (this.grille.children[j*(this.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(this))
-                    }
-                    (this.grille.children[j*(this.grille.rowCount)+i] as Circle).fill = Color.BLACK
-                }
-            }
-        }
 
-    }
 
-    fun playerTurn(){
-        println("Joueur courant : ${jeu.getJoueurCourant()!!.nom}")
-        println(Joueur(this.joueur1.text).nom)
-        if (Joueur(this.joueur1.text) == jeu.getJoueurCourant()){
-            this.joueur1.style = "-fx-font-weight : bold;"
-            this.joueur2.style = ""
-        }else{
-            this.joueur2.style = "-fx-font-weight : bold;"
-            this.joueur1.style = ""
-        }
-    }
 }
