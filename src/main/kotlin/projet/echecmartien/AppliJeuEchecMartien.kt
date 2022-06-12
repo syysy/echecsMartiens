@@ -16,7 +16,7 @@ class AppliJeuEchecMartien: Application() {
         val vue = MainVue()
         val modele = Jeu()
         vue.fixeListenerBouton(vue.botButton,ControleurBot(vue,primaryStage))
-        vue.fixeListenerBouton(vue.rulesButton,ControleurRules(RulesVue(),primaryStage))
+        vue.fixeListenerBouton(vue.rulesButton,ControleurRules(vue,primaryStage))
         vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,primaryStage))
         vue.fixeListenerBouton(vue.buttonBottomRules, ControleurRetourRules(vue,primaryStage))
         vue.fixeListenerBouton(vue.loadButton,ControleurChargerSave(vue,primaryStage))

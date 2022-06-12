@@ -29,7 +29,7 @@ class ControleurReset(vue: MainVue, primaryStage: Stage): EventHandler<ActionEve
             primaryStage.centerOnScreen()
             vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,primaryStage))
             vue.fixeListenerBouton(vue.botButton,ControleurBot(vue,primaryStage))
-            vue.fixeListenerBouton(vue.rulesButton,ControleurRules(RulesVue(),primaryStage))
+            vue.fixeListenerBouton(vue.rulesButton,ControleurRules(vue,primaryStage))
         }
     }
 }
