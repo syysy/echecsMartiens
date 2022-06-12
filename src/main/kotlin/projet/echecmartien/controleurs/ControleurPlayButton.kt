@@ -30,7 +30,7 @@ class ControleurPlayButton(oldVue: MainVue, primaryStage: Stage): EventHandler<A
         newVue.joueur2.text = oldVue.textFieldPseudo2.text
         newVue.initialisationJeu()
         newVue.fixeListenerBouton(newVue.boutonReset,ControleurReset(MainVue(),primaryStage))
-        newVue.fixeListenerBouton(newVue.boutonRegles,ControleurRulesJeu(RulesVue(),primaryStage))
+        newVue.fixeListenerBouton(newVue.boutonRegles,ControleurRulesJeu(newVue,primaryStage))
         newVue.fixeListenerBouton(newVue.boutonSave,ControleurSave(newVue,modele,primaryStage))
     }
 

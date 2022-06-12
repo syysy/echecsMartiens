@@ -28,11 +28,13 @@ class JeuVue() : BorderPane() {
     val info1 = HBox()
     val info2 = HBox()
     val joueur1 = Label("joueur1")
+    var savePseudo1 : String
     val joueur2 = Label("joueur2")
+    var savePseudo2 : String
     var pts1 = Label("0")
     var pts2 = Label("0")
-    val point1 = Label(" points")
-    val point2 = Label(" points")
+    val point1 = Label(" 0 points")
+    val point2 = Label(" 0 points")
 
     val pions1 = VBox()
     val grand1 = Circle()
@@ -53,8 +55,8 @@ class JeuVue() : BorderPane() {
     val boutonRegles = Button("Règles")
     val boutonReset = Button("Reset")
 
-    val jeu = Jeu()
-
+    var jeu = Jeu()
+    var saveJeu : Jeu
     init{
         // Titre en haut
         val flowPaneTop = FlowPane()
@@ -75,10 +77,12 @@ class JeuVue() : BorderPane() {
         points1box.children.addAll(pts1,point1)
         val points2box =HBox()
         points2box.children.addAll(pts2,point2)
-        info1.children.addAll(joueur1,points1box)
+        savePseudo1 = joueur1.text
+        info1.children.addAll(joueur1,point1)
         info1.spacing = 160.0
         info1.padding = Insets(10.0)
-        info2.children.addAll(joueur2,points2box)
+        savePseudo2 = joueur2.text
+        info2.children.addAll(joueur2,point2)
         info2.spacing = 160.0
         info2.padding = Insets(10.0)
         centre.children.addAll(info1,grille,info2)
@@ -100,6 +104,8 @@ class JeuVue() : BorderPane() {
         bot.alignment = Pos.CENTER
         this.bottom = bot
 
+        saveJeu = jeu
+        saveJeu.plateau = jeu.plateau
 
         for (i in 0 until 4){
             for (j in 0 until 8){
@@ -148,6 +154,13 @@ class JeuVue() : BorderPane() {
         grille.rowConstraints.addAll(ligne1,ligne2,ligne3,ligne4,ligne5,ligne6,ligne7,ligne8)
         grille.isGridLinesVisible = true
         this.padding = Insets(10.0)
+
+
+        // Compte des pions sur les côtés
+        val hboxLeft = HBox()
+
+
+
     }
 
     fun initialisationJeu(){

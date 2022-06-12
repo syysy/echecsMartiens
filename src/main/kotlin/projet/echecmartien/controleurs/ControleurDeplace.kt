@@ -15,6 +15,8 @@ import projet.echecmartien.vue.MainVue
 
 class ControleurDeplace(vue :JeuVue) : EventHandler<MouseEvent>{
     private val vue = vue
+    var nbpts1 = 0
+    var nbpts2 = 0
 
     override fun handle(event: MouseEvent) {
         val row = GridPane.getRowIndex(event.source as Node)
@@ -33,16 +35,12 @@ class ControleurDeplace(vue :JeuVue) : EventHandler<MouseEvent>{
         }else if (type == 3){
             vue.setAsGrandPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle)
         }
-        var nbpts1 = 0
-        var nbpts2 = 0
         if (vue.jeu.plateau.getCases()[column][row].estLibre() == false && vue.jeu.plateau.getCases()[column][row].getJoueur() != vue.jeu.getJoueurCourant()){
             if (vue.jeu.getJoueurCourant()!!.nom == vue.joueur1.text){
-                nbpts1 += 1
-                vue.pts1.text = nbpts1.toString()
+                vue.point1.text = "${vue.point1.text[vue.point1.text.length-1]+1} Points"
             }
             if (vue.jeu.getJoueurCourant()!!.nom == vue.joueur2.text){
-                nbpts2 += 1
-                vue.pts2.text += nbpts2.toString()
+                vue.point2.text = "${vue.point2.text[vue.point2.text.length-1]+1} Points"
             }
         }
         vue.jeu.changeJoueurCourant()

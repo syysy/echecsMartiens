@@ -20,10 +20,14 @@ class ControleurRetourRules(oldVue: MainVue, primaryStage: Stage): EventHandler<
     }
 
     override fun handle(p0: ActionEvent?) {
-        primaryStage.scene = Scene(vue,400.0,600.0)
+        val new = MainVue()
+        primaryStage.scene = Scene(new,400.0,600.0)
         primaryStage.centerOnScreen()
-        vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,primaryStage))
-        vue.fixeListenerBouton(vue.botButton,ControleurBot(vue,primaryStage))
-        vue.fixeListenerBouton(vue.rulesButton,ControleurRules(RulesVue(),primaryStage))
+        new.textFieldPseudo1.text = vue.savePseudo1
+        new.textFieldPseudo2.text = vue.savePseudo2
+        new.fixeListenerBouton(new.playButton,ControleurPlayButton(new,primaryStage))
+        new.fixeListenerBouton(new.botButton,ControleurBot(new,primaryStage))
+        new.fixeListenerBouton(new.rulesButton,ControleurRules(new,primaryStage))
+        new.fixeListenerBouton(new.loadButton,ControleurChargerSave(new,primaryStage))
     }
 }
