@@ -27,6 +27,9 @@ class ControleurPlace(vue :JeuVue,modele : Jeu) : EventHandler<MouseEvent>{
                     println("${i*(vue.grille.columnCount)+j}, verti = $j, horri = $i")
                     try {
                         jeu.plateau.getCases()[column][row].getPion()!!.getDeplacement(Deplacement(Coordonnee(column,row),Coordonnee(j,i)))
+                        if(!jeu.deplacementPossible(column,row,j,i,jeu.plateau.getCases()[column][row].getJoueur())){
+                            throw DeplacementException()
+                        }
                         vue.fixeListenerCase((vue.grille.children[j*(vue.grille.rowCount)+i] as Circle),ControleurDeplace(vue,jeu))
                         if (jeu.plateau.getCases()[j][i].getPion() == null){
                             (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.RED
@@ -37,7 +40,6 @@ class ControleurPlace(vue :JeuVue,modele : Jeu) : EventHandler<MouseEvent>{
                         if (jeu.plateau.getCases()[j][i].getPion() == null){
                             (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.WHITE
                         }else{
-
                             vue.fixeListenerCase((vue.grille.children[j*(vue.grille.rowCount)+i] as Circle),ControleurPlace(vue,jeu))
                             (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.BLACK
                         }
