@@ -6,17 +6,19 @@ import javafx.scene.Scene
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
 import javafx.stage.Stage
+import projet.echecmartien.modele.Jeu
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
 import projet.echecmartien.vue.RulesVue
 
-class ControleurReset(vue: MainVue, primaryStage: Stage): EventHandler<ActionEvent> {
+class ControleurReset(vue: MainVue, modele : Jeu, primaryStage: Stage): EventHandler<ActionEvent> {
     val vue : MainVue
     val primaryStage : Stage
-
+    val jeu : Jeu
     init {
         this.vue = vue
         this.primaryStage = primaryStage
+        this.jeu = modele
     }
 
     override fun handle(p0: ActionEvent?) {
@@ -27,9 +29,9 @@ class ControleurReset(vue: MainVue, primaryStage: Stage): EventHandler<ActionEve
         if (resultat.get() == ButtonType.OK){
             primaryStage.scene = Scene(vue,400.0,500.0)
             primaryStage.centerOnScreen()
-            vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,primaryStage))
-            vue.fixeListenerBouton(vue.botButton,ControleurBot(vue,primaryStage))
-            vue.fixeListenerBouton(vue.rulesButton,ControleurRules(vue,primaryStage))
+            vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,jeu,primaryStage))
+            vue.fixeListenerBouton(vue.botButton,ControleurBot(vue, jeu, primaryStage))
+            vue.fixeListenerBouton(vue.rulesButton,ControleurRules(vue, jeu, primaryStage))
         }
     }
 }

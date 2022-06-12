@@ -16,11 +16,11 @@ import java.util.*
 class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): EventHandler<ActionEvent> {
     val vue : MainVue
     val primaryStage : Stage
-    val modele : Jeu
+    val jeu : Jeu
     init {
         this.vue = vue
         this.primaryStage = primaryStage
-        this.modele = modele
+        this.jeu = modele
     }
     override fun handle(p0: ActionEvent?) {
         val file = FileChooser()
@@ -29,10 +29,10 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             println(result)
             val reader = FileReader(result)
             val readJson = Gson().fromJson(reader, JsonObject::class.java)
-            modele.initialiserPartie(Joueur(readJson["joueur1"].toString()),
-                Joueur(readJson["joueur2"].toString()), modele.getNombreCoupsMax())
-            modele.getJoueurCourant()!!.nom = readJson["jCourant"].toString()
-            if (modele.getJoueurCourant()!!.nom == readJson["joueur1"].toString() ){
+            jeu.initialiserPartie(Joueur(readJson["joueur1"].toString()),
+                Joueur(readJson["joueur2"].toString()), jeu.getNombreCoupsMax())
+            jeu.getJoueurCourant()!!.nom = readJson["jCourant"].toString()
+            if (jeu.getJoueurCourant()!!.nom == readJson["joueur1"].toString() ){
                 Joueur(readJson["joueur1"].toString()).pionCapture
             }
         }

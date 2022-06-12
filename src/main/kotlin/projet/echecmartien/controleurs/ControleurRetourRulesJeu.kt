@@ -9,14 +9,16 @@ import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
 import projet.echecmartien.vue.RulesVue
 
-class ControleurRetourRulesJeu (vue: JeuVue, primaryStage: Stage): EventHandler<ActionEvent> {
+class ControleurRetourRulesJeu (vue: JeuVue, modele:Jeu, primaryStage: Stage): EventHandler<ActionEvent> {
 
     val primaryStage : Stage
     val vue : JeuVue
+    val jeu : Jeu
 
     init {
         this.primaryStage = primaryStage
         this.vue = vue
+        this.jeu = modele
     }
 
     override fun handle(p0: ActionEvent?) {
@@ -26,11 +28,9 @@ class ControleurRetourRulesJeu (vue: JeuVue, primaryStage: Stage): EventHandler<
         new.pts1.text = vue.pts1.text
         new.pts2.text = vue.pts2.text
         new.compteTour.text = vue.compteTour.text
-        new.jeu.plateau = vue.jeu.plateau
-        new.initialisationJeu()
         primaryStage.scene = Scene(new,500.0,800.0)
         primaryStage.centerOnScreen()
-        new.fixeListenerBouton(new.boutonReset,ControleurReset(MainVue(),primaryStage))
-        new.fixeListenerBouton(new.boutonRegles,ControleurRulesJeu(new,primaryStage))
+        new.fixeListenerBouton(new.boutonReset,ControleurReset(MainVue(),jeu,primaryStage))
+        new.fixeListenerBouton(new.boutonRegles,ControleurRulesJeu(new,jeu,primaryStage))
     }
 }

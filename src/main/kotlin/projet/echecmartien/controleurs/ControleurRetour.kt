@@ -7,13 +7,15 @@ import projet.echecmartien.modele.Jeu
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
 
-class ControleurRetour(vue: MainVue, primaryStage: Stage): EventHandler<ActionEvent> {
+class ControleurRetour(vue: MainVue, modele : Jeu,primaryStage: Stage): EventHandler<ActionEvent> {
     val vue : MainVue
     val primaryStage : Stage
+    val jeu : Jeu
 
     init {
         this.vue = vue
         this.primaryStage = primaryStage
+        this.jeu = modele
     }
 
     override fun handle(p0: ActionEvent?) {
@@ -21,7 +23,7 @@ class ControleurRetour(vue: MainVue, primaryStage: Stage): EventHandler<ActionEv
         vue.textFieldPseudo2.style = "-fx-background-color:white ; -fx-border-color:lightgray"
         vue.textFieldPseudo2.isEditable = true
         vue.botButton.text = "Jouer contre un robot"
-        vue.fixeListenerBouton(vue.botButton,ControleurBot(vue,primaryStage))
-        vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue, primaryStage))
+        vue.fixeListenerBouton(vue.botButton,ControleurBot(vue,jeu,primaryStage))
+        vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue, jeu,primaryStage))
     }
 }

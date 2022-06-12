@@ -9,13 +9,15 @@ import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
 import projet.echecmartien.vue.RulesVue
 
-class ControleurRulesJeu(vue: JeuVue, primaryStage: Stage): EventHandler<ActionEvent> {
+class ControleurRulesJeu(vue: JeuVue, modele : Jeu, primaryStage: Stage): EventHandler<ActionEvent> {
     val vue : JeuVue
     val primaryStage : Stage
+    val jeu : Jeu
 
     init {
         this.vue = vue
         this.primaryStage = primaryStage
+        this.jeu = modele
     }
 
     override fun handle(p0: ActionEvent?) {
@@ -24,7 +26,6 @@ class ControleurRulesJeu(vue: JeuVue, primaryStage: Stage): EventHandler<ActionE
         primaryStage.centerOnScreen()
         vue.savePseudo1 = vue.joueur1.text
         vue.savePseudo2 = vue.joueur2.text
-        vue.saveJeu = vue.jeu
-        rules.fixeListenerBouton(rules.buttonBottomRules,ControleurRetourRulesJeu(vue,primaryStage))
+        rules.fixeListenerBouton(rules.buttonBottomRules,ControleurRetourRulesJeu(vue,jeu,primaryStage))
     }
 }
