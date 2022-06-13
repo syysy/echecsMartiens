@@ -29,10 +29,7 @@ open class Message (titre : String,
 
     @Override
     override fun toString(): String {
-        return "\n-------\n $titre " +
-                "\n-------\n$joueur1,$ptsj1" +
-                "\n-------\n$joueur2,$ptsj2" +
-                "\n-------\n$nbtour,$jCourant"
+        return titre + " " + joueur1 + " " + ptsj1 + " " + joueur2 + " " + ptsj2 + " " + nbtour + " " + jCourant + " "
     }
 
     fun serialiser(nomFichier: String) {

@@ -7,18 +7,12 @@ import javafx.scene.layout.GridPane
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import projet.echecmartien.exceptions.DeplacementException
-import projet.echecmartien.modele.Coordonnee
-import projet.echecmartien.modele.Deplacement
-import projet.echecmartien.modele.Jeu
-import projet.echecmartien.modele.Joueur
+import projet.echecmartien.modele.*
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
 
-class ControleurDeplace(vue :JeuVue,modele : Jeu) : EventHandler<MouseEvent>{
-    private val vue = vue
+class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<MouseEvent>{
     val jeu = modele
-    var nbpts1 = 0
-    var nbpts2 = 0
 
     fun setAsGrandPion(pion : Circle){
         pion.radius = 20.0
@@ -51,7 +45,10 @@ class ControleurDeplace(vue :JeuVue,modele : Jeu) : EventHandler<MouseEvent>{
         val originRow = originCords.getY()
         val originColumn = originCords.getX()
         val type = jeu.plateau.getCases()[originColumn][originRow].getPion()!!.getScore()
-        val typePris = jeu.plateau.getCases()[originColumn][originRow].getPion()!!.getScore()
+        var typePris = type
+        if (!jeu.plateau.getCases()[column][row].estLibre()){
+            typePris = jeu.plateau.getCases()[column][row].getPion()!!.getScore()
+        }
         jeu.deplacer(originColumn,originRow,column,row)
         setAsNull(vue.grille.children[originColumn*(vue.grille.rowCount)+originRow] as Circle)
         if (type == 1){
@@ -61,21 +58,46 @@ class ControleurDeplace(vue :JeuVue,modele : Jeu) : EventHandler<MouseEvent>{
         }else if (type == 3){
             setAsGrandPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle)
         }
-        if (jeu.plateau.getCases()[column][row].estLibre() == false && jeu.plateau.getCases()[column][row].getJoueur() != jeu.getJoueurCourant()){
+        if (!jeu.plateau.getCases()[column][row].estLibre() && jeu.plateau.getCases()[column][row].getJoueur() != jeu.getJoueurCourant()){
+
             if (jeu.getJoueurCourant()!!.nom == vue.joueur1.text){
-                vue.point1.text = "${vue.point1.text[1]+type} Points"
+                vue.point1.text = "${jeu.getJoueurCourant()!!.calculerScore()} Points"
+                if (typePris == 1 ){
+                    vue.nbPetit2.text = vue.nbPetit2.text + 1
+                    vue.listej1.add(PetitPion())
+                }
+                if (typePris == 2 ){
+                    vue.nbMoyen2.text = vue.nbMoyen2.text + 1
+                    vue.listej1.add(MoyenPion())
+                }
+                if (typePris == 3 ){
+                    vue.nbGrand2.text = vue.nbGrand2.text + 1
+                    vue.listej1.add(GrandPion())
+                }
             }
             if (jeu.getJoueurCourant()!!.nom == vue.joueur2.text){
-                vue.point2.text = "${vue.point2.text[1]+type} Points"
+                vue.point2.text = "${jeu.getJoueurCourant()!!.calculerScore()} Points"
+                if (typePris == 1 ){
+                    vue.nbPetit.text = vue.nbPetit.text + 1
+                    vue.listej2.add(PetitPion())
+                }
+                if (typePris == 2 ){
+                    vue.nbMoyen.text = vue.nbMoyen.text + 1
+                    vue.listej2.add(MoyenPion())
+                }
+                if (typePris == 3 ){
+                    vue.nbGrand.text = vue.nbGrand.text + 1
+                    vue.listej2.add(GrandPion())
+                }
             }
         }
         jeu.changeJoueurCourant()
+
         //update
         for (i in 0 until 8){
             for (j in 0 until 4){
                 if (jeu.plateau.getCases()[j][i].getPion() == null){
                     setAsNull(vue.grille.children[j*(vue.grille.rowCount)+i] as Circle)
-
                 }else{
                     if (jeu.plateau.getCases()[j][i].getJoueur() == jeu.getJoueurCourant()){
                         vue.fixeListenerCase(vue.grille.children[j*(vue.grille.rowCount)+i] as Circle,ControleurPlace(vue,jeu))
@@ -88,6 +110,7 @@ class ControleurDeplace(vue :JeuVue,modele : Jeu) : EventHandler<MouseEvent>{
         }
 
         vue.compteTour.text = "Tour ${vue.compteTour.text[vue.compteTour.text.length-1]+1}"
+
         //playerturn
         if (Joueur(vue.joueur1.text) == jeu.getJoueurCourant()){
             vue.joueur1.style = "-fx-font-weight : bold;"

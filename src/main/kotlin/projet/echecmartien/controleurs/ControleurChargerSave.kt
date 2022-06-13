@@ -2,6 +2,7 @@ package projet.echecmartien.controleurs
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.google.gson.JsonPrimitive
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.stage.FileChooser
@@ -28,13 +29,17 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
         if (result != null){
             println(result)
             val reader = FileReader(result)
-            val readJson = Gson().fromJson(reader, JsonObject::class.java)
-            jeu.initialiserPartie(Joueur(readJson["joueur1"].toString()),
+            val readJson = Gson().fromJson(reader, JsonPrimitive::class.java)
+            println(readJson.asJsonObject["joueur1"])
+            println(readJson)
+            /*jeu.initialiserPartie(Joueur(readJson.toString()),
                 Joueur(readJson["joueur2"].toString()), jeu.getNombreCoupsMax())
+
             jeu.getJoueurCourant()!!.nom = readJson["jCourant"].toString()
-            if (jeu.getJoueurCourant()!!.nom == readJson["joueur1"].toString() ){
+            if (jeu.getJoueurCourant()!!.nom == readJson["joueur1"].toString() ) {
                 Joueur(readJson["joueur1"].toString()).pionCapture
-            }
+            } */
+
         }
     }
     fun scanner(file : String){

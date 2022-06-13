@@ -58,6 +58,13 @@ class JeuVue() : BorderPane() {
     val boutonRegles = Button("Règles")
     val boutonReset = Button("Reset")
 
+    val nbPetit = Label("0")
+    val nbMoyen = Label("0")
+    val nbGrand = Label("0")
+
+    val nbPetit2 = Label("0")
+    val nbMoyen2 = Label("0")
+    val nbGrand2 = Label("0")
 
     var nbTour = 0
 
@@ -168,9 +175,7 @@ class JeuVue() : BorderPane() {
         vboxLeft1.spacing = 10.0
         leftgrid.padding = Insets(330.0,0.0,0.0,10.0)
         val vboxLeft2 = VBox()
-        val nbPetit = Label("0")
-        val nbMoyen = Label("0")
-        val nbGrand = Label("0")
+
         vboxLeft2.spacing = 18.0
         vboxLeft2.children.addAll(nbPetit,nbMoyen,nbGrand)
         leftgrid.hgap = 10.0
@@ -191,9 +196,7 @@ class JeuVue() : BorderPane() {
         vboxRight1.spacing = 13.0
         vboxRight1.padding = Insets(75.0,0.0,0.0,0.0)
         val vboxRight2 = VBox()
-        val nbPetit2 = Label("0")
-        val nbMoyen2 = Label("0")
-        val nbGrand2 = Label("0")
+
         vboxRight2.spacing = 18.0
         vboxRight2.padding = Insets(90.0,0.0,0.0,0.0)
         vboxRight2.children.addAll(nbGrand2,nbMoyen2,nbPetit2)
