@@ -45,7 +45,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         val originRow = originCords.getY()
         val originColumn = originCords.getX()
         val type = jeu.plateau.getCases()[originColumn][originRow].getPion()!!.getScore()
-        var typePris = type
+        var typePris = 0
         if (!jeu.plateau.getCases()[column][row].estLibre()){
             typePris = jeu.plateau.getCases()[column][row].getPion()!!.getScore()
         }
@@ -58,8 +58,10 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         }else if (type == 3){
             setAsGrandPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle)
         }
-        if (!jeu.plateau.getCases()[column][row].estLibre() && jeu.plateau.getCases()[column][row].getJoueur() != jeu.getJoueurCourant()){
 
+        // Compteur des points
+
+        if (!jeu.plateau.getCases()[column][row].estLibre() && jeu.plateau.getCases()[column][row].getJoueur() != jeu.getJoueurCourant()){
             if (jeu.getJoueurCourant()!!.nom == vue.joueur1.text){
                 vue.point1.text = "${jeu.getJoueurCourant()!!.calculerScore()} Points"
                 if (typePris == 1 ){
