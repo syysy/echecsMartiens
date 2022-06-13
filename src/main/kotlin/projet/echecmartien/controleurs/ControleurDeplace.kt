@@ -63,30 +63,30 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             if (jeu.getJoueurCourant()!!.nom == vue.joueur1.text){
                 vue.point1.text = "${jeu.getJoueurCourant()!!.calculerScore()} Points"
                 if (typePris == 1 ){
-                    vue.nbPetit2.text = vue.nbPetit2.text + 1
+                    vue.nbPetit2.text = (vue.nbPetit2.text.toInt() + 1).toString()
                     vue.listej1.add(PetitPion())
                 }
                 if (typePris == 2 ){
-                    vue.nbMoyen2.text = vue.nbMoyen2.text + 1
+                    vue.nbMoyen2.text = (vue.nbMoyen2.text.toInt() + 1).toString()
                     vue.listej1.add(MoyenPion())
                 }
                 if (typePris == 3 ){
-                    vue.nbGrand2.text = vue.nbGrand2.text + 1
+                    vue.nbGrand2.text = (vue.nbGrand2.text.toInt() + 1).toString()
                     vue.listej1.add(GrandPion())
                 }
             }
             if (jeu.getJoueurCourant()!!.nom == vue.joueur2.text){
                 vue.point2.text = "${jeu.getJoueurCourant()!!.calculerScore()} Points"
                 if (typePris == 1 ){
-                    vue.nbPetit.text = vue.nbPetit.text + 1
+                    vue.nbPetit.text = (vue.nbPetit.text.toInt() + 1).toString()
                     vue.listej2.add(PetitPion())
                 }
                 if (typePris == 2 ){
-                    vue.nbMoyen.text = vue.nbMoyen.text + 1
+                    vue.nbMoyen.text = (vue.nbMoyen.text.toInt() + 1).toString()
                     vue.listej2.add(MoyenPion())
                 }
                 if (typePris == 3 ){
-                    vue.nbGrand.text = vue.nbGrand.text + 1
+                    vue.nbGrand.text = (vue.nbGrand.text.toInt() + 1).toString()
                     vue.listej2.add(GrandPion())
                 }
             }
