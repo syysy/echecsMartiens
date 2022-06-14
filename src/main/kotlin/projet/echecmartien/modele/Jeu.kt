@@ -9,7 +9,7 @@ class Jeu : InterfaceJeu{
     private var nombreCoupsSansPrise = 0
     private var nombreCoupsSansPriseMax = 10
     private var coordDest : Coordonnee? = null
-    private var pionArriveDeZone : Pion? = null
+    var pionArriveDeZone : Pion? = null
     private var joueurCourant : Joueur? = null
     private var joueur = arrayOf(Joueur(""), Joueur(""))
     var plateau = Plateau()
@@ -33,7 +33,6 @@ class Jeu : InterfaceJeu{
     fun getCoordDestinationDeplacement(): Coordonnee? {
         return coordDest
     }
-
 
     /**
      * setter
@@ -63,6 +62,7 @@ class Jeu : InterfaceJeu{
     fun getNombreCoupsSansPrise(): Int{
         return nombreCoupsSansPrise
     }
+
     /**
      * affectation des joueurs aux cases
      * @param joueur1 premier joueur
@@ -152,9 +152,6 @@ class Jeu : InterfaceJeu{
         return false
     }
 
-
-
-
     override fun deplacer(coordOrigineX: Int, coordOrigineY: Int, coordDestinationX: Int, coordDestinationY: Int) {
         if (deplacementPossible(coordOrigineX,coordOrigineY,coordDestinationX,coordDestinationY,this.joueurCourant)){
             if (!plateau.getCases()[coordDestinationX][coordDestinationY].estLibre()){
@@ -162,11 +159,16 @@ class Jeu : InterfaceJeu{
             }else{
                 this.nombreCoupsSansPrise += 1
             }
+            println("${plateau.getCases()[coordOrigineX][coordOrigineY].getPion()} ICI ")
             plateau.getCases()[coordDestinationX][coordDestinationY].setPion(plateau.getCases()[coordOrigineX][coordOrigineY].getPion())
             plateau.getCases()[coordOrigineX][coordOrigineY].setPion(null)
+            if (coordOrigineY >= 4 && coordDestinationY < 4 || coordOrigineY < 4 && coordDestinationY >= 4){
+                pionArriveDeZone = plateau.getCases()[coordDestinationX][coordDestinationY].getPion()
+            }
         }else{
             throw DeplacementException()
         }
+
     }
 
     override fun joueurVainqueur(): Joueur? {

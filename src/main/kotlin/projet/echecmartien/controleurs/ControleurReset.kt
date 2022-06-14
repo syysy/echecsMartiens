@@ -29,9 +29,9 @@ class ControleurReset(vue: MainVue, modele : Jeu, primaryStage: Stage): EventHan
         if (resultat.get() == ButtonType.OK){
             primaryStage.scene = Scene(vue,400.0,500.0)
             primaryStage.centerOnScreen()
-            vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,jeu,primaryStage))
-            vue.fixeListenerBouton(vue.botButton,ControleurBot(vue, jeu, primaryStage))
-            vue.fixeListenerBouton(vue.rulesButton,ControleurRules(vue, jeu, primaryStage))
+            vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,Jeu(),primaryStage))
+            vue.fixeListenerBouton(vue.botButton,ControleurBot(vue, Jeu(), primaryStage))
+            vue.fixeListenerBouton(vue.rulesButton,ControleurRules(vue, Jeu(), primaryStage))
         }
     }
 }
