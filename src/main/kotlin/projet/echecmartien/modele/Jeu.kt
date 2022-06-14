@@ -93,7 +93,28 @@ class Jeu : InterfaceJeu{
      * @return true si la partie est finie, false sinon
      */
     fun arretPartie(): Boolean {
-        return nombreCoupsSansPrise >= nombreCoupsSansPriseMax
+        if (nombreCoupsSansPrise >= nombreCoupsSansPriseMax) {
+            return true
+        }
+        var count = 0
+        var countJcourant = 0
+        for (i in 0 until 8) {
+            for (j in 0 until 4) {
+                if (!plateau.getCases()[i][j].estLibre()){
+                    count += 1
+                }
+                if (plateau.getCases()[i][j].getJoueur() == joueurCourant && !plateau.getCases()[i][j].estLibre()){
+                    countJcourant += 1
+                }
+            }
+        }
+        if (count < 2 ){
+            return true
+        }
+        if (countJcourant == 0){
+            return true
+        }
+        return false
     }
 
     /**
