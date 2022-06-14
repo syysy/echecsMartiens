@@ -29,6 +29,8 @@ class MainVue: BorderPane() {
     var playButton : Button
     var labelTop = Label("Echecs Martiens")
     var buttonBottomRules  = Button("Retour")
+    var IActive : Boolean = false
+
 
     init {
 
@@ -93,6 +95,7 @@ class MainVue: BorderPane() {
     fun fixeListenerBouton(bouton: Button, action: EventHandler<ActionEvent>) {
         bouton.onAction = action
     }
+
 
 
 
