@@ -7,7 +7,7 @@ class Jeu : InterfaceJeu{
 
     private var coordOrigine : Coordonnee? = null
     private var nombreCoupsSansPrise = 0
-    private var nombreCoupsSansPriseMax = 10
+    private var nombreCoupsSansPriseMax = 4
     private var coordDest : Coordonnee? = null
     private var pionArriveDeZone : Pion? = null
     private var joueurCourant : Joueur? = null
@@ -63,6 +63,11 @@ class Jeu : InterfaceJeu{
     fun getNombreCoupsSansPrise(): Int{
         return nombreCoupsSansPrise
     }
+
+    fun setNombreCoupSansPrise(nombre : Int ){
+        nombreCoupsSansPrise = nombre
+    }
+
     /**
      * affectation des joueurs aux cases
      * @param joueur1 premier joueur
@@ -88,10 +93,7 @@ class Jeu : InterfaceJeu{
      * @return true si la partie est finie, false sinon
      */
     fun arretPartie(): Boolean {
-        if(nombreCoupsSansPrise == nombreCoupsSansPriseMax){
-            return true
-        }
-        return false
+        return nombreCoupsSansPrise >= nombreCoupsSansPriseMax
     }
 
     /**

@@ -2,6 +2,8 @@ package projet.echecmartien.controleurs
 
 import javafx.event.EventHandler
 import javafx.scene.Node
+import javafx.scene.control.Alert
+import javafx.scene.control.ButtonType
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.GridPane
 import javafx.scene.paint.Color
@@ -29,6 +31,9 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             typePris = jeu.plateau.getCases()[column][row].getPion()!!.getScore()
             jeu.getJoueurCourant()!!.pionCapture.add(jeu.plateau.getCases()[row][column].getPion()!!)
         }
+
+
+
         jeu.deplacer(originColumn,originRow,column,row)
         vue.setAsNull(vue.grille.children[originColumn*(vue.grille.rowCount)+originRow] as Circle,jeu)
         if (type == 1){
@@ -38,6 +43,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         }else if (type == 3){
             vue.setAsGrandPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle,jeu)
         }
+
 
         // Compteur des points
         if (!jeu.plateau.getCases()[column][row].estLibre() && jeu.plateau.getCases()[column][row].getJoueur() != jeu.getJoueurCourant()){
@@ -94,6 +100,14 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         }else{
             vue.joueur2.style = "-fx-font-weight : bold;"
             vue.joueur1.style = ""
+        }
+
+        if (jeu.arretPartie()){
+            val dialog = Alert(Alert.AlertType.INFORMATION)
+            dialog.title="Fin de partie"
+            dialog.headerText="La partie est terminée"
+            dialog.contentText = ""
+            dialog.showAndWait()
         }
 
     }
