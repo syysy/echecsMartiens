@@ -4,6 +4,20 @@ class Joueur(nom : String) {
     var nom : String = nom
     var pionCapture : MutableSet<Pion> = mutableSetOf()
 
+    fun stringPions(): String {
+        var res = ""
+        for (i in pionCapture){
+            if(i is PetitPion){
+                res += "1"
+            }else if (i is MoyenPion){
+                res += "2"
+            }else{
+                res += "3"
+            }
+        }
+        return res
+    }
+
     /**
      * récupére la liste des pions capturés
      * @return la liste des pions capturés qui est vide si aucun pion n'a été capturé

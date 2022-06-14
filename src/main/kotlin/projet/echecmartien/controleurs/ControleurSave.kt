@@ -28,8 +28,10 @@ open class ControleurSave(vue: JeuVue, modele : Jeu ,primaryStage: Stage): Event
         val result = dialog.showAndWait()
         val titre = result.get()
         if (result.isPresent){
-            val message = Message(titre, vue.joueur1.text, vue.joueur2.text,
-                vue.pts1.text + "points" ,vue.pts2.text +   "points" ,vue.compteTour.text, jeu.getJoueurCourant()!!.nom)
+            val message = Message(titre, "|"+vue.joueur1.text + "|", "|"+vue.joueur2.text + "|",
+                vue.point1.text + "/points" ,vue.point2.text + "/points" ,vue.compteTour.text+"/", "|"+jeu.getJoueurCourant()!!.nom+"|" + " plateau\n"
+                        + jeu.plateau
+            + "#"+jeu.getJoueur()[0].stringPions()+"##"+jeu.getJoueur()[1].stringPions()+"#")
             println(message)
             message.serialiser("sauvegarde/$titre.json")
         }
