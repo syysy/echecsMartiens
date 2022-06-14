@@ -7,7 +7,7 @@ class Jeu : InterfaceJeu{
 
     private var coordOrigine : Coordonnee? = null
     private var nombreCoupsSansPrise = 0
-    private var nombreCoupsSansPriseMax = 4
+    private var nombreCoupsSansPriseMax = 20
     private var coordDest : Coordonnee? = null
     private var pionArriveDeZone : Pion? = null
     private var joueurCourant : Joueur? = null
