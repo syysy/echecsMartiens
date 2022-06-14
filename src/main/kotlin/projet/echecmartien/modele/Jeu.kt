@@ -100,10 +100,10 @@ class Jeu : InterfaceJeu{
         var countJcourant = 0
         for (i in 0 until 8) {
             for (j in 0 until 4) {
-                if (!plateau.getCases()[i][j].estLibre()){
+                if (!plateau.getCases()[j][i].estLibre()){
                     count += 1
                 }
-                if (plateau.getCases()[i][j].getJoueur() == joueurCourant && !plateau.getCases()[i][j].estLibre()){
+                if (plateau.getCases()[j][i].getJoueur() == joueurCourant && !plateau.getCases()[j][i].estLibre()){
                     countJcourant += 1
                 }
             }
@@ -152,8 +152,7 @@ class Jeu : InterfaceJeu{
             return false
         }
         if (deplacementPossible(coordOrigineX,coordOrigineY) && deplacementPossible(coordDestinationX,coordDestinationY)) {
-            val dep =
-                Deplacement(Coordonnee(coordOrigineX, coordOrigineY), Coordonnee(coordDestinationX, coordDestinationY))
+            val dep = Deplacement(Coordonnee(coordOrigineX, coordOrigineY), Coordonnee(coordDestinationX, coordDestinationY))
             if (!dep.estHorizontal() && !dep.estVertical() && !dep.estDiagonal()) {
                 return false
             }
@@ -161,9 +160,7 @@ class Jeu : InterfaceJeu{
                 return false
             }
             val ourPion = plateau.getCases()[coordOrigineX][coordOrigineY].getPion()
-            println("${dep.getOrigine().getX()},${dep.getOrigine().getY()},${dep.getDestination().getX()},${dep.getDestination().getY()}")
             val chemin = ourPion!!.getDeplacement(dep)
-            print(chemin)
             for (i in chemin) {
                 if (!plateau.getCases()[i.getX()][i.getY()].estLibre()) {
                     return false
@@ -181,6 +178,7 @@ class Jeu : InterfaceJeu{
     override fun deplacer(coordOrigineX: Int, coordOrigineY: Int, coordDestinationX: Int, coordDestinationY: Int) {
         if (deplacementPossible(coordOrigineX,coordOrigineY,coordDestinationX,coordDestinationY,this.joueurCourant)){
             if (!plateau.getCases()[coordDestinationX][coordDestinationY].estLibre()){
+                this.nombreCoupsSansPrise = 0
                 this.joueurCourant!!.ajouterPionCaptures(plateau.getCases()[coordDestinationX][coordDestinationY].getPion()!!)
             }else{
                 this.nombreCoupsSansPrise += 1
@@ -189,6 +187,8 @@ class Jeu : InterfaceJeu{
             plateau.getCases()[coordOrigineX][coordOrigineY].setPion(null)
             if (coordOrigineY >= 4 && coordDestinationY < 4 || coordOrigineY < 4 && coordDestinationY >= 4){
                 pionArriveDeZone = plateau.getCases()[coordDestinationX][coordDestinationY].getPion()
+            }else{
+                pionArriveDeZone = null
             }
         }else{
             throw DeplacementException()
