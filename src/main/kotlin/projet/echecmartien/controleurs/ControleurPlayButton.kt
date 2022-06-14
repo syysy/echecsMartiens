@@ -29,29 +29,7 @@ class ControleurPlayButton(oldVue: MainVue,modele : Jeu,primaryStage: Stage): Ev
         this.newVue = JeuVue()
     }
 
-    fun setAsGrandPion(pion : Circle){
-        pion.radius = 20.0
-        pion.fill = Color.BLACK
-        newVue.fixeListenerCase(pion,ControleurPlace(newVue,jeu))
-    }
 
-    fun setAsMoyenPion(pion : Circle){
-        pion.radius = 10.0
-        pion.fill = Color.BLACK
-        newVue.fixeListenerCase(pion,ControleurPlace(newVue,jeu))
-    }
-
-    fun setAsPetitPion(pion : Circle){
-        pion.radius = 5.0
-        pion.fill = Color.BLACK
-        newVue.fixeListenerCase(pion,ControleurPlace(newVue,jeu))
-    }
-
-    fun setAsNull(pion : Circle){
-        pion.radius = 20.0
-        pion.fill = Color.WHITE
-        pion.removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(newVue,jeu))
-    }
 
     override fun handle(p0: ActionEvent?) {
         val scene = Scene(newVue,500.0,800.0)
@@ -59,7 +37,7 @@ class ControleurPlayButton(oldVue: MainVue,modele : Jeu,primaryStage: Stage): Ev
         primaryStage.centerOnScreen()
         newVue.joueur1.text = oldVue.textFieldPseudo1.text
         newVue.joueur2.text = oldVue.textFieldPseudo2.text
-
+        newVue.IActive = oldVue.IActive
         //initialisation du jeu
         var row : Int
         var column : Int
@@ -78,13 +56,13 @@ class ControleurPlayButton(oldVue: MainVue,modele : Jeu,primaryStage: Stage): Ev
                 column = GridPane.getRowIndex(i)
                 if (i is Circle){
                     if (jeu.plateau.getCases()[row][column].getPion() is MoyenPion){
-                        setAsMoyenPion(i)
+                        newVue.setAsMoyenPion(i,jeu)
                     }else if (jeu.plateau.getCases()[row][column].getPion() is GrandPion){
-                        setAsGrandPion(i)
+                        newVue.setAsGrandPion(i,jeu)
                     }else if (jeu.plateau.getCases()[row][column].getPion() is PetitPion){
-                        setAsPetitPion(i)
+                        newVue.setAsPetitPion(i,jeu)
                     }else{
-                        setAsNull(i)
+                        newVue.setAsNull(i,jeu)
                     }
 
                 }
