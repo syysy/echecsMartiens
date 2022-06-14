@@ -21,6 +21,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
     override fun handle(event: MouseEvent) {
         val row = GridPane.getRowIndex(event.source as Node)
         val column = GridPane.getColumnIndex(event.source as Node)
+        println("$row,$column   ROW COLUMN")
         jeu.setCoordDestinationDeplacement(Coordonnee(column,row))
         val originCords = jeu.getCoordOrigineDeplacement()!!
         val originRow = originCords.getY()
@@ -29,7 +30,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         var typePris = 0
         if (!jeu.plateau.getCases()[column][row].estLibre()){
             typePris = jeu.plateau.getCases()[column][row].getPion()!!.getScore()
-            jeu.getJoueurCourant()!!.pionCapture.add(jeu.plateau.getCases()[row][column].getPion()!!)
+            jeu.getJoueurCourant()!!.pionCapture.add(jeu.plateau.getCases()[column][row].getPion()!!)
         }
 
 
@@ -49,14 +50,14 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         if (!jeu.plateau.getCases()[column][row].estLibre() && jeu.plateau.getCases()[column][row].getJoueur() != jeu.getJoueurCourant()){
             if (jeu.getJoueurCourant()!!.nom == vue.joueur1.text){
                 vue.point1.text = "${jeu.getJoueurCourant()!!.calculerScore()} Points"
-                if (typePris == 1 ){
+                if (typePris == 1){
                     vue.nbPetit2.text = (vue.nbPetit2.text.toInt() + 1).toString()
 
                 }
-                if (typePris == 2 ){
+                if (typePris == 2){
                     vue.nbMoyen2.text = (vue.nbMoyen2.text.toInt() + 1).toString()
                 }
-                if (typePris == 3 ){
+                if (typePris == 3){
                     vue.nbGrand2.text = (vue.nbGrand2.text.toInt() + 1).toString()
                 }
             }
