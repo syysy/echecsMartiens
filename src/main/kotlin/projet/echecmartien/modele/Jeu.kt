@@ -14,6 +14,9 @@ class Jeu : InterfaceJeu{
     private var joueur = arrayOf(Joueur(""), Joueur(""))
     var plateau = Plateau()
 
+    fun getJoueur(): Array<Joueur> {
+        return this.joueur
+    }
     fun getNombreCoupsMax():Int{
         return nombreCoupsSansPriseMax
     }
