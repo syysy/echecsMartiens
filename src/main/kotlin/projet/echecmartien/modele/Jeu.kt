@@ -123,7 +123,7 @@ class Jeu : InterfaceJeu{
         coordDestinationY: Int,
         joueur: Joueur?
     ): Boolean {
-        if (plateau.getCases()[coordOrigineX][coordOrigineY].estLibre() || plateau.getCases()[coordOrigineX][coordOrigineY].getJoueur() != joueurCourant){
+        if (plateau.getCases()[coordOrigineX][coordOrigineY].estLibre() || joueur != joueurCourant){
             return false
         }
         if (deplacementPossible(coordOrigineX,coordOrigineY) && deplacementPossible(coordDestinationX,coordDestinationY)) {
@@ -136,13 +136,13 @@ class Jeu : InterfaceJeu{
                 return false
             }
             val ourPion = plateau.getCases()[coordOrigineX][coordOrigineY].getPion()
+            println("${dep.getOrigine().getX()},${dep.getOrigine().getY()},${dep.getDestination().getX()},${dep.getDestination().getY()}")
             val chemin = ourPion!!.getDeplacement(dep)
             for (i in chemin) {
-                if (!plateau.getCases()[i.getX()][i.getY()].estLibre() || plateau.getCases()[i.getX()][i.getY()].getJoueur() == joueurCourant) {
+                if (!plateau.getCases()[i.getX()][i.getY()].estLibre()) {
                     return false
                 }
             }
-
             return !(plateau.getCases()[coordOrigineX][coordOrigineY].getPion() === this.pionArriveDeZone && ((coordDestinationY >= 4 && coordOrigineY < 4) || (coordDestinationY < 4 && coordOrigineY >= 4)))
 
         }

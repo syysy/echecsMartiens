@@ -45,6 +45,16 @@ class TestCase{
 
     @Test
     fun caseEquals(){
+        val casePion = Case()
+        val caseEgal = Case()
+        casePion.setJoueur(Joueur("maurice"))
+        casePion.setPion(PetitPion())
+        caseEgal.setPion(GrandPion())
+        caseEgal.setJoueur(Joueur("maurice"))
         assertFalse(caseLib.equals(case1))
+        assertFalse(caseLib.equals("feur"))
+        assertFalse(case1.equals(case2))
+        assertFalse(case1.equals(casePion))
+        assertTrue(case1.equals(caseEgal))
     }
 }

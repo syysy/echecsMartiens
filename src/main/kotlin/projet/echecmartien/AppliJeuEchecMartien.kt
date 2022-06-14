@@ -4,10 +4,8 @@ import javafx.application.Application
 import javafx.scene.Scene
 
 import javafx.stage.Stage
-import projet.echecmartien.controleurs.ControleurBot
-import projet.echecmartien.controleurs.ControleurPlayButton
-import projet.echecmartien.controleurs.ControleurRetourRules
-import projet.echecmartien.controleurs.ControleurRules
+import projet.echecmartien.controleurs.*
+import projet.echecmartien.modele.Jeu
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
 import projet.echecmartien.vue.RulesVue
@@ -16,15 +14,16 @@ class AppliJeuEchecMartien: Application() {
     override fun start(primaryStage: Stage) {
 
         val vue = MainVue()
-        vue.fixeListenerBouton(vue.botButton,ControleurBot(vue,primaryStage))
-        vue.fixeListenerBouton(vue.rulesButton,ControleurRules(RulesVue(),primaryStage))
-        vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,primaryStage))
-        vue.fixeListenerBouton(vue.buttonBottomRules, ControleurRetourRules(vue,primaryStage))
+        val modele = Jeu()
+        vue.fixeListenerBouton(vue.botButton,ControleurBot(vue,modele,primaryStage))
+        vue.fixeListenerBouton(vue.rulesButton,ControleurRules(vue,modele,primaryStage))
+        vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,modele,primaryStage))
+        vue.fixeListenerBouton(vue.buttonBottomRules, ControleurRetourRules(vue,modele,primaryStage))
+        vue.fixeListenerBouton(vue.loadButton,ControleurChargerSave(vue,modele,primaryStage))
         val scene = Scene(vue,400.0,500.0)
         primaryStage.title="TD5B MVC"
         primaryStage.scene=scene
         primaryStage.show()
-
     }
 }
 

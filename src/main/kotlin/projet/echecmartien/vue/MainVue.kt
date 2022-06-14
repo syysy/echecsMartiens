@@ -24,6 +24,7 @@ class MainVue: BorderPane() {
     val rulesButton = Button("Règles")
     var textFieldPseudo1 : TextField
     var textFieldPseudo2 : TextField
+    var savePseudo1 : String
     var savePseudo2 : String
     var playButton : Button
     var labelTop = Label("Echecs Martiens")
@@ -51,6 +52,7 @@ class MainVue: BorderPane() {
         contrainteLine3.valignment = VPos.CENTER
         textFieldPseudo1 = TextField("Joueur 1")
         textFieldPseudo1.alignment = Pos.CENTER
+        savePseudo1 = textFieldPseudo1.text
         textFieldPseudo2 = TextField("Joueur 2")
         textFieldPseudo2.alignment = Pos.CENTER
         savePseudo2 = textFieldPseudo2.text

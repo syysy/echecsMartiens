@@ -5,24 +5,30 @@ import javafx.event.EventHandler
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.stage.Stage
+import projet.echecmartien.modele.Jeu
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
 import projet.echecmartien.vue.RulesVue
 
 
-class ControleurRules(vue: RulesVue, primaryStage: Stage): EventHandler<ActionEvent> {
-    val vue : RulesVue
+class ControleurRules(vue: MainVue,modele : Jeu, primaryStage: Stage): EventHandler<ActionEvent> {
+    val vue : MainVue
     val primaryStage : Stage
+    val jeu : Jeu
 
     init {
         this.vue = vue
         this.primaryStage = primaryStage
+        this.jeu = modele
     }
 
     override fun handle(p0: ActionEvent?) {
-        primaryStage.scene = Scene(vue,1080.0,500.0)
+        val rules = RulesVue()
+        vue.savePseudo1 = vue.textFieldPseudo1.text
+        vue.savePseudo2 = vue.textFieldPseudo2.text
+        primaryStage.scene = Scene(rules,1080.0,600.0)
         primaryStage.centerOnScreen()
-        vue.fixeListenerBouton(vue.buttonBottomRules,ControleurRetourRules(MainVue(),primaryStage))
+        rules.fixeListenerBouton(rules.buttonBottomRules,ControleurRetourRules(vue,jeu,primaryStage))
     }
 }
 

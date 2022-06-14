@@ -2,12 +2,12 @@ package projet.echecmartien.vue
 
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
+import javafx.event.EventType
 import javafx.geometry.HPos
 import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.Group
 import javafx.scene.Node
-import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
@@ -28,9 +28,13 @@ class JeuVue() : BorderPane() {
     val info1 = HBox()
     val info2 = HBox()
     val joueur1 = Label("joueur1")
+    var savePseudo1 : String
     val joueur2 = Label("joueur2")
-    val point1 = Label("0 points")
-    val point2 = Label("0 points")
+    var savePseudo2 : String
+    var pts1 = Label("0")
+    var pts2 = Label("0")
+    val point1 = Label(" 0 points")
+    val point2 = Label(" 0 points")
 
     val pions1 = VBox()
     val grand1 = Circle()
@@ -42,6 +46,9 @@ class JeuVue() : BorderPane() {
     val moyen2 = Circle()
     val petit2 = Circle()
 
+    val listej1 = mutableSetOf<Pion>()
+    val listej2 = mutableSetOf<Pion>()
+
     val grille = GridPane()
 
     val bot = GridPane()
@@ -50,6 +57,16 @@ class JeuVue() : BorderPane() {
     val boutonSave = Button("Save")
     val boutonRegles = Button("Règles")
     val boutonReset = Button("Reset")
+
+    val nbPetit = Label("0")
+    val nbMoyen = Label("0")
+    val nbGrand = Label("0")
+
+    val nbPetit2 = Label("0")
+    val nbMoyen2 = Label("0")
+    val nbGrand2 = Label("0")
+
+    var nbTour = 0
 
     init{
         // Titre en haut
@@ -61,15 +78,17 @@ class JeuVue() : BorderPane() {
         flowPaneTop.children.add(labelTop)
         this.top = flowPaneTop
 
-        this.pions1.children.addAll(grand1,moyen1,petit1)
-        this.pions2.children.addAll(grand2,moyen2,petit2)
-        this.left = pions1
-        this.right = pions2
 
         // Centre
+        val points1box =HBox()
+        points1box.children.addAll(pts1,point1)
+        val points2box =HBox()
+        points2box.children.addAll(pts2,point2)
+        savePseudo1 = joueur1.text
         info1.children.addAll(joueur1,point1)
         info1.spacing = 160.0
         info1.padding = Insets(10.0)
+        savePseudo2 = joueur2.text
         info2.children.addAll(joueur2,point2)
         info2.spacing = 160.0
         info2.padding = Insets(10.0)
@@ -97,8 +116,7 @@ class JeuVue() : BorderPane() {
             for (j in 0 until 8){
                 grille.style = "-fx-border-color : blue;-border-width:1"
                 var cercle = Circle()
-                cercle.radius = 30.0
-                fixeListenerCase(cercle,ControleurPlace(this))
+                cercle.radius = 20.0
                 grille.add(cercle,i,j)
                 if (j == 3){
                     cercle.style = "-fx-size:20px"
@@ -141,68 +159,86 @@ class JeuVue() : BorderPane() {
         grille.rowConstraints.addAll(ligne1,ligne2,ligne3,ligne4,ligne5,ligne6,ligne7,ligne8)
         grille.isGridLinesVisible = true
         this.padding = Insets(10.0)
-        initialisationJeu()
+
+
+        // Compte des pions sur les côtés
+        val leftgrid = GridPane()
+        val vboxLeft1 = VBox()
+        val petit = Circle()
+        petit.radius = 5.0
+        val moyen = Circle()
+        moyen.radius = 10.0
+        val grand = Circle()
+        grand.radius = 20.0
+        vboxLeft1.children.addAll(petit,moyen,grand)
+        vboxLeft1.alignment = Pos.BOTTOM_CENTER
+        vboxLeft1.spacing = 10.0
+        leftgrid.padding = Insets(330.0,0.0,0.0,10.0)
+        val vboxLeft2 = VBox()
+
+        vboxLeft2.spacing = 18.0
+        vboxLeft2.children.addAll(nbPetit,nbMoyen,nbGrand)
+        leftgrid.hgap = 10.0
+        leftgrid.add(vboxLeft1,0,0)
+        leftgrid.add(vboxLeft2,1,0)
+        this.left = leftgrid
+
+        val rightgrid = GridPane()
+        val vboxRight1 = VBox()
+        val petit2 = Circle()
+        petit2.radius = 5.0
+        val moyen2 = Circle()
+        moyen2.radius = 10.0
+        val grand2 = Circle()
+        grand2.radius = 20.0
+        vboxRight1.children.addAll(grand2,moyen2,petit2)
+        vboxRight1.alignment = Pos.TOP_CENTER
+        vboxRight1.spacing = 13.0
+        vboxRight1.padding = Insets(75.0,0.0,0.0,0.0)
+        val vboxRight2 = VBox()
+
+        vboxRight2.spacing = 18.0
+        vboxRight2.padding = Insets(90.0,0.0,0.0,0.0)
+        vboxRight2.children.addAll(nbGrand2,nbMoyen2,nbPetit2)
+        rightgrid.hgap = 10.0
+        rightgrid.add(vboxRight1,1,0)
+        rightgrid.add(vboxRight2,0,0)
+        this.right = rightgrid
+
     }
 
-    fun initialisationJeu(){
-        val jeu = Jeu()
-        var row : Int
-        var column : Int
-        jeu.initialiserPartie(Joueur(joueur1.text), Joueur(joueur2.text),jeu.getNombreCoupsMax())
-        for (i in grille.children){
-            if (i !is Group){
-                row = GridPane.getColumnIndex(i)
-                column = GridPane.getRowIndex(i)
-                if (i is Circle){
-                    if (jeu.plateau.getCases()[row][column].getPion() is MoyenPion){
-                        setAsMoyenPion(i)
-                    }else if (jeu.plateau.getCases()[row][column].getPion() is GrandPion){
-                        setAsGrandPion(i)
-                    }else if (jeu.plateau.getCases()[row][column].getPion() is PetitPion){
-                        setAsPetitPion(i)
-                    }else{
-                        setAsNull(i)
-                    }
 
-                }
-            }
-            val alert : Alert
-        }
-    }
 
     fun fixeListenerCase(case : Circle, action: EventHandler<MouseEvent>) {
         case.onMouseClicked = action
     }
 
 
-    fun setAsGrandPion(pion : Circle){
-        pion.radius = 30.0
-        pion.fill = Color.BLACK
-    }
-
-    fun setAsMoyenPion(pion : Circle){
-        pion.radius = 20.0
-        pion.fill = Color.BLACK
-
-    }
-
-    fun setAsPetitPion(pion : Circle){
-        pion.radius = 10.0
-        pion.fill = Color.BLACK
-    }
-
-    fun setAsNull(pion : Circle){
-        pion.radius = 30.0
-        pion.fill = Color.WHITE
-    }
-
-
-
-
-
-
     fun fixeListenerBouton(bouton: Button, action: EventHandler<ActionEvent>) {
         bouton.onAction = action
+    }
+
+    fun setAsNull(pion : Circle, jeu : Jeu){
+        pion.radius = 20.0
+        pion.fill = Color.WHITE
+        pion.removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(this,jeu))
+    }
+
+    fun update( jeu : Jeu){
+        for (i in 0 until 8){
+            for (j in 0 until 4){
+                if (jeu.plateau.getCases()[j][i].getPion() == null){
+                    setAsNull(this.grille.children[j*(this.grille.rowCount)+i] as Circle,jeu)
+                }else{
+                    if (jeu.plateau.getCases()[j][i].getJoueur() == jeu.getJoueurCourant()){
+                        this.fixeListenerCase(this.grille.children[j*(this.grille.rowCount)+i] as Circle,ControleurPlace(this,jeu))
+                    }else{
+                        (this.grille.children[j*(this.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(this,jeu))
+                    }
+                    (this.grille.children[j*(this.grille.rowCount)+i] as Circle).fill = Color.BLACK
+                }
+            }
+        }
     }
 
 }
