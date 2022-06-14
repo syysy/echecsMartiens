@@ -41,7 +41,7 @@ class Case {
      */
     fun setPion(pion: Pion?) {
        this.pion = pion
-        this.estLibre = pion == null
+       this.estLibre = (pion == null)
     }
 
     override fun equals(other: Any?): Boolean {

@@ -104,7 +104,7 @@ class Deplacement(origine : Coordonnee, destination : Coordonnee) {
      * @return true si le déplacement est positif, false sinon
      */
     fun estHorizontalPositif():Boolean{
-        return origine.getX() < destination.getX()
+        return origine.getX() > destination.getX()
     }
 
     /**
@@ -177,7 +177,7 @@ class Deplacement(origine : Coordonnee, destination : Coordonnee) {
      */
     fun getCheminHorizontal(): List<Coordonnee> {
         var res = mutableListOf<Coordonnee>()
-        if (estVerticalPositif()){
+        if (estHorizontalPositif()){
             for (i in 1 until longueur()){
                 res.add(Coordonnee(origine.getX()-i,origine.getY()))
             }

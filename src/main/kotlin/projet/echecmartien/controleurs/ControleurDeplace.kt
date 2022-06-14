@@ -2,6 +2,8 @@ package projet.echecmartien.controleurs
 
 import javafx.event.EventHandler
 import javafx.scene.Node
+import javafx.scene.control.Alert
+import javafx.scene.control.ButtonType
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.GridPane
 import javafx.scene.paint.Color
@@ -14,29 +16,8 @@ import projet.echecmartien.vue.MainVue
 class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<MouseEvent>{
     val jeu = modele
 
-    fun setAsGrandPion(pion : Circle){
-        pion.radius = 20.0
-        pion.fill = Color.BLACK
-        vue.fixeListenerCase(pion,ControleurPlace(vue,jeu))
-    }
 
-    fun setAsMoyenPion(pion : Circle){
-        pion.radius = 10.0
-        pion.fill = Color.BLACK
-        vue.fixeListenerCase(pion,ControleurPlace(vue,jeu))
-    }
 
-    fun setAsPetitPion(pion : Circle){
-        pion.radius = 5.0
-        pion.fill = Color.BLACK
-        vue.fixeListenerCase(pion,ControleurPlace(vue,jeu))
-    }
-
-    fun setAsNull(pion : Circle){
-        pion.radius = 20.0
-        pion.fill = Color.WHITE
-        pion.removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(vue,jeu))
-    }
     override fun handle(event: MouseEvent) {
         val row = GridPane.getRowIndex(event.source as Node)
         val column = GridPane.getColumnIndex(event.source as Node)
@@ -48,48 +29,47 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         var typePris = 0
         if (!jeu.plateau.getCases()[column][row].estLibre()){
             typePris = jeu.plateau.getCases()[column][row].getPion()!!.getScore()
+            jeu.getJoueurCourant()!!.pionCapture.add(jeu.plateau.getCases()[column][row].getPion()!!)
         }
+
+
+
         jeu.deplacer(originColumn,originRow,column,row)
-        setAsNull(vue.grille.children[originColumn*(vue.grille.rowCount)+originRow] as Circle)
+        vue.setAsNull(vue.grille.children[originColumn*(vue.grille.rowCount)+originRow] as Circle,jeu)
         if (type == 1){
-            setAsPetitPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle)
+            vue.setAsPetitPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle,jeu)
         }else if (type == 2){
-            setAsMoyenPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle)
+            vue.setAsMoyenPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle,jeu)
         }else if (type == 3){
-            setAsGrandPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle)
+            vue.setAsGrandPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle,jeu)
         }
+
 
         // Compteur des points
-
         if (!jeu.plateau.getCases()[column][row].estLibre() && jeu.plateau.getCases()[column][row].getJoueur() != jeu.getJoueurCourant()){
             if (jeu.getJoueurCourant()!!.nom == vue.joueur1.text){
                 vue.point1.text = "${jeu.getJoueurCourant()!!.calculerScore()} Points"
-                if (typePris == 1 ){
+                if (typePris == 1){
                     vue.nbPetit2.text = (vue.nbPetit2.text.toInt() + 1).toString()
-                    vue.listej1.add(PetitPion())
+
                 }
-                if (typePris == 2 ){
+                if (typePris == 2){
                     vue.nbMoyen2.text = (vue.nbMoyen2.text.toInt() + 1).toString()
-                    vue.listej1.add(MoyenPion())
                 }
-                if (typePris == 3 ){
+                if (typePris == 3){
                     vue.nbGrand2.text = (vue.nbGrand2.text.toInt() + 1).toString()
-                    vue.listej1.add(GrandPion())
                 }
             }
             if (jeu.getJoueurCourant()!!.nom == vue.joueur2.text){
                 vue.point2.text = "${jeu.getJoueurCourant()!!.calculerScore()} Points"
                 if (typePris == 1 ){
                     vue.nbPetit.text = (vue.nbPetit.text.toInt() + 1).toString()
-                    vue.listej2.add(PetitPion())
                 }
                 if (typePris == 2 ){
                     vue.nbMoyen.text = (vue.nbMoyen.text.toInt() + 1).toString()
-                    vue.listej2.add(MoyenPion())
                 }
                 if (typePris == 3 ){
                     vue.nbGrand.text = (vue.nbGrand.text.toInt() + 1).toString()
-                    vue.listej2.add(GrandPion())
                 }
             }
         }
@@ -99,7 +79,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         for (i in 0 until 8){
             for (j in 0 until 4){
                 if (jeu.plateau.getCases()[j][i].getPion() == null){
-                    setAsNull(vue.grille.children[j*(vue.grille.rowCount)+i] as Circle)
+                    vue.setAsNull(vue.grille.children[j*(vue.grille.rowCount)+i] as Circle,jeu)
                 }else{
                     if (jeu.plateau.getCases()[j][i].getJoueur() == jeu.getJoueurCourant()){
                         vue.fixeListenerCase(vue.grille.children[j*(vue.grille.rowCount)+i] as Circle,ControleurPlace(vue,jeu))
@@ -120,6 +100,17 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         }else{
             vue.joueur2.style = "-fx-font-weight : bold;"
             vue.joueur1.style = ""
+        }
+
+        if (jeu.arretPartie()){
+            if (jeu.joueurVainqueur()!!.nom == jeu.getJoueurCourant()!!.nom){
+                jeu.changeJoueurCourant()
+            }
+            val dialog = Alert(Alert.AlertType.INFORMATION)
+            dialog.title="Fin de partie"
+            dialog.headerText="La partie est terminée"
+            dialog.contentText = "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${jeu.joueurVainqueur()!!.calculerScore()} Point(s) \n " + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${jeu.getJoueurCourant()!!.calculerScore()} Point(s) "
+            dialog.showAndWait()
         }
 
     }

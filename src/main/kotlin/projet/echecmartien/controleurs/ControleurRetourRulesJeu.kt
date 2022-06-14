@@ -3,6 +3,9 @@ package projet.echecmartien.controleurs
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.scene.Scene
+import javafx.scene.input.MouseEvent
+import javafx.scene.paint.Color
+import javafx.scene.shape.Circle
 import javafx.stage.Stage
 import projet.echecmartien.modele.Jeu
 import projet.echecmartien.vue.JeuVue
@@ -25,9 +28,16 @@ class ControleurRetourRulesJeu (vue: JeuVue, modele:Jeu, primaryStage: Stage): E
         var new = JeuVue()
         new.joueur1.text = vue.savePseudo1
         new.joueur2.text = vue.savePseudo2
-        new.pts1.text = vue.pts1.text
-        new.pts2.text = vue.pts2.text
+        new.point1.text = vue.point1.text
+        new.point2.text = vue.point2.text
         new.compteTour.text = vue.compteTour.text
+        new.nbPetit.text = vue.nbPetit.text
+        new.nbMoyen.text = vue.nbMoyen.text
+        new.nbGrand.text = vue.nbGrand.text
+        new.nbPetit2.text = vue.nbPetit2.text
+        new.nbMoyen2.text = vue.nbMoyen2.text
+        new.nbGrand2.text = vue.nbGrand2.text
+        new.update(jeu)
         primaryStage.scene = Scene(new,500.0,800.0)
         primaryStage.centerOnScreen()
         new.fixeListenerBouton(new.boutonReset,ControleurReset(MainVue(),jeu,primaryStage))

@@ -7,7 +7,7 @@ class Jeu : InterfaceJeu{
 
     private var coordOrigine : Coordonnee? = null
     private var nombreCoupsSansPrise = 0
-    private var nombreCoupsSansPriseMax = 10
+    private var nombreCoupsSansPriseMax = 4
     private var coordDest : Coordonnee? = null
     private var pionArriveDeZone : Pion? = null
     private var joueurCourant : Joueur? = null
@@ -63,6 +63,13 @@ class Jeu : InterfaceJeu{
         return joueurCourant
     }
 
+    fun getNombreCoupsSansPrise(): Int{
+        return nombreCoupsSansPrise
+    }
+
+    fun setNombreCoupSansPrise(nombre : Int ){
+        nombreCoupsSansPrise = nombre
+    }
 
     /**
      * affectation des joueurs aux cases
@@ -89,7 +96,25 @@ class Jeu : InterfaceJeu{
      * @return true si la partie est finie, false sinon
      */
     fun arretPartie(): Boolean {
-        if(nombreCoupsSansPrise == nombreCoupsSansPriseMax){
+        if (nombreCoupsSansPrise >= nombreCoupsSansPriseMax) {
+            return true
+        }
+        var count = 0
+        var countJcourant = 0
+        for (i in 0 until 8) {
+            for (j in 0 until 4) {
+                if (!plateau.getCases()[i][j].estLibre()){
+                    count += 1
+                }
+                if (plateau.getCases()[i][j].getJoueur() == joueurCourant && !plateau.getCases()[i][j].estLibre()){
+                    countJcourant += 1
+                }
+            }
+        }
+        if (count < 2 ){
+            return true
+        }
+        if (countJcourant == 0){
             return true
         }
         return false
@@ -141,6 +166,7 @@ class Jeu : InterfaceJeu{
             val ourPion = plateau.getCases()[coordOrigineX][coordOrigineY].getPion()
             println("${dep.getOrigine().getX()},${dep.getOrigine().getY()},${dep.getDestination().getX()},${dep.getDestination().getY()}")
             val chemin = ourPion!!.getDeplacement(dep)
+            print(chemin)
             for (i in chemin) {
                 if (!plateau.getCases()[i.getX()][i.getY()].estLibre()) {
                     return false
@@ -164,6 +190,9 @@ class Jeu : InterfaceJeu{
             }
             plateau.getCases()[coordDestinationX][coordDestinationY].setPion(plateau.getCases()[coordOrigineX][coordOrigineY].getPion())
             plateau.getCases()[coordOrigineX][coordOrigineY].setPion(null)
+            if (coordOrigineY >= 4 && coordDestinationY < 4 || coordOrigineY < 4 && coordDestinationY >= 4){
+                pionArriveDeZone = plateau.getCases()[coordDestinationX][coordDestinationY].getPion()
+            }
         }else{
             throw DeplacementException()
         }
