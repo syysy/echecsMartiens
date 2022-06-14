@@ -21,7 +21,6 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
     override fun handle(event: MouseEvent) {
         val row = GridPane.getRowIndex(event.source as Node)
         val column = GridPane.getColumnIndex(event.source as Node)
-        println("$row,$column   ROW COLUMN")
         jeu.setCoordDestinationDeplacement(Coordonnee(column,row))
         val originCords = jeu.getCoordOrigineDeplacement()!!
         val originRow = originCords.getY()

@@ -187,6 +187,9 @@ class Jeu : InterfaceJeu{
             }
             plateau.getCases()[coordDestinationX][coordDestinationY].setPion(plateau.getCases()[coordOrigineX][coordOrigineY].getPion())
             plateau.getCases()[coordOrigineX][coordOrigineY].setPion(null)
+            if (coordOrigineY >= 4 && coordDestinationY < 4 || coordOrigineY < 4 && coordDestinationY >= 4){
+                pionArriveDeZone = plateau.getCases()[coordDestinationX][coordDestinationY].getPion()
+            }
         }else{
             throw DeplacementException()
         }
