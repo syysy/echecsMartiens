@@ -138,6 +138,7 @@ class Jeu : InterfaceJeu{
             val ourPion = plateau.getCases()[coordOrigineX][coordOrigineY].getPion()
             println("${dep.getOrigine().getX()},${dep.getOrigine().getY()},${dep.getDestination().getX()},${dep.getDestination().getY()}")
             val chemin = ourPion!!.getDeplacement(dep)
+            print(chemin)
             for (i in chemin) {
                 if (!plateau.getCases()[i.getX()][i.getY()].estLibre()) {
                     return false

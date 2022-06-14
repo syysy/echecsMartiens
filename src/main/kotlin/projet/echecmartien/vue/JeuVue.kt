@@ -224,6 +224,24 @@ class JeuVue() : BorderPane() {
         pion.removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(this,jeu))
     }
 
+    fun setAsGrandPion(pion : Circle,jeu :Jeu){
+        pion.radius = 20.0
+        pion.fill = Color.BLACK
+        this.fixeListenerCase(pion,ControleurPlace(this,jeu))
+    }
+
+    fun setAsMoyenPion(pion : Circle,jeu :Jeu){
+        pion.radius = 10.0
+        pion.fill = Color.BLACK
+        this.fixeListenerCase(pion,ControleurPlace(this,jeu))
+    }
+
+    fun setAsPetitPion(pion : Circle,jeu :Jeu){
+        pion.radius = 5.0
+        pion.fill = Color.BLACK
+        this.fixeListenerCase(pion,ControleurPlace(this,jeu))
+    }
+
     fun update( jeu : Jeu){
         for (i in 0 until 8){
             for (j in 0 until 4){
@@ -235,7 +253,13 @@ class JeuVue() : BorderPane() {
                     }else{
                         (this.grille.children[j*(this.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(this,jeu))
                     }
-                    (this.grille.children[j*(this.grille.rowCount)+i] as Circle).fill = Color.BLACK
+                    if (jeu.plateau.getCases()[j][i].getPion() is MoyenPion){
+                        setAsMoyenPion(this.grille.children[j*(this.grille.rowCount)+i] as Circle,jeu)
+                    }else if (jeu.plateau.getCases()[j][i].getPion() is GrandPion){
+                        setAsGrandPion(this.grille.children[j*(this.grille.rowCount)+i] as Circle,jeu)
+                    }else{
+                        setAsPetitPion(this.grille.children[j*(this.grille.rowCount)+i] as Circle,jeu)
+                    }
                 }
             }
         }
