@@ -29,14 +29,14 @@ class JeuVue() : BorderPane() {
     val centre = VBox()
     val info1 = HBox()
     val info2 = HBox()
-    val joueur1 = Label("joueur1")
+    var joueur1 = Label("joueur1")
     var savePseudo1 : String
-    val joueur2 = Label("joueur2")
+    var joueur2 = Label("joueur2")
     var savePseudo2 : String
     var pts1 = Label("0")
     var pts2 = Label("0")
-    val point1 = Label(" 0 points")
-    val point2 = Label(" 0 points")
+    var point1 = Label(" 0 points")
+    var point2 = Label(" 0 points")
 
     val grille = GridPane()
 
@@ -261,5 +261,15 @@ class JeuVue() : BorderPane() {
             }
         }
     }
+    fun chargement(jeu : Jeu,jCourant : String, plateau: Plateau, listPion1 : MutableSet<Pion>, listPion2 : MutableSet<Pion> ){
+        jeu.initialiserPartie(Joueur(joueur1.text),Joueur(joueur2.text),10)
+        if (jeu.getJoueurCourant()!!.nom != jCourant){
+            jeu.changeJoueurCourant()
+        }
+        jeu.plateau = plateau
+        jeu.getJoueur()[0].pionCapture = listPion1
+        jeu.getJoueur()[1].pionCapture = listPion2
 
+    }
 }
+

@@ -3,9 +3,15 @@ package projet.echecmartien.controleurs
 import com.google.gson.Gson
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
+import javafx.scene.Group
+import javafx.scene.Scene
+import javafx.scene.layout.GridPane
+import javafx.scene.shape.Circle
 import javafx.stage.FileChooser
 import javafx.stage.Stage
+import jdk.jfr.Label
 import projet.echecmartien.modele.*
+import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
 import java.io.File
 import java.io.FileReader
@@ -48,9 +54,17 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                     joueurCourantName += readJson[i]
                 }
                 if (countSlash(extent) == 1 && joueur1points !is Int){
-                    joueur1points = Integer.parseInt(extent[i-1].toString())
+                    if (extent[i-2] != ' '){
+                        joueur1points = Integer.parseInt("${extent[i-2]}${extent[i-1]}")
+                    }else{
+                        joueur1points = Integer.parseInt(extent[i-1].toString())
+                    }
                 }else if (countSlash(extent) == 2 && joueur2points !is Int){
-                    joueur2points = Integer.parseInt(extent[i-1].toString())
+                    if (extent[i-2] != ' '){
+                        joueur2points = Integer.parseInt("${extent[i-2]}${extent[i-1]}")
+                    }else{
+                        joueur2points = Integer.parseInt(extent[i-1].toString())
+                    }
                 }
                 if (countHashtag(extent) == 1){
                     if (extent[i] == '1'){
@@ -443,17 +457,58 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             println("/Joueur 2/ $joueur2name")
             println("/Points 1/ $joueur1points")
             println("/Points 2/ $joueur2points")
-            println("/Joueur courant $joueurCourantName")
+            println("/Joueur courant/ $joueurCourantName")
             println("/Pions Joueur 1/ $listPion1")
             println("/Pions Joueur 2/ $listPion2")
             println("/Plateau/\n$matricePlateau")
 
-            jeu.initialiserPartie(Joueur(joueur1name), Joueur(joueur2name), jeu.getNombreCoupsMax())
-
+            /*jeu.initialiserPartie(Joueur(joueur1name), Joueur(joueur2name), jeu.getNombreCoupsMax())
             jeu.getJoueurCourant()!!.nom = joueurCourantName
             jeu.getJoueur()[0].pionCapture = listPion1
             jeu.getJoueur()[1].pionCapture = listPion2
-            jeu.plateau = matricePlateau
+            jeu.plateau = matricePlateau*/
+
+            val newVue = JeuVue()
+            val scene = Scene(newVue,500.0,800.0)
+            primaryStage.scene = scene
+            primaryStage.centerOnScreen()
+            //initialisation du jeu
+            var row : Int
+            var column : Int
+            newVue.joueur1.text = joueur1name
+            newVue.joueur2.text = joueur2name
+            newVue.chargement(jeu,joueurCourantName,matricePlateau,listPion1,listPion2)
+
+            //playerturn
+            if (Joueur(newVue.joueur1.text) == jeu.getJoueurCourant()){
+                newVue.joueur1.style = "-fx-font-weight : bold;"
+                newVue.joueur2.style = ""
+            }else{
+                newVue.joueur2.style = "-fx-font-weight : bold;"
+                newVue.joueur1.style = ""
+            }
+            for (i in newVue.grille.children){
+                if (i !is Group){
+                    row = GridPane.getColumnIndex(i)
+                    column = GridPane.getRowIndex(i)
+                    if (i is Circle){
+                        if (jeu.plateau.getCases()[row][column].getPion() is MoyenPion){
+                            newVue.setAsMoyenPion(i,jeu)
+                        }else if (jeu.plateau.getCases()[row][column].getPion() is GrandPion){
+                            newVue.setAsGrandPion(i,jeu)
+                        }else if (jeu.plateau.getCases()[row][column].getPion() is PetitPion){
+                            newVue.setAsPetitPion(i,jeu)
+                        }else{
+                            newVue.setAsNull(i,jeu)
+                        }
+
+                    }
+                }
+            }
+            newVue.fixeListenerBouton(newVue.boutonReset,ControleurReset(MainVue(),jeu,primaryStage))
+            newVue.fixeListenerBouton(newVue.boutonRegles,ControleurRulesJeu(newVue,jeu,primaryStage))
+            newVue.fixeListenerBouton(newVue.boutonCharge,ControleurSave(newVue,jeu,primaryStage))
+            newVue.fixeListenerBouton(newVue.boutonSave,ControleurChargerSave(MainVue(),jeu,primaryStage))
 
         }
     }

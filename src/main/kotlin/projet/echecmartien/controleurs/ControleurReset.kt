@@ -32,6 +32,7 @@ class ControleurReset(vue: MainVue, modele : Jeu, primaryStage: Stage): EventHan
             vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,Jeu(),primaryStage))
             vue.fixeListenerBouton(vue.botButton,ControleurBot(vue, Jeu(), primaryStage))
             vue.fixeListenerBouton(vue.rulesButton,ControleurRules(vue, Jeu(), primaryStage))
+            vue.fixeListenerBouton(vue.loadButton,ControleurChargerSave(vue,Jeu(),primaryStage))
         }
     }
 }
