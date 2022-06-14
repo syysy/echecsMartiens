@@ -103,10 +103,13 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         }
 
         if (jeu.arretPartie()){
+            if (jeu.joueurVainqueur()!!.nom == jeu.getJoueurCourant()!!.nom){
+                jeu.changeJoueurCourant()
+            }
             val dialog = Alert(Alert.AlertType.INFORMATION)
             dialog.title="Fin de partie"
             dialog.headerText="La partie est terminée"
-            dialog.contentText = ""
+            dialog.contentText = "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${jeu.joueurVainqueur()!!.calculerScore()} Point(s) \n " + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${jeu.getJoueurCourant()!!.calculerScore()} Point(s) "
             dialog.showAndWait()
         }
 
