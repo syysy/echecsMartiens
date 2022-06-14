@@ -60,7 +60,9 @@ class Jeu : InterfaceJeu{
         return joueurCourant
     }
 
-
+    fun getNombreCoupsSansPrise(): Int{
+        return nombreCoupsSansPrise
+    }
     /**
      * affectation des joueurs aux cases
      * @param joueur1 premier joueur
