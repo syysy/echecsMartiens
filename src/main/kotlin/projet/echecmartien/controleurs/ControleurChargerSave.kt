@@ -55,15 +55,15 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                 }
                 if (countSlash(extent) == 1 && joueur1points !is Int){
                     if (extent[i-2] != ' '){
-                        joueur1points = Integer.parseInt("${extent[i-2]}${extent[i-1]}")
+                        joueur1points = Integer.parseInt("${extent[i-9]}${extent[i-8]}")
                     }else{
-                        joueur1points = Integer.parseInt(extent[i-1].toString())
+                        joueur1points = Integer.parseInt(extent[i-8].toString())
                     }
                 }else if (countSlash(extent) == 2 && joueur2points !is Int){
                     if (extent[i-2] != ' '){
-                        joueur2points = Integer.parseInt("${extent[i-2]}${extent[i-1]}")
+                        joueur2points = Integer.parseInt("${extent[i-9]}${extent[i-8]}")
                     }else{
-                        joueur2points = Integer.parseInt(extent[i-1].toString())
+                        joueur2points = Integer.parseInt(extent[i-8].toString())
                     }
                 }
                 if (countHashtag(extent) == 1){
