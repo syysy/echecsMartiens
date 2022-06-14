@@ -4,6 +4,7 @@ import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.scene.Group
 import javafx.scene.Scene
+import javafx.scene.control.Alert
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.GridPane
 import javafx.scene.paint.Color
@@ -54,47 +55,55 @@ class ControleurPlayButton(oldVue: MainVue,modele : Jeu,primaryStage: Stage): Ev
     }
 
     override fun handle(p0: ActionEvent?) {
-        val scene = Scene(newVue,500.0,800.0)
-        primaryStage.scene = scene
-        primaryStage.centerOnScreen()
-        newVue.joueur1.text = oldVue.textFieldPseudo1.text
-        newVue.joueur2.text = oldVue.textFieldPseudo2.text
+        if (oldVue.textFieldPseudo1.text.isBlank() || oldVue.textFieldPseudo2.text.isBlank() || oldVue.textFieldPseudo1.text == oldVue.textFieldPseudo2.text || oldVue.textFieldPseudo2.text == "BOT"){
+            val dialog = Alert(Alert.AlertType.INFORMATION)
+            dialog.title = "INFORMATION"
+            dialog.headerText = "CHAMPS NON CORRECT"
+            dialog.contentText = "Veuillez remplir le nom des deux jouerrs ou ne pas mettre des noms égaux"
+            dialog.showAndWait()
+        } else {
+            val scene = Scene(newVue, 500.0, 800.0)
+            primaryStage.scene = scene
+            primaryStage.centerOnScreen()
+            newVue.joueur1.text = oldVue.textFieldPseudo1.text
+            newVue.joueur2.text = oldVue.textFieldPseudo2.text
 
-        //initialisation du jeu
-        var row : Int
-        var column : Int
-        jeu.initialiserPartie(Joueur(newVue.joueur1.text), Joueur(newVue.joueur2.text),jeu.getNombreCoupsMax())
-        //playerturn
-        if (Joueur(newVue.joueur1.text) == jeu.getJoueurCourant()){
-            newVue.joueur1.style = "-fx-font-weight : bold;"
-            newVue.joueur2.style = ""
-        }else{
-            newVue.joueur2.style = "-fx-font-weight : bold;"
-            newVue.joueur1.style = ""
-        }
-        for (i in newVue.grille.children){
-            if (i !is Group){
-                row = GridPane.getColumnIndex(i)
-                column = GridPane.getRowIndex(i)
-                if (i is Circle){
-                    if (jeu.plateau.getCases()[row][column].getPion() is MoyenPion){
-                        setAsMoyenPion(i)
-                    }else if (jeu.plateau.getCases()[row][column].getPion() is GrandPion){
-                        setAsGrandPion(i)
-                    }else if (jeu.plateau.getCases()[row][column].getPion() is PetitPion){
-                        setAsPetitPion(i)
-                    }else{
-                        setAsNull(i)
-                    }
-
-                }
+            //initialisation du jeu
+            var row: Int
+            var column: Int
+            jeu.initialiserPartie(Joueur(newVue.joueur1.text), Joueur(newVue.joueur2.text), jeu.getNombreCoupsMax())
+            //playerturn
+            if (Joueur(newVue.joueur1.text) == jeu.getJoueurCourant()) {
+                newVue.joueur1.style = "-fx-font-weight : bold;"
+                newVue.joueur2.style = ""
+            } else {
+                newVue.joueur2.style = "-fx-font-weight : bold;"
+                newVue.joueur1.style = ""
             }
+            for (i in newVue.grille.children) {
+                if (i !is Group) {
+                    row = GridPane.getColumnIndex(i)
+                    column = GridPane.getRowIndex(i)
+                    if (i is Circle) {
+                        if (jeu.plateau.getCases()[row][column].getPion() is MoyenPion) {
+                            setAsMoyenPion(i)
+                        } else if (jeu.plateau.getCases()[row][column].getPion() is GrandPion) {
+                            setAsGrandPion(i)
+                        } else if (jeu.plateau.getCases()[row][column].getPion() is PetitPion) {
+                            setAsPetitPion(i)
+                        } else {
+                            setAsNull(i)
+                        }
 
+                    }
+                }
+
+            }
+            newVue.fixeListenerBouton(newVue.boutonReset, ControleurReset(MainVue(), jeu, primaryStage))
+            newVue.fixeListenerBouton(newVue.boutonRegles, ControleurRulesJeu(newVue, jeu, primaryStage))
+            newVue.fixeListenerBouton(newVue.boutonCharge, ControleurSave(newVue, jeu, primaryStage))
+            newVue.fixeListenerBouton(newVue.boutonSave, ControleurChargerSave(MainVue(), jeu, primaryStage))
         }
-        newVue.fixeListenerBouton(newVue.boutonReset,ControleurReset(MainVue(),jeu,primaryStage))
-        newVue.fixeListenerBouton(newVue.boutonRegles,ControleurRulesJeu(newVue,jeu,primaryStage))
-        newVue.fixeListenerBouton(newVue.boutonCharge,ControleurSave(newVue,jeu,primaryStage))
-        newVue.fixeListenerBouton(newVue.boutonSave,ControleurChargerSave(MainVue(),jeu,primaryStage))
     }
 
 }
