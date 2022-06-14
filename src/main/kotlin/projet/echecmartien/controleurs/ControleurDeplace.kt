@@ -91,7 +91,8 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             }
         }
 
-        vue.compteTour.text = "Tour ${vue.compteTour.text[vue.compteTour.text.length-1]+1}"
+        vue.nbTour += 1
+        vue.compteTour.text = "Tour ${vue.nbTour}"
 
         //playerturn
         if (Joueur(vue.joueur1.text) == jeu.getJoueurCourant()){

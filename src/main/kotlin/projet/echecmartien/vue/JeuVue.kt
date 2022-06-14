@@ -18,6 +18,8 @@ import javafx.scene.shape.Circle
 import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
+import javafx.scene.text.TextAlignment
+import org.controlsfx.control.spreadsheet.Grid
 import projet.echecmartien.controleurs.ControleurPlace
 import projet.echecmartien.modele.*
 
@@ -36,19 +38,6 @@ class JeuVue() : BorderPane() {
     val point1 = Label(" 0 points")
     val point2 = Label(" 0 points")
 
-    val pions1 = VBox()
-    val grand1 = Circle()
-    val moyen1 = Circle()
-    val petit1 = Circle()
-
-    val pions2 = VBox()
-    val grand2 = Circle()
-    val moyen2 = Circle()
-    val petit2 = Circle()
-
-    val listej1 = mutableSetOf<Pion>()
-    val listej2 = mutableSetOf<Pion>()
-
     val grille = GridPane()
 
     val bot = GridPane()
@@ -66,7 +55,8 @@ class JeuVue() : BorderPane() {
     val nbMoyen2 = Label("0")
     val nbGrand2 = Label("0")
 
-    var nbTour = 0
+    var nbTour = 1
+    val tourSansPrises = Label("Tours sans prises : 0")
 
     init{
         // Titre en haut
@@ -100,16 +90,20 @@ class JeuVue() : BorderPane() {
 
         // Boutons du bas
         compteTour.style = " -fx-font-size : 15 ;-fx-font-weight :bold"
+        tourSansPrises.style = " -fx-font-size : 15 ;-fx-font-weight :bold"
         bot.add(compteTour,1,0)
-        bot.add(boutonCharge,0,1)
-        bot.add(boutonSave,0,2)
-        bot.add(boutonRegles,2,1)
-        bot.add(boutonReset,2,2)
+        bot.add(boutonCharge,0,2)
+        bot.add(boutonSave,0,3)
+        bot.add(boutonRegles,2,2)
+        bot.add(boutonReset,2,3)
+        bot.add(tourSansPrises,1,1)
+        GridPane.setHalignment(compteTour,HPos.CENTER)
         bot.vgap = 20.0
         bot.hgap = 50.0
         bot.padding = Insets(30.0)
         bot.alignment = Pos.CENTER
         this.bottom = bot
+
 
 
         for (i in 0 until 4){
