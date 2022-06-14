@@ -13,7 +13,6 @@ class MoyenPion():GrandPion() {
             throw DeplacementException()
         }
         if (deplacement.longueur() > 2){
-            println("longueur : ${deplacement.longueur()}")
             throw DeplacementException()
         }
         if (deplacement.estHorizontal()){

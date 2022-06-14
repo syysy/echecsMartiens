@@ -58,6 +58,8 @@ class JeuVue() : BorderPane() {
     var nbTour = 1
     val tourSansPrises = Label("Tours sans prises : 0")
 
+    var IActive : Boolean
+
     init{
         // Titre en haut
         val flowPaneTop = FlowPane()
@@ -199,6 +201,7 @@ class JeuVue() : BorderPane() {
         rightgrid.add(vboxRight2,0,0)
         this.right = rightgrid
 
+        IActive = (joueur1.text == "BOT")
     }
 
 
