@@ -214,15 +214,31 @@ class JeuVue() : BorderPane() {
     }
 
 
-
-
-
-
     fun fixeListenerBouton(bouton: Button, action: EventHandler<ActionEvent>) {
         bouton.onAction = action
     }
 
+    fun setAsNull(pion : Circle, jeu : Jeu){
+        pion.radius = 20.0
+        pion.fill = Color.WHITE
+        pion.removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(this,jeu))
+    }
 
-
+    fun update( jeu : Jeu){
+        for (i in 0 until 8){
+            for (j in 0 until 4){
+                if (jeu.plateau.getCases()[j][i].getPion() == null){
+                    setAsNull(this.grille.children[j*(this.grille.rowCount)+i] as Circle,jeu)
+                }else{
+                    if (jeu.plateau.getCases()[j][i].getJoueur() == jeu.getJoueurCourant()){
+                        this.fixeListenerCase(this.grille.children[j*(this.grille.rowCount)+i] as Circle,ControleurPlace(this,jeu))
+                    }else{
+                        (this.grille.children[j*(this.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(this,jeu))
+                    }
+                    (this.grille.children[j*(this.grille.rowCount)+i] as Circle).fill = Color.BLACK
+                }
+            }
+        }
+    }
 
 }
