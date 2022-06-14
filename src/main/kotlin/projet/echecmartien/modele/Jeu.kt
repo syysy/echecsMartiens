@@ -164,13 +164,13 @@ class Jeu : InterfaceJeu{
             }
             val ourPion = plateau.getCases()[coordOrigineX][coordOrigineY].getPion()
             val chemin = ourPion!!.getDeplacement(dep)
+            println(chemin)
             for (i in chemin) {
                 if (!plateau.getCases()[i.getX()][i.getY()].estLibre()) {
                     return false
                 }
             }
             return !(plateau.getCases()[coordOrigineX][coordOrigineY].getPion() === this.pionArriveDeZone && ((coordDestinationY >= 4 && coordOrigineY < 4) || (coordDestinationY < 4 && coordOrigineY >= 4)))
-
         }
         return false
     }
