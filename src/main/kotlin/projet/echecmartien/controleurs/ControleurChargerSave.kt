@@ -454,7 +454,11 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                     }
                 }
                 if (countSlash(extent) == 3 && nbTour !is Int){
-                    nbTour = Integer.parseInt(extent[i-1].toString())
+                    if (extent[i-2] != ' '){
+                        nbTour = Integer.parseInt("${extent[i-2]}${extent[i-1]}")
+                    }else {
+                        nbTour = Integer.parseInt(extent[i - 1].toString())
+                    }
                 }
                 if (countSlash(extent) == 4 && nbTourSansPrise !is Int){
                     nbTourSansPrise = Integer.parseInt(extent[i-1].toString())
