@@ -244,7 +244,6 @@ class JeuVue(
         for (i in 0 until 8){
             for (j in 0 until 4){
                 if (jeu.plateau.getCases()[j][i].getPion() == null){
-                    println("oui")
                     setAsNull(this.grille.children[j*(this.grille.rowCount)+i] as Circle,jeu)
                 }else{
                     if (jeu.plateau.getCases()[j][i].getJoueur() == jeu.getJoueurCourant()){
@@ -264,7 +263,9 @@ class JeuVue(
         }
     }
     fun chargement(jeu : Jeu,jCourant : String, plateau: Plateau, listPion1 : MutableSet<Pion>, listPion2 : MutableSet<Pion> ){
-        jeu.initialiserPartie(Joueur(joueur1.text),Joueur(joueur2.text),10)
+        jeu.getJoueur()[0] = Joueur(joueur1.text)
+        jeu.getJoueur()[1] = Joueur(joueur2.text)
+        jeu.initialiserJoueur(jeu.getJoueur()[0],jeu.getJoueur()[1])
         if (jeu.getJoueurCourant()!!.nom != jCourant){
             jeu.changeJoueurCourant()
         }

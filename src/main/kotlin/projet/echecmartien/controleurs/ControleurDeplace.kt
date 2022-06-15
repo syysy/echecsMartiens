@@ -236,15 +236,6 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                         }else{
                             (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(vue,jeu))
                         }
-                        if( type == 3){
-                            (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.SADDLEBROWN
-                        }
-                        if( type == 2){
-                            (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.SANDYBROWN
-                        }
-                        if( type == 1){
-                            (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.ROSYBROWN
-                        }
                     }
                 }
             }

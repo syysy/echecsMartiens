@@ -79,7 +79,7 @@ class Jeu(var plateau: Plateau = Plateau()) : InterfaceJeu{
      * @param joueur1 premier joueur
      * @paral joueur2 second joueur
      */
-    private fun initialiserJoueur(joueur1: Joueur, joueur2: Joueur) {
+     fun initialiserJoueur(joueur1: Joueur, joueur2: Joueur) {
         for (i in 0 until plateau.getTailleVerticale()){
             if (i < 4){
                 for (j in 0 until plateau.getTailleHorizontale()){

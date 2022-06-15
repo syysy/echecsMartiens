@@ -11,17 +11,14 @@ import projet.echecmartien.modele.Coordonnee
 import projet.echecmartien.modele.Deplacement
 import projet.echecmartien.modele.Jeu
 import projet.echecmartien.vue.JeuVue
-import projet.echecmartien.vue.MainVue
 
-class ControleurPlace(vue :JeuVue,modele : Jeu) : EventHandler<MouseEvent>{
-    private val vue = vue
+class ControleurPlace(private val vue: JeuVue, modele : Jeu) : EventHandler<MouseEvent>{
     val jeu = modele
-
     override fun handle(event: MouseEvent) {
-        var row = GridPane.getRowIndex(event.source as Node)
-        var column = GridPane.getColumnIndex(event.source as Node)
+        vue.update(jeu)
+        val row = GridPane.getRowIndex(event.source as Node)
+        val column = GridPane.getColumnIndex(event.source as Node)
         jeu.setCoordOrigineDeplacement(Coordonnee(column,row))
-        val type = jeu.plateau.getCases()[column][row].getPion()!!.getScore()
         for (i in 0 until 8){
             for(j in 0 until 4){
                 if (vue.grille.children[i*(vue.grille.columnCount)+j] is Circle){

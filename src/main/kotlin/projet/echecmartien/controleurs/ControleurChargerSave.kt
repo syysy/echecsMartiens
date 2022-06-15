@@ -476,8 +476,8 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             println("/Points 1/ $joueur1points")
             println("/Points 2/ $joueur2points")
             println("/Joueur courant/ $joueurCourantName")
-            println("/Pions Joueur 1/ $listPion1")
-            println("/Pions Joueur 2/ $listPion2")
+            println("/Pions Joueur 1/ $listPion2")
+            println("/Pions Joueur 2/ $listPion1")
             println("/Plateau/\n$matricePlateau")
 
             var nbPetit = 0
@@ -533,13 +533,14 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             val scene = Scene(newVue,500.0,800.0)
             primaryStage.scene = scene
             primaryStage.centerOnScreen()
+
             //initialisation du jeu
-            var row : Int
-            var column : Int
+
             newVue.joueur1.text = joueur1name
             newVue.joueur2.text = joueur2name
-            newVue.chargement(jeu,joueurCourantName,matricePlateau,listPion1,listPion2)
-
+            println(jeu.plateau)
+            newVue.chargement(jeu,joueurCourantName,jeu.plateau,listPion1,listPion2)
+            println(jeu.plateau)
             //playerturn
             if (Joueur(newVue.joueur1.text) == jeu.getJoueurCourant()){
                 newVue.joueur1.style = "-fx-font-weight : bold;"
@@ -551,8 +552,8 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
 
             newVue.fixeListenerBouton(newVue.boutonReset,ControleurReset(MainVue(),jeu,primaryStage))
             newVue.fixeListenerBouton(newVue.boutonRegles,ControleurRulesJeu(newVue,jeu,primaryStage))
-            newVue.fixeListenerBouton(newVue.boutonCharge,ControleurSave(newVue,jeu,primaryStage))
-            newVue.fixeListenerBouton(newVue.boutonSave,ControleurChargerSave(MainVue(),jeu,primaryStage))
+            newVue.fixeListenerBouton(newVue.boutonCharge,ControleurChargerSave(MainVue(),jeu,primaryStage))
+            newVue.fixeListenerBouton(newVue.boutonSave,ControleurSave(newVue,jeu,primaryStage))
 
         }else{
             return
