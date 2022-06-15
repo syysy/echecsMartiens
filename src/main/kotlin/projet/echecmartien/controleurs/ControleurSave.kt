@@ -32,7 +32,7 @@ open class ControleurSave(vue: JeuVue, modele : Jeu ,primaryStage: Stage): Event
             val message = Message(titre, "|"+vue.joueur1.text + "|", "|"+vue.joueur2.text + "|",
                 vue.point1.text+ "/" ,vue.point2.text + "/" ,vue.compteTour.text+"/", "|"+jeu.getJoueurCourant()!!.nom+"|" + " plateau\n"
                         + save()
-            + "#"+jeu.getJoueur()[0].stringPions()+"##"+jeu.getJoueur()[1].stringPions()+"#")
+            + "#"+jeu.getJoueur()[0].stringPions()+"##"+jeu.getJoueur()[1].stringPions()+"#"+jeu.getNombreCoupsSansPrise()+"/")
             println(message)
             message.serialiser("sauvegarde/$titre.json")
         }
