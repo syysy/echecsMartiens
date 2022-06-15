@@ -523,6 +523,9 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                 Label(nbPetit2.toString()), Label(nbMoyen2.toString()),Label(nbGrand2.toString()),
             Label("Tour "+nbTour.toString()),nbTour!!,
             Label("Tours sans prises : $nbTourSansPrise"))
+            newVue.update(jeu)
+            println(jeu.plateau)
+            println(jeu.plateau.getCases()[1][7].getPion())
             val scene = Scene(newVue,500.0,800.0)
             primaryStage.scene = scene
             primaryStage.centerOnScreen()
@@ -541,29 +544,14 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                 newVue.joueur2.style = "-fx-font-weight : bold;"
                 newVue.joueur1.style = ""
             }
-            for (i in newVue.grille.children){
-                if (i !is Group){
-                    row = GridPane.getColumnIndex(i)
-                    column = GridPane.getRowIndex(i)
-                    if (i is Circle){
-                        if (jeu.plateau.getCases()[row][column].getPion() is MoyenPion){
-                            newVue.setAsMoyenPion(i,jeu)
-                        }else if (jeu.plateau.getCases()[row][column].getPion() is GrandPion){
-                            newVue.setAsGrandPion(i,jeu)
-                        }else if (jeu.plateau.getCases()[row][column].getPion() is PetitPion){
-                            newVue.setAsPetitPion(i,jeu)
-                        }else{
-                            newVue.setAsNull(i,jeu)
-                        }
 
-                    }
-                }
-            }
             newVue.fixeListenerBouton(newVue.boutonReset,ControleurReset(MainVue(),jeu,primaryStage))
             newVue.fixeListenerBouton(newVue.boutonRegles,ControleurRulesJeu(newVue,jeu,primaryStage))
             newVue.fixeListenerBouton(newVue.boutonCharge,ControleurSave(newVue,jeu,primaryStage))
             newVue.fixeListenerBouton(newVue.boutonSave,ControleurChargerSave(MainVue(),jeu,primaryStage))
 
+        }else{
+            return
         }
     }
 
