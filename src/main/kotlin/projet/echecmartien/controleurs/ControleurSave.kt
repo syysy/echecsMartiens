@@ -22,31 +22,42 @@ open class ControleurSave(vue: JeuVue, modele : Jeu ,primaryStage: Stage): Event
     }
 
     override fun handle(p0: ActionEvent?) {
+        /**
+         * On set up une boite de dialogue pour récupérer le nom de la sauvegarde
+         * */
         val dialog = TextInputDialog()
         dialog.title = "Sauvegarde d'une partie"
         dialog.headerText = "Entrez un nom pour votre sauvegarde"
         dialog.contentText = "Nom :"
         val result = dialog.showAndWait()
         val titre = result.get()
+
+        /**
+         *  Lorsqu'on a le résultat, on sauvegarde dans un json le message contenant
+         * les noms des joueurs, leurs points, le tour, le joueur courant, le plateau, les pions capturés par les joueurs
+         * et le nombre de coups sans prises.
+         * */
         if (result.isPresent){
             val message = Message(titre, "|"+vue.joueur1.text + "|", "|"+vue.joueur2.text + "|",
-                vue.point1.text+ "/" ,vue.point2.text + "/" ,vue.compteTour.text+"/", "|"+jeu.getJoueurCourant()!!.nom+"|" + " plateau\n"
+                vue.point1.text+ "/" ,vue.point2.text + "/" ,vue.compteTour.text+"/"+jeu.getNombreCoupsSansPrise()+"/", "|"+jeu.getJoueurCourant()!!.nom+"|" + " plateau\n"
                         + save()
-            + "#"+jeu.getJoueur()[0].stringPions()+"##"+jeu.getJoueur()[1].stringPions()+"#"+jeu.getNombreCoupsSansPrise()+"/")
-            println(message)
+            + "#"+jeu.getJoueur()[0].stringPions()+"##"+jeu.getJoueur()[1].stringPions()+"#"+vue.IActive+"/")
             message.serialiser("sauvegarde/$titre.json")
         }
     }
 
-    fun save(): String {
+    private fun save(): String {
+        /**
+         * Permet d'obtenir un string facilement lisible et analysable du plateau
+         * */
         var res = ""
         for (i in 0 until 8){
             res += '_'
             for (j in 0 until 4){
-                if (jeu.plateau.getCases()[j][i].getPion() !is Pion){
-                    res += "0_"
+                res += if (jeu.plateau.getCases()[j][i].getPion() !is Pion){
+                    "0_"
                 }else{
-                    res += "${jeu.plateau.getCases()[j][i].getPion()!!.getScore()}_"
+                    "${jeu.plateau.getCases()[j][i].getPion()!!.getScore()}_"
                 }
             }
         }

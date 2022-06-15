@@ -13,9 +13,7 @@ import javafx.stage.Stage
 import projet.echecmartien.modele.*
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
-import java.io.File
 import java.io.FileReader
-import java.util.*
 
 class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): EventHandler<ActionEvent> {
     val vue : MainVue
@@ -39,11 +37,12 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             var joueur1name = ""
             var joueur2name = ""
             var joueurCourantName = ""
-            var listPion1 = mutableSetOf<Pion>()
-            var listPion2 = mutableSetOf<Pion>()
-            var matricePlateau = Plateau()
+            val listPion1 = mutableSetOf<Pion>()
+            val listPion2 = mutableSetOf<Pion>()
+            val matricePlateau = Plateau()
             var nbTour : Int? = null
             var nbTourSansPrise : Int? = null
+            var IActive : Boolean? = null
             for (i in readJson.indices) {
                 extent += readJson[i]
                 if (countPipe(extent) == 1 && readJson[i] != '|'){
@@ -56,16 +55,16 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                     joueurCourantName += readJson[i]
                 }
                 if (countSlash(extent) == 1 && joueur1points !is Int){
-                    if (extent[i-9] != ' '){
-                        joueur1points = Integer.parseInt("${extent[i-9]}${extent[i-8]}")
+                    joueur1points = if (extent[i-9] != ' '){
+                        Integer.parseInt("${extent[i-9]}${extent[i-8]}")
                     }else{
-                        joueur1points = Integer.parseInt(extent[i-8].toString())
+                        Integer.parseInt(extent[i-8].toString())
                     }
                 }else if (countSlash(extent) == 2 && joueur2points !is Int){
-                    if (extent[i-9] != ' '){
-                        joueur2points = Integer.parseInt("${extent[i-9]}${extent[i-8]}")
+                    joueur2points = if (extent[i-9] != ' '){
+                        Integer.parseInt("${extent[i-9]}${extent[i-8]}")
                     }else{
-                        joueur2points = Integer.parseInt(extent[i-8].toString())
+                        Integer.parseInt(extent[i-8].toString())
                     }
                 }
                 if (countHashtag(extent) == 1){
@@ -460,6 +459,13 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                 if (countSlash(extent) == 4 && nbTourSansPrise !is Int){
                     nbTourSansPrise = Integer.parseInt(extent[i-1].toString())
                 }
+                if (countSlash(extent) == 5 && IActive !is Boolean){
+                    if (extent[i-6] == ' '){
+                        IActive = true
+                    }else if (extent[i-7] == ' '){
+                        IActive = false
+                    }
+                }
             }
             println("/Joueur 1/ $joueur1name")
             println("/Joueur 2/ $joueur2name")
@@ -479,21 +485,29 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             var nbGrand2 = 0
 
             for (i in listPion1){
-                if (i is PetitPion){
-                    nbPetit += 1
-                }else if (i is MoyenPion){
-                    nbMoyen += 1
-                }else if (i is GrandPion){
-                    nbGrand += 1
+                when (i) {
+                    is PetitPion -> {
+                        nbPetit += 1
+                    }
+                    is MoyenPion -> {
+                        nbMoyen += 1
+                    }
+                    is GrandPion -> {
+                        nbGrand += 1
+                    }
                 }
             }
             for (i in listPion2){
-                if (i is PetitPion){
-                    nbPetit2 += 1
-                }else if (i is MoyenPion){
-                    nbMoyen2 += 1
-                }else if (i is GrandPion){
-                    nbGrand2 += 1
+                when (i) {
+                    is PetitPion -> {
+                        nbPetit2 += 1
+                    }
+                    is MoyenPion -> {
+                        nbMoyen2 += 1
+                    }
+                    is GrandPion -> {
+                        nbGrand2 += 1
+                    }
                 }
             }
 
@@ -552,15 +566,8 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
 
         }
     }
-    fun scanner(file : String){
-        val scanner = Scanner(File(file))
-        while (scanner.hasNextLine()){
-            val contenu = scanner.nextLine()
 
-        }
-    }
-
-    fun countSlash(extent : String) : Int{
+    private fun countSlash(extent : String) : Int{
         var count = 0
         for (i in extent){
             if (i == '/'){
@@ -570,7 +577,7 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
         return count
     }
 
-    fun countPipe(extent : String) : Int{
+    private fun countPipe(extent : String) : Int{
         var count = 0
         for (i in extent){
             if (i == '|'){
@@ -580,7 +587,7 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
         return count
     }
 
-    fun countHashtag(extent : String) : Int{
+    private fun countHashtag(extent : String) : Int{
         var count = 0
         for (i in extent){
             if (i == '#'){
@@ -590,7 +597,7 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
         return count
     }
 
-    fun countUnderscore(extent : String) : Int{
+    private fun countUnderscore(extent : String) : Int{
         var count = 0
         for (i in extent){
             if (i == '_'){
