@@ -244,6 +244,7 @@ class JeuVue(
         for (i in 0 until 8){
             for (j in 0 until 4){
                 if (jeu.plateau.getCases()[j][i].getPion() == null){
+                    println("oui")
                     setAsNull(this.grille.children[j*(this.grille.rowCount)+i] as Circle,jeu)
                 }else{
                     if (jeu.plateau.getCases()[j][i].getJoueur() == jeu.getJoueurCourant()){

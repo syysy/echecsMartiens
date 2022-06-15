@@ -27,8 +27,9 @@ open class ControleurSave(vue: JeuVue, modele : Jeu ,primaryStage: Stage): Event
         dialog.headerText = "Entrez un nom pour votre sauvegarde"
         dialog.contentText = "Nom :"
         val result = dialog.showAndWait()
-        val titre = result.get()
+        var titre = ""
         if (result.isPresent){
+            titre = result.get()
             val message = Message(titre, "|"+vue.joueur1.text + "|", "|"+vue.joueur2.text + "|",
                 vue.point1.text+ "/" ,vue.point2.text + "/" ,vue.compteTour.text+"/", "|"+jeu.getJoueurCourant()!!.nom+"|" + " plateau\n"
                         + save()
