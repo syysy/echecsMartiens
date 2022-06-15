@@ -4,16 +4,12 @@ import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.scene.Group
 import javafx.scene.Scene
-import javafx.scene.input.MouseEvent
 import javafx.scene.layout.GridPane
-import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import javafx.stage.Stage
-import projet.echecmartien.AppliJeuEchecMartien
 import projet.echecmartien.modele.*
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
-import projet.echecmartien.vue.RulesVue
 
 class ControleurPlayButton(oldVue: MainVue,modele : Jeu,primaryStage: Stage): EventHandler<ActionEvent> {
 

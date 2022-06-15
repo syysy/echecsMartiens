@@ -5,11 +5,11 @@ import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.scene.Group
 import javafx.scene.Scene
+import javafx.scene.control.Label
 import javafx.scene.layout.GridPane
 import javafx.scene.shape.Circle
 import javafx.stage.FileChooser
 import javafx.stage.Stage
-import jdk.jfr.Label
 import projet.echecmartien.modele.*
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
@@ -42,6 +42,7 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             var listPion1 = mutableSetOf<Pion>()
             var listPion2 = mutableSetOf<Pion>()
             var matricePlateau = Plateau()
+            var nbTour : Int? = null
             for (i in readJson.indices) {
                 extent += readJson[i]
                 if (countPipe(extent) == 1 && readJson[i] != '|'){
@@ -54,13 +55,13 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                     joueurCourantName += readJson[i]
                 }
                 if (countSlash(extent) == 1 && joueur1points !is Int){
-                    if (extent[i-2] != ' '){
+                    if (extent[i-9] != ' '){
                         joueur1points = Integer.parseInt("${extent[i-9]}${extent[i-8]}")
                     }else{
                         joueur1points = Integer.parseInt(extent[i-8].toString())
                     }
                 }else if (countSlash(extent) == 2 && joueur2points !is Int){
-                    if (extent[i-2] != ' '){
+                    if (extent[i-9] != ' '){
                         joueur2points = Integer.parseInt("${extent[i-9]}${extent[i-8]}")
                     }else{
                         joueur2points = Integer.parseInt(extent[i-8].toString())
@@ -452,6 +453,9 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                         }
                     }
                 }
+                if (countSlash(extent) == 3 && nbTour !is Int){
+                    nbTour = Integer.parseInt(extent[i-1].toString())
+                }
             }
             println("/Joueur 1/ $joueur1name")
             println("/Joueur 2/ $joueur2name")
@@ -462,13 +466,44 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             println("/Pions Joueur 2/ $listPion2")
             println("/Plateau/\n$matricePlateau")
 
-            /*jeu.initialiserPartie(Joueur(joueur1name), Joueur(joueur2name), jeu.getNombreCoupsMax())
+            var nbPetit = 0
+            var nbMoyen = 0
+            var nbGrand = 0
+
+            var nbPetit2 = 0
+            var nbMoyen2 = 0
+            var nbGrand2 = 0
+
+            for (i in listPion1){
+                if (i is PetitPion){
+                    nbPetit += 1
+                }else if (i is MoyenPion){
+                    nbMoyen += 1
+                }else if (i is GrandPion){
+                    nbGrand += 1
+                }
+            }
+            for (i in listPion2){
+                if (i is PetitPion){
+                    nbPetit2 += 1
+                }else if (i is MoyenPion){
+                    nbMoyen2 += 1
+                }else if (i is GrandPion){
+                    nbGrand2 += 1
+                }
+            }
+
+            jeu.initialiserPartie(Joueur(joueur1name), Joueur(joueur2name), jeu.getNombreCoupsMax())
             jeu.getJoueurCourant()!!.nom = joueurCourantName
             jeu.getJoueur()[0].pionCapture = listPion1
             jeu.getJoueur()[1].pionCapture = listPion2
-            jeu.plateau = matricePlateau*/
+            jeu.plateau = matricePlateau
 
-            val newVue = JeuVue()
+            println(jeu.plateau)
+            val newVue = JeuVue(Label(joueur1name),Label(joueur2name),Label(" $joueur2points points"),Label(" $joueur1points points"),
+            Label(nbPetit.toString()),Label(nbMoyen.toString()),Label(nbGrand.toString()),
+                Label(nbPetit2.toString()), Label(nbMoyen2.toString()),Label(nbGrand2.toString()),
+            Label("Tour "+nbTour.toString()),nbTour!!)
             val scene = Scene(newVue,500.0,800.0)
             primaryStage.scene = scene
             primaryStage.centerOnScreen()
