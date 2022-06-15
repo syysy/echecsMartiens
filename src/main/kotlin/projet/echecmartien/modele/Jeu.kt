@@ -3,7 +3,7 @@ package projet.echecmartien.modele
 import projet.echecmartien.exceptions.DeplacementException
 
 
-class Jeu : InterfaceJeu{
+class Jeu(var plateau: Plateau = Plateau()) : InterfaceJeu{
 
     private var coordOrigine : Coordonnee? = null
     private var nombreCoupsSansPrise = 0
@@ -12,7 +12,10 @@ class Jeu : InterfaceJeu{
     private var pionArriveDeZone : Pion? = null
     private var joueurCourant : Joueur? = null
     private var joueur = arrayOf(Joueur(""), Joueur(""))
-    var plateau = Plateau()
+
+    init {
+        this.plateau = plateau
+    }
 
     fun getJoueur(): Array<Joueur> {
         return this.joueur

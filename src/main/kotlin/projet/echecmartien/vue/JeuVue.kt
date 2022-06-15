@@ -2,15 +2,11 @@ package projet.echecmartien.vue
 
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
-import javafx.event.EventType
 import javafx.geometry.HPos
 import javafx.geometry.Insets
 import javafx.geometry.Pos
-import javafx.scene.Group
-import javafx.scene.Node
 import javafx.scene.control.Button
 import javafx.scene.control.Label
-import javafx.scene.control.TextField
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.*
 import javafx.scene.paint.Color
@@ -18,46 +14,45 @@ import javafx.scene.shape.Circle
 import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
-import javafx.scene.text.TextAlignment
-import org.controlsfx.control.spreadsheet.Grid
 import projet.echecmartien.controleurs.ControleurPlace
 import projet.echecmartien.modele.*
 
-class JeuVue() : BorderPane() {
-    var labelTop = Label("Echecs Martiens")
+class JeuVue(
+    var joueur1:Label = Label("joueur1"),
+    var joueur2:Label = Label("joueur2"),
 
-    val centre = VBox()
-    val info1 = HBox()
-    val info2 = HBox()
-    var joueur1 = Label("joueur1")
+
+    var point1:Label= Label(" 0 points"),
+    var point2:Label= Label(" 0 points"),
+
+    val nbPetit:Label= Label("0"),
+    val nbMoyen:Label= Label("0"),
+    val nbGrand:Label= Label("0"),
+
+    val nbPetit2:Label= Label("0"),
+    val nbMoyen2:Label= Label("0"),
+    val nbGrand2:Label= Label("0"),
+
+    val compteTour :Label= Label("Tour 1"),
+    var nbTour : Int = 1) : BorderPane() {
+
+    val grille :GridPane= GridPane()
+
+    val bot :GridPane= GridPane()
+
+    val boutonCharge :Button= Button("Charger")
+    val boutonSave :Button= Button("Save")
+    val boutonRegles :Button= Button("Règles")
+    val boutonReset :Button= Button("Reset")
+    var pts1 :Label= Label("0")
+    var pts2 :Label= Label("0")
+    val tourSansPrises :Label= Label("Tours sans prises : 0")
+    var labelTop :Label = Label("Echecs Martiens")
+    val centre :VBox = VBox()
+    val info1 :HBox= HBox()
+    val info2 :HBox= HBox()
     var savePseudo1 : String
-    var joueur2 = Label("joueur2")
     var savePseudo2 : String
-    var pts1 = Label("0")
-    var pts2 = Label("0")
-    var point1 = Label(" 0 points")
-    var point2 = Label(" 0 points")
-
-    val grille = GridPane()
-
-    val bot = GridPane()
-    val compteTour = Label("Tour 1")
-    val boutonCharge = Button("Charger")
-    val boutonSave = Button("Save")
-    val boutonRegles = Button("Règles")
-    val boutonReset = Button("Reset")
-
-    val nbPetit = Label("0")
-    val nbMoyen = Label("0")
-    val nbGrand = Label("0")
-
-    val nbPetit2 = Label("0")
-    val nbMoyen2 = Label("0")
-    val nbGrand2 = Label("0")
-
-    var nbTour = 1
-    val tourSansPrises = Label("Tours sans prises : 0")
-
     var IActive : Boolean
 
     init{
