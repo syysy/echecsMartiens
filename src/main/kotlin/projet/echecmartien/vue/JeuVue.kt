@@ -34,7 +34,8 @@ class JeuVue(
     val nbGrand2:Label= Label("0"),
 
     val compteTour :Label= Label("Tour 1"),
-    var nbTour : Int = 1) : BorderPane() {
+    var nbTour : Int = 1,
+    val tourSansPrises :Label= Label("Tours sans prises : 0")) : BorderPane() {
 
     val grille :GridPane= GridPane()
 
@@ -46,7 +47,6 @@ class JeuVue(
     val boutonReset :Button= Button("Reset")
     var pts1 :Label= Label("0")
     var pts2 :Label= Label("0")
-    val tourSansPrises :Label= Label("Tours sans prises : 0")
     var labelTop :Label = Label("Echecs Martiens")
     val centre :VBox = VBox()
     val info1 :HBox= HBox()

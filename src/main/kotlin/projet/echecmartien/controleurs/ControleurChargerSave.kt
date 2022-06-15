@@ -43,6 +43,7 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             var listPion2 = mutableSetOf<Pion>()
             var matricePlateau = Plateau()
             var nbTour : Int? = null
+            var nbTourSansPrise : Int? = null
             for (i in readJson.indices) {
                 extent += readJson[i]
                 if (countPipe(extent) == 1 && readJson[i] != '|'){
@@ -456,6 +457,9 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                 if (countSlash(extent) == 3 && nbTour !is Int){
                     nbTour = Integer.parseInt(extent[i-1].toString())
                 }
+                if (countSlash(extent) == 4 && nbTourSansPrise !is Int){
+                    nbTourSansPrise = Integer.parseInt(extent[i-1].toString())
+                }
             }
             println("/Joueur 1/ $joueur1name")
             println("/Joueur 2/ $joueur2name")
@@ -503,7 +507,8 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             val newVue = JeuVue(Label(joueur1name),Label(joueur2name),Label(" $joueur2points points"),Label(" $joueur1points points"),
             Label(nbPetit.toString()),Label(nbMoyen.toString()),Label(nbGrand.toString()),
                 Label(nbPetit2.toString()), Label(nbMoyen2.toString()),Label(nbGrand2.toString()),
-            Label("Tour "+nbTour.toString()),nbTour!!)
+            Label("Tour "+nbTour.toString()),nbTour!!,
+            Label("Tours sans prises : $nbTourSansPrise"))
             val scene = Scene(newVue,500.0,800.0)
             primaryStage.scene = scene
             primaryStage.centerOnScreen()
