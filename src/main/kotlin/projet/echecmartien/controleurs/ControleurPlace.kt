@@ -34,7 +34,16 @@ class ControleurPlace(vue :JeuVue,modele : Jeu) : EventHandler<MouseEvent>{
                         if (jeu.plateau.getCases()[j][i].getPion() == null){
                             (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.RED
                         }else{
+
                             (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.BLUE
+                        }
+
+                    }catch (e : DeplacementException){
+                        if (jeu.plateau.getCases()[j][i].getPion() == null){
+                            (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.WHITE
+                        }
+                        else{
+                            vue.fixeListenerCase((vue.grille.children[j*(vue.grille.rowCount)+i] as Circle),ControleurPlace(vue,jeu))
                             if(jeu.plateau.getCases()[j][i].getPion()!!.getScore() == 3){
                                 (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.SADDLEBROWN
                             }
@@ -44,14 +53,6 @@ class ControleurPlace(vue :JeuVue,modele : Jeu) : EventHandler<MouseEvent>{
                             if(jeu.plateau.getCases()[j][i].getPion()!!.getScore() == 1){
                                 (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.ROSYBROWN
                             }
-                        }
-
-                    }catch (e : DeplacementException){
-                        if (jeu.plateau.getCases()[j][i].getPion() == null){
-                            (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.WHITE
-                        }
-                        else{
-                            vue.fixeListenerCase((vue.grille.children[j*(vue.grille.rowCount)+i] as Circle),ControleurPlace(vue,jeu))
                         }
                     }
                 }
