@@ -21,13 +21,13 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
 
 
     override fun handle(event: MouseEvent) {
-        val row = GridPane.getRowIndex(event.source as Node)
-        val column = GridPane.getColumnIndex(event.source as Node)
+        var row = GridPane.getRowIndex(event.source as Node)
+        var column = GridPane.getColumnIndex(event.source as Node)
         jeu.setCoordDestinationDeplacement(Coordonnee(column,row))
-        val originCords = jeu.getCoordOrigineDeplacement()!!
-        val originRow = originCords.getY()
-        val originColumn = originCords.getX()
-        val type = jeu.plateau.getCases()[originColumn][originRow].getPion()!!.getScore()
+        var originCords = jeu.getCoordOrigineDeplacement()!!
+        var originRow = originCords.getY()
+        var originColumn = originCords.getX()
+        var type = jeu.plateau.getCases()[originColumn][originRow].getPion()!!.getScore()
         var typePris = 0
         if (!jeu.plateau.getCases()[column][row].estLibre()){
             typePris = jeu.plateau.getCases()[column][row].getPion()!!.getScore()
@@ -119,6 +119,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
 
 
 
+
         //contrôle IA
 
         if (vue.IActive){
@@ -128,7 +129,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             var listePrendreCos = mutableListOf<Coordonnee>()
             for (row in 4 until 8){
                 for (column in 0 until 4){
-                    for (i in 4 until 8){
+                    for (i in 0 until 8){
                         for(j in 0 until 4){
                             if (vue.grille.children[i*(vue.grille.columnCount)+j] is Circle && jeu.plateau.getCases()[column][row].getPion() != null){
                                 try {
@@ -138,10 +139,10 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                                     }
                                     vue.fixeListenerCase((vue.grille.children[j*(vue.grille.rowCount)+i] as Circle),ControleurDeplace(vue,jeu))
                                     if (jeu.plateau.getCases()[j][i].getPion() == null){
-                                        listeDeplace.add(Coordonnee(i,j))
+                                        listeDeplace.add(Coordonnee(j,i))
                                         listeDeplaceCos.add(Coordonnee(column,row))
                                     }else{
-                                        listePrendre.add(Coordonnee(i,j))
+                                        listePrendre.add(Coordonnee(j,i))
                                         listePrendreCos.add(Coordonnee(column,row))
                                     }
                                 }catch (e : DeplacementException){
@@ -152,23 +153,38 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                     }
                 }
             }
-            println(listeDeplace)
-            println(listeDeplaceCos)
-            val coordDestinationX = listeDeplace[0].getX()
-            val coordDestinationY = listeDeplace[0].getY()
-            println(jeu.plateau.getCases()[coordDestinationX][coordDestinationY].getPion() != null && jeu.plateau.getCases()[coordDestinationX][coordDestinationY].getJoueur() == jeu.getJoueurCourant())
 
-
-
-            var rand = Random.nextInt(0,listeDeplace.size)
             if (listePrendre.size != 0){
-                jeu.deplacer(listePrendreCos[rand].getX(),listePrendreCos[rand].getY(),listePrendre[rand].getX(),listePrendre[rand].getY())
+                var rand = Random.nextInt(0,listePrendre.size)
+                column = listePrendre[rand].getX()
+                row = listePrendre[rand].getY()
+                jeu.setCoordOrigineDeplacement(listePrendreCos[rand])
             }else{
-                jeu.deplacer(listeDeplaceCos[0].getX(),listeDeplaceCos[0].getY(),listeDeplace[0].getX(),listeDeplace[0].getY())
+                var rand = Random.nextInt(0,listeDeplace.size)
+                column = listeDeplace[rand].getX()
+                row = listeDeplace[rand].getY()
+                jeu.setCoordOrigineDeplacement(listeDeplaceCos[rand])
             }
-            jeu.changeJoueurCourant()
+
+            originCords = jeu.getCoordOrigineDeplacement()!!
+            originColumn = originCords.getX()
+            originRow = originCords.getY()
+
+            println("Origine : $originCords")
+            println("Destination ${Coordonnee(column,row)}")
 
 
+            type = jeu.plateau.getCases()[originColumn][originRow].getPion()!!.getScore()
+            typePris = 0
+            if (!jeu.plateau.getCases()[column][row].estLibre()){
+                typePris = jeu.plateau.getCases()[column][row].getPion()!!.getScore()
+                jeu.getJoueurCourant()!!.pionCapture.add(jeu.plateau.getCases()[column][row].getPion()!!)
+            }
+
+
+
+
+            jeu.deplacer(originColumn,originRow,column,row)
 
             vue.setAsNull(vue.grille.children[originColumn*(vue.grille.rowCount)+originRow] as Circle,jeu)
             if (type == 1){
@@ -250,6 +266,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 dialog.showAndWait()
             }
         }
+
 
     }
 }
