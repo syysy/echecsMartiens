@@ -162,10 +162,13 @@ class JeuVue() : BorderPane() {
         val vboxLeft1 = VBox()
         val petit = Circle()
         petit.radius = 5.0
+        petit.fill = Color.ROSYBROWN
         val moyen = Circle()
         moyen.radius = 10.0
+        moyen.fill = Color.SANDYBROWN
         val grand = Circle()
         grand.radius = 20.0
+        grand.fill = Color.SADDLEBROWN
         vboxLeft1.children.addAll(petit,moyen,grand)
         vboxLeft1.alignment = Pos.BOTTOM_CENTER
         vboxLeft1.spacing = 10.0
@@ -183,10 +186,13 @@ class JeuVue() : BorderPane() {
         val vboxRight1 = VBox()
         val petit2 = Circle()
         petit2.radius = 5.0
+        petit2.fill = Color.ROSYBROWN
         val moyen2 = Circle()
         moyen2.radius = 10.0
+        moyen2.fill = Color.SANDYBROWN
         val grand2 = Circle()
         grand2.radius = 20.0
+        grand2.fill = Color.SADDLEBROWN
         vboxRight1.children.addAll(grand2,moyen2,petit2)
         vboxRight1.alignment = Pos.TOP_CENTER
         vboxRight1.spacing = 13.0
@@ -223,19 +229,19 @@ class JeuVue() : BorderPane() {
 
     fun setAsGrandPion(pion : Circle,jeu :Jeu){
         pion.radius = 20.0
-        pion.fill = Color.BLACK
+        pion.fill = Color.SADDLEBROWN
         this.fixeListenerCase(pion,ControleurPlace(this,jeu))
     }
 
     fun setAsMoyenPion(pion : Circle,jeu :Jeu){
         pion.radius = 10.0
-        pion.fill = Color.BLACK
+        pion.fill = Color.SANDYBROWN
         this.fixeListenerCase(pion,ControleurPlace(this,jeu))
     }
 
     fun setAsPetitPion(pion : Circle,jeu :Jeu){
         pion.radius = 5.0
-        pion.fill = Color.BLACK
+        pion.fill = Color.ROSYBROWN
         this.fixeListenerCase(pion,ControleurPlace(this,jeu))
     }
 

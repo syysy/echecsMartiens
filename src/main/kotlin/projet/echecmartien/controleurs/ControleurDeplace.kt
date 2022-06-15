@@ -53,7 +53,6 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 vue.point1.text = "${jeu.getJoueurCourant()!!.calculerScore()} Points"
                 if (typePris == 1){
                     vue.nbPetit2.text = (vue.nbPetit2.text.toInt() + 1).toString()
-
                 }
                 if (typePris == 2){
                     vue.nbMoyen2.text = (vue.nbMoyen2.text.toInt() + 1).toString()
@@ -88,7 +87,15 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                     }else{
                         (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(vue,jeu))
                     }
-                    (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.BLACK
+                    if( type == 3){
+                        (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.SADDLEBROWN
+                    }
+                    if( type == 2){
+                        (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.SANDYBROWN
+                    }
+                    if( type == 1){
+                        (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.ROSYBROWN
+                    }
                 }
             }
         }
@@ -237,7 +244,15 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                         }else{
                             (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(vue,jeu))
                         }
-                        (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.BLACK
+                        if( type == 3){
+                            (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.SADDLEBROWN
+                        }
+                        if( type == 2){
+                            (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.SANDYBROWN
+                        }
+                        if( type == 1){
+                            (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.ROSYBROWN
+                        }
                     }
                 }
             }

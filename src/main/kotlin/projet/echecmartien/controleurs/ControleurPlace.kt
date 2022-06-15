@@ -21,7 +21,7 @@ class ControleurPlace(vue :JeuVue,modele : Jeu) : EventHandler<MouseEvent>{
         var row = GridPane.getRowIndex(event.source as Node)
         var column = GridPane.getColumnIndex(event.source as Node)
         jeu.setCoordOrigineDeplacement(Coordonnee(column,row))
-
+        val type = jeu.plateau.getCases()[column][row].getPion()!!.getScore()
         for (i in 0 until 8){
             for(j in 0 until 4){
                 if (vue.grille.children[i*(vue.grille.columnCount)+j] is Circle){
@@ -35,13 +35,23 @@ class ControleurPlace(vue :JeuVue,modele : Jeu) : EventHandler<MouseEvent>{
                             (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.RED
                         }else{
                             (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.BLUE
+                            if(jeu.plateau.getCases()[j][i].getPion()!!.getScore() == 3){
+                                (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.SADDLEBROWN
+                            }
+                            if(jeu.plateau.getCases()[j][i].getPion()!!.getScore() == 2){
+                                (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.SANDYBROWN
+                            }
+                            if(jeu.plateau.getCases()[j][i].getPion()!!.getScore() == 1){
+                                (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.ROSYBROWN
+                            }
                         }
+
                     }catch (e : DeplacementException){
                         if (jeu.plateau.getCases()[j][i].getPion() == null){
                             (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.WHITE
-                        }else{
+                        }
+                        else{
                             vue.fixeListenerCase((vue.grille.children[j*(vue.grille.rowCount)+i] as Circle),ControleurPlace(vue,jeu))
-                            (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.BLACK
                         }
                     }
                 }
