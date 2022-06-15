@@ -24,7 +24,7 @@ class ControleurRetourRules(oldVue: MainVue, modele : Jeu, primaryStage: Stage):
 
     override fun handle(p0: ActionEvent?) {
         val new = MainVue()
-        primaryStage.scene = Scene(new,400.0,600.0)
+        primaryStage.scene = Scene(new,400.0,500.0)
         primaryStage.centerOnScreen()
         new.textFieldPseudo1.text = vue.savePseudo1
         new.textFieldPseudo2.text = vue.savePseudo2

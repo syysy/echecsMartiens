@@ -21,7 +21,7 @@ class AppliJeuEchecMartien: Application() {
         vue.fixeListenerBouton(vue.buttonBottomRules, ControleurRetourRules(vue,modele,primaryStage))
         vue.fixeListenerBouton(vue.loadButton,ControleurChargerSave(vue,modele,primaryStage))
         val scene = Scene(vue,400.0,500.0)
-        primaryStage.title="TD5B MVC"
+        primaryStage.title="ECHECS MARTIENS"
         primaryStage.scene=scene
         primaryStage.show()
     }

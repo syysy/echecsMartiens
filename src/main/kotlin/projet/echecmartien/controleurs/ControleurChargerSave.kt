@@ -42,7 +42,7 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             val matricePlateau = Plateau()
             var nbTour : Int? = null
             var nbTourSansPrise : Int? = null
-            var IActive : Boolean? = null
+            var IActive : Boolean? = false
             for (i in readJson.indices) {
                 extent += readJson[i]
                 if (countPipe(extent) == 1 && readJson[i] != '|'){
@@ -464,6 +464,7 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                     nbTourSansPrise = Integer.parseInt(extent[i-1].toString())
                 }
                 if (countSlash(extent) == 5 && IActive !is Boolean){
+                    println(countSlash(extent[i-6].toString()))
                     if (extent[i-6] == ' '){
                         IActive = true
                     }else if (extent[i-7] == ' '){
@@ -479,6 +480,7 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             println("/Pions Joueur 1/ $listPion2")
             println("/Pions Joueur 2/ $listPion1")
             println("/Plateau/\n$matricePlateau")
+            println("IA ? $IActive")
 
             var nbPetit = 0
             var nbMoyen = 0
@@ -526,10 +528,9 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             Label(nbPetit.toString()),Label(nbMoyen.toString()),Label(nbGrand.toString()),
                 Label(nbPetit2.toString()), Label(nbMoyen2.toString()),Label(nbGrand2.toString()),
             Label("Tour "+nbTour.toString()),nbTour!!,
-            Label("Tours sans prises : $nbTourSansPrise"))
+            Label("Tours sans prises : $nbTourSansPrise"),IActive)
             newVue.update(jeu)
-            println(jeu.plateau)
-            println(jeu.plateau.getCases()[1][7].getPion())
+            println(IActive)
             val scene = Scene(newVue,500.0,800.0)
             primaryStage.scene = scene
             primaryStage.centerOnScreen()

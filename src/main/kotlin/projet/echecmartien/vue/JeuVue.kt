@@ -7,6 +7,8 @@ import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.control.Button
 import javafx.scene.control.Label
+import javafx.scene.control.Labeled
+import javafx.scene.image.Image
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.*
 import javafx.scene.paint.Color
@@ -16,6 +18,7 @@ import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
 import projet.echecmartien.controleurs.ControleurPlace
 import projet.echecmartien.modele.*
+
 
 class JeuVue(
     var joueur1:Label = Label("joueur1"),
@@ -35,7 +38,8 @@ class JeuVue(
 
     val compteTour :Label= Label("Tour 1"),
     var nbTour : Int = 1,
-    val tourSansPrises :Label= Label("Tours sans prises : 0")) : BorderPane() {
+    val tourSansPrises :Label= Label("Tours sans prises : 0"),
+    var IActive : Boolean? = false ) : BorderPane() {
 
     val grille :GridPane= GridPane()
 
@@ -53,18 +57,33 @@ class JeuVue(
     val info2 :HBox= HBox()
     var savePseudo1 : String
     var savePseudo2 : String
-    var IActive : Boolean
+
 
     init{
+
         // Titre en haut
         val flowPaneTop = FlowPane()
         labelTop.font = Font.font("Tahoma", FontWeight.BOLD, FontPosture.REGULAR, 20.0)
-        labelTop.textFill = Color.BLACK
+        labelTop.textFill = Color.WHITE
         flowPaneTop.alignment = Pos.CENTER
-        labelTop.padding = Insets(30.0,0.0,30.0,0.0)
+        labelTop.padding = Insets(30.0,0.0,20.0,0.0)
         flowPaneTop.children.add(labelTop)
         this.top = flowPaneTop
 
+        pts2.textFill = Color.WHITE
+        pts1.textFill = Color.WHITE
+        tourSansPrises.textFill = Color.WHITE
+        compteTour.textFill = Color.WHITE
+        joueur1.textFill = Color.WHITE
+        joueur2.textFill = Color.WHITE
+        point1.textFill = Color.WHITE
+        point2.textFill = Color.WHITE
+        nbGrand.textFill = Color.WHITE
+        nbGrand2.textFill = Color.WHITE
+        nbMoyen2.textFill = Color.WHITE
+        nbPetit2.textFill = Color.WHITE
+        nbMoyen.textFill = Color.WHITE
+        nbPetit.textFill = Color.WHITE
 
         // Centre
         val points1box =HBox()
@@ -105,7 +124,7 @@ class JeuVue(
 
         for (i in 0 until 4){
             for (j in 0 until 8){
-                grille.style = "-fx-border-color : blue;-border-width:1"
+                grille.style = "-fx-border-color : black;-border-width:2"
                 var cercle = Circle()
                 cercle.radius = 20.0
                 grille.add(cercle,i,j)
@@ -143,15 +162,18 @@ class JeuVue(
         colonne2.halignment = HPos.CENTER
         colonne3.halignment = HPos.CENTER
         colonne4.halignment = HPos.CENTER
-        grille.vgap = 5.0
-
-
         grille.columnConstraints.addAll(colonne1,colonne2,colonne3,colonne4)
         grille.rowConstraints.addAll(ligne1,ligne2,ligne3,ligne4,ligne5,ligne6,ligne7,ligne8)
         grille.isGridLinesVisible = true
         this.padding = Insets(10.0)
 
+        grille.background = Background(BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))
+        this.style = ("-fx-background-image: url('https://png.pngtree.com/thumb_back/fw800/back_our/20190625/ourmid/pngtree-deep-space-cosmic-galaxy-sci-fi-cartoon-background-illustration-image_255936.jpg'); -fx-background-repeat: no-repeat; -fx-background-size: 500 800; -fx-background-position: center center;")
 
+        /*this.background = Background(BackgroundImage(
+            Image("https://ak.picdn.net/shutterstock/videos/1015364758/thumb/11.jpg?ip=x480"), BackgroundRepeat.NO_REPEAT,
+        BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+        BackgroundSize.DEFAULT))*/
         // Compte des pions sur les côtés
         val leftgrid = GridPane()
         val vboxLeft1 = VBox()

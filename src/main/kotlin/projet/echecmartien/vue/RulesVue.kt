@@ -45,12 +45,12 @@ class RulesVue: BorderPane() {
     init {
         val flowPaneTop = FlowPane()
         labelTop.font = Font.font("Tahoma", FontWeight.BOLD, FontPosture.REGULAR, 20.0)
-        labelTop.textFill = Color.BLACK
+        labelTop.textFill = Color.WHITE
         flowPaneTop.alignment = Pos.CENTER
         labelTop.padding = Insets(30.0,0.0,30.0,0.0)
         flowPaneTop.children.add(labelTop)
         this.top = flowPaneTop
-
+        text.textFill = Color.WHITE
         val borderCenter = FlowPane()
         borderCenter.padding = Insets(0.0,0.0,0.0,75.0)
         borderCenter.children.add(text)
@@ -64,6 +64,9 @@ class RulesVue: BorderPane() {
         neoFlow.children.add(buttonBottomRules)
         neoFlow.padding = Insets(50.0,0.0,50.0,0.0)
         neoFlow.alignment = Pos.CENTER
+
+        this.style = ("-fx-background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20190222/ourmid/pngtree-azure-universe-planet-cartoon-background-image_58913.jpg'); -fx-background-repeat: no-repeat; -fx-background-size: 1080 600; -fx-background-position: center center;")
+
     }
     fun fixeListenerBouton(bouton: Button, action: EventHandler<ActionEvent>) {
         bouton.onAction = action

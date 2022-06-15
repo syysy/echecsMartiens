@@ -33,9 +33,6 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             typePris = jeu.plateau.getCases()[column][row].getPion()!!.getScore()
             jeu.getJoueurCourant()!!.pionCapture.add(jeu.plateau.getCases()[column][row].getPion()!!)
         }
-
-
-
         jeu.deplacer(originColumn,originRow,column,row)
         vue.setAsNull(vue.grille.children[originColumn*(vue.grille.rowCount)+originRow] as Circle,jeu)
         if (type == 1){
@@ -121,7 +118,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
 
         //contrôle IA
 
-        if (vue.IActive){
+        if (vue.IActive == true){
             var listeDeplace = mutableListOf<Coordonnee>()
             var listeDeplaceCos = mutableListOf<Coordonnee>()
             var listePrendre = mutableListOf<Coordonnee>()
