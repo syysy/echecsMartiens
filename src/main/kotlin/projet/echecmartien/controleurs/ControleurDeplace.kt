@@ -317,8 +317,8 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 listePasAdverseCos.add(listeDispoCos[i])
             }
         }
-        println(listePasAdverse)
-        println(listePasAdverseCos)
+        println("pas pour l'adversaire $listePasAdverse")
+        println("pas pour l'adversaire $listePasAdverseCos")
 
         if (listePasAdverse.size != 0){
             val rand = Random.nextInt(0,listePasAdverse.size)
@@ -387,6 +387,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         }else{
             false
         }
+
 
     }
 }
