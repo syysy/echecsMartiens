@@ -82,10 +82,10 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
 
         //playerturn
         if (Joueur(vue.joueur1.text) == jeu.getJoueurCourant()){
-            vue.joueur1.style = "-fx-font-weight : bold;"
+            vue.joueur2.style = "-fx-font-weight : bold; -fx-text-fill : red;"
             vue.joueur2.style = ""
         }else{
-            vue.joueur2.style = "-fx-font-weight : bold;"
+            vue.joueur2.style = "-fx-font-weight : bold; -fx-text-fill : red;"
             vue.joueur1.style = ""
         }
 

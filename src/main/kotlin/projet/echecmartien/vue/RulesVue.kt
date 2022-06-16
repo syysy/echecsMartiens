@@ -64,8 +64,8 @@ class RulesVue: BorderPane() {
         neoFlow.children.add(buttonBottomRules)
         neoFlow.padding = Insets(50.0,0.0,50.0,0.0)
         neoFlow.alignment = Pos.CENTER
-
-        this.style = ("-fx-background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20190222/ourmid/pngtree-azure-universe-planet-cartoon-background-image_58913.jpg'); -fx-background-repeat: no-repeat; -fx-background-size: 1080 600; -fx-background-position: center center;")
+        //-fx-background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20190222/ourmid/pngtree-azure-universe-planet-cartoon-background-image_58913.jpg')
+        this.style = ("-fx-background-color: #383344;; -fx-background-repeat: no-repeat; -fx-background-size: 1080 600; -fx-background-position: center center;")
 
     }
     fun fixeListenerBouton(bouton: Button, action: EventHandler<ActionEvent>) {

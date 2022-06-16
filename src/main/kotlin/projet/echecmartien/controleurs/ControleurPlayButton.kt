@@ -28,7 +28,7 @@ class ControleurPlayButton(oldVue: MainVue,modele : Jeu,primaryStage: Stage): Ev
 
 
     override fun handle(p0: ActionEvent?) {
-        val scene = Scene(newVue,500.0,800.0)
+        val scene = Scene(newVue,600.0,900.0)
         primaryStage.scene = scene
         primaryStage.centerOnScreen()
         newVue.joueur1.text = oldVue.textFieldPseudo1.text
@@ -40,10 +40,10 @@ class ControleurPlayButton(oldVue: MainVue,modele : Jeu,primaryStage: Stage): Ev
         jeu.initialiserPartie(Joueur(newVue.joueur1.text), Joueur(newVue.joueur2.text),jeu.getNombreCoupsMax())
         //playerturn
         if (Joueur(newVue.joueur1.text) == jeu.getJoueurCourant()){
-            newVue.joueur1.style = "-fx-font-weight : bold;"
+            newVue.joueur1.style = "-fx-font-weight : bold; -fx-text-fill : red;"
             newVue.joueur2.style = ""
         }else{
-            newVue.joueur2.style = "-fx-font-weight : bold;"
+            newVue.joueur2.style = "-fx-font-weight : bold; -fx-text-fill : red;"
             newVue.joueur1.style = ""
         }
         for (i in newVue.grille.children){
