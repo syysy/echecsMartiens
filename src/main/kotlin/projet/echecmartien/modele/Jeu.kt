@@ -13,10 +13,10 @@ class Jeu(var plateau: Plateau = Plateau()) : InterfaceJeu{
     private var joueurCourant : Joueur? = null
     private var joueur = arrayOf(Joueur(""), Joueur(""))
 
-    init {
-        this.plateau = plateau
-    }
 
+    /**
+     * Permet de récupérer les variables associées
+     * */
     fun getJoueur(): Array<Joueur> {
         return this.joueur
     }
@@ -70,9 +70,6 @@ class Jeu(var plateau: Plateau = Plateau()) : InterfaceJeu{
         return nombreCoupsSansPrise
     }
 
-    fun setNombreCoupSansPrise(nombre : Int ){
-        nombreCoupsSansPrise = nombre
-    }
 
     /**
      * affectation des joueurs aux cases
@@ -80,6 +77,10 @@ class Jeu(var plateau: Plateau = Plateau()) : InterfaceJeu{
      * @paral joueur2 second joueur
      */
      fun initialiserJoueur(joueur1: Joueur, joueur2: Joueur) {
+        /**
+         * On parcourt l'ensemble du plateau et on affecte aux cases du haut le joueur 1 et à celles du
+         * bas le joueur 2
+         * */
         for (i in 0 until plateau.getTailleVerticale()){
             if (i < 4){
                 for (j in 0 until plateau.getTailleHorizontale()){
@@ -99,11 +100,19 @@ class Jeu(var plateau: Plateau = Plateau()) : InterfaceJeu{
      * @return true si la partie est finie, false sinon
      */
     fun arretPartie(): Boolean {
+        /**
+         * Si notre nombre de coups sans prises excèdent ou est égal au nombre de coups sans prises
+         * maximum la partie prend fin
+         * */
         if (nombreCoupsSansPrise >= nombreCoupsSansPriseMax) {
             return true
         }
         var count = 0
         var countJcourant = 0
+        /**
+         * On parcourt le plateau, ainsi si le plateau ne contient plus que 1 pion ou que le joueur courant
+         * n'a plus de pion (et ne peut donc pas jouer), la partie prend fin également
+         * */
         for (i in 0 until 8) {
             for (j in 0 until 4) {
                 if (!plateau.getCases()[j][i].estLibre()){
@@ -136,6 +145,10 @@ class Jeu(var plateau: Plateau = Plateau()) : InterfaceJeu{
         }
     }
 
+
+    /**
+     * On initialise les joueurs et la position des pions sur le plateau
+     * */
     override fun initialiserPartie(joueur1: Joueur, joueur2: Joueur, nombreCoupsSansPriseMax: Int) {
         joueur[0] = joueur1
         joueur[1] = joueur2
@@ -144,10 +157,18 @@ class Jeu(var plateau: Plateau = Plateau()) : InterfaceJeu{
         plateau.initialiser()
     }
 
+    /**
+     * On regarde si le déplacement est valide
+     * */
     override fun deplacementPossible(coordOrigineX: Int, coordOrigineY: Int): Boolean {
         return (coordOrigineX >= 0 && coordOrigineX < plateau.getTailleHorizontale() && coordOrigineY >= 0 && coordOrigineY < plateau.getTailleVerticale())
     }
 
+
+    /**
+     * Regarde si le déplacement est valide à partir des coordonnées de départ et d'origine ainsi
+     * que du joueur
+     * */
     override fun deplacementPossible(
         coordOrigineX: Int,
         coordOrigineY: Int,
@@ -191,16 +212,20 @@ class Jeu(var plateau: Plateau = Plateau()) : InterfaceJeu{
             }
             plateau.getCases()[coordDestinationX][coordDestinationY].setPion(plateau.getCases()[coordOrigineX][coordOrigineY].getPion())
             plateau.getCases()[coordOrigineX][coordOrigineY].setPion(null)
-            if (coordOrigineY >= 4 && coordDestinationY < 4 || coordOrigineY < 4 && coordDestinationY >= 4){
-                pionArriveDeZone = plateau.getCases()[coordDestinationX][coordDestinationY].getPion()
+            pionArriveDeZone = if (coordOrigineY >= 4 && coordDestinationY < 4 || coordOrigineY < 4 && coordDestinationY >= 4){
+                plateau.getCases()[coordDestinationX][coordDestinationY].getPion()
             }else{
-                pionArriveDeZone = null
+                null
             }
         }else{
             throw DeplacementException()
         }
     }
 
+
+    /**
+     * Calcule le score de chaques joueurs et déclare si un joueur est vainqueur, null sinon
+     * */
     override fun joueurVainqueur(): Joueur? {
         if (joueur[0].calculerScore() < joueur[1].calculerScore()){
             return joueur[1]
