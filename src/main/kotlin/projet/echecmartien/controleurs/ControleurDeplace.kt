@@ -258,20 +258,19 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 vue.endGame.isVisible = true
             }
         }
-
-
     }
 
     private fun triPrendre(liste : MutableList<Coordonnee>, listeCos : MutableList<Coordonnee>) : Boolean{
         var max = 1
         var listeMax = mutableListOf<Coordonnee>()
-        val listeMaxCos = mutableListOf<Coordonnee>()
+        var listeMaxCos = mutableListOf<Coordonnee>()
         for (i in 0 until liste.size){
             if (jeu.plateau.getCases()[liste[i].getX()][liste[i].getY()].getPion()!!.getScore() == max){
                 listeMax.add(liste[i])
                 listeMaxCos.add(listeCos[i])
             }else if(jeu.plateau.getCases()[liste[i].getX()][liste[i].getY()].getPion()!!.getScore() > max){
                 listeMax = mutableListOf()
+                listeMaxCos = mutableListOf()
                 listeMax.add(liste[i])
                 listeMaxCos.add(listeCos[i])
                 max = jeu.plateau.getCases()[liste[i].getX()][liste[i].getY()].getPion()!!.getScore()
@@ -279,7 +278,6 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         }
 
         return if (listeMax.size > 0){
-
             val rand = Random.nextInt(0,listeMax.size)
             jeu.setCoordDestinationDeplacement(listeMax[rand])
             jeu.setCoordOrigineDeplacement(listeMaxCos[rand])
@@ -348,7 +346,6 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             jeu.setCoordOrigineDeplacement(listeCos[rand])
         }
         return false
-
     }
 
 
