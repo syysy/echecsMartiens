@@ -109,7 +109,7 @@ internal class TestJeu {
     @Test
     fun testDeplacementPossible2() {
         jeuTest.initialiserPartie(Joueur("oui"),Joueur("non"),20)
-        assertTrue(jeuTest.deplacementPossible(2,2,3,3,null))
+        assertTrue(jeuTest.deplacementPossible(2,2,3,3,jeuTest.getJoueurCourant()))
     }
 
     @Test
