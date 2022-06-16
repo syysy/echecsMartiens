@@ -264,8 +264,6 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             }
         }
 
-        println("ListeMax : $listeMax")
-        println("Liste max Cos : $listeMax")
         return if (listeMax.size > 0){
 
             val rand = Random.nextInt(0,listeMax.size)
@@ -317,8 +315,6 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 listePasAdverseCos.add(listeDispoCos[i])
             }
         }
-        println("pas pour l'adversaire $listePasAdverse")
-        println("pas pour l'adversaire $listePasAdverseCos")
 
         if (listePasAdverse.size != 0){
             val rand = Random.nextInt(0,listePasAdverse.size)
