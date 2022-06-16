@@ -103,41 +103,6 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                     }
                     if (countUnderscore(extent) == 2 && extent[i] != '_'){
                         if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[0][1].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[0][1].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[0][1].setPion(GrandPion())
-                        }
-                    }
-                    if (countUnderscore(extent) == 3 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[0][2].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[0][2].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[0][2].setPion(GrandPion())
-                        }
-                    }
-                    if (countUnderscore(extent) == 4 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[0][3].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[0][3].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[0][3].setPion(GrandPion())
-                        }
-                    }
-                }
-                if (countUnderscore(extent) in 6..10){
-                    if (countUnderscore(extent) == 6 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
                             matricePlateau.getCases()[1][0].setPion(PetitPion())
                         }
                         if (Integer.parseInt(extent[i].toString()) == 2) {
@@ -145,6 +110,41 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                         }
                         if (Integer.parseInt(extent[i].toString()) == 3) {
                             matricePlateau.getCases()[1][0].setPion(GrandPion())
+                        }
+                    }
+                    if (countUnderscore(extent) == 3 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[2][0].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[2][0].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[2][0].setPion(GrandPion())
+                        }
+                    }
+                    if (countUnderscore(extent) == 4 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[3][0].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[3][0].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[3][0].setPion(GrandPion())
+                        }
+                    }
+                }
+                if (countUnderscore(extent) in 6..10){
+                    if (countUnderscore(extent) == 6 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[0][1].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[0][1].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[0][1].setPion(GrandPion())
                         }
                     }
                     if (countUnderscore(extent) == 7 && extent[i] != '_'){
@@ -160,41 +160,6 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                     }
                     if (countUnderscore(extent) == 8 && extent[i] != '_'){
                         if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[1][2].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[1][2].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[1][2].setPion(GrandPion())
-                        }
-                    }
-                    if (countUnderscore(extent) == 9 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[1][3].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[1][3].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[1][3].setPion(GrandPion())
-                        }
-                    }
-                }
-                if (countUnderscore(extent) in 11..15){
-                    if (countUnderscore(extent) == 11 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[2][0].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[2][0].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[2][0].setPion(GrandPion())
-                        }
-                    }
-                    if (countUnderscore(extent) == 12 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
                             matricePlateau.getCases()[2][1].setPion(PetitPion())
                         }
                         if (Integer.parseInt(extent[i].toString()) == 2) {
@@ -202,6 +167,41 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                         }
                         if (Integer.parseInt(extent[i].toString()) == 3) {
                             matricePlateau.getCases()[2][1].setPion(GrandPion())
+                        }
+                    }
+                    if (countUnderscore(extent) == 9 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[3][1].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[3][1].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[3][1].setPion(GrandPion())
+                        }
+                    }
+                }
+                if (countUnderscore(extent) in 11..15){
+                    if (countUnderscore(extent) == 11 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[0][2].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[0][2].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[0][2].setPion(GrandPion())
+                        }
+                    }
+                    if (countUnderscore(extent) == 12 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[1][2].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[1][2].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[1][2].setPion(GrandPion())
                         }
                     }
                     if (countUnderscore(extent) == 13 && extent[i] != '_'){
@@ -217,41 +217,6 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                     }
                     if (countUnderscore(extent) == 14 && extent[i] != '_'){
                         if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[2][3].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[2][3].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[2][3].setPion(GrandPion())
-                        }
-                    }
-                }
-                if (countUnderscore(extent) in 16..20){
-                    if (countUnderscore(extent) == 16 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[3][0].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[3][0].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[3][0].setPion(GrandPion())
-                        }
-                    }
-                    if (countUnderscore(extent) == 17 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[3][1].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[3][1].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[3][1].setPion(GrandPion())
-                        }
-                    }
-                    if (countUnderscore(extent) == 18 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
                             matricePlateau.getCases()[3][2].setPion(PetitPion())
                         }
                         if (Integer.parseInt(extent[i].toString()) == 2) {
@@ -259,6 +224,41 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                         }
                         if (Integer.parseInt(extent[i].toString()) == 3) {
                             matricePlateau.getCases()[3][2].setPion(GrandPion())
+                        }
+                    }
+                }
+                if (countUnderscore(extent) in 16..20){
+                    if (countUnderscore(extent) == 16 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[0][3].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[0][3].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[0][3].setPion(GrandPion())
+                        }
+                    }
+                    if (countUnderscore(extent) == 17 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[1][3].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[1][3].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[1][3].setPion(GrandPion())
+                        }
+                    }
+                    if (countUnderscore(extent) == 18 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[2][3].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[2][3].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[2][3].setPion(GrandPion())
                         }
                     }
                     if (countUnderscore(extent) == 19 && extent[i] != '_'){
@@ -287,41 +287,6 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                     }
                     if (countUnderscore(extent) == 22 && extent[i] != '_'){
                         if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[0][5].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[0][5].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[0][5].setPion(GrandPion())
-                        }
-                    }
-                    if (countUnderscore(extent) == 23 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[0][6].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[0][6].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[0][6].setPion(GrandPion())
-                        }
-                    }
-                    if (countUnderscore(extent) == 24 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[0][7].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[0][7].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[0][7].setPion(GrandPion())
-                        }
-                    }
-                }
-                if (countUnderscore(extent) in 26..30){
-                    if (countUnderscore(extent) == 26 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
                             matricePlateau.getCases()[1][4].setPion(PetitPion())
                         }
                         if (Integer.parseInt(extent[i].toString()) == 2) {
@@ -329,6 +294,41 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                         }
                         if (Integer.parseInt(extent[i].toString()) == 3) {
                             matricePlateau.getCases()[1][4].setPion(GrandPion())
+                        }
+                    }
+                    if (countUnderscore(extent) == 23 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[2][4].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[2][4].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[2][4].setPion(GrandPion())
+                        }
+                    }
+                    if (countUnderscore(extent) == 24 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[3][4].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[3][4].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[3][4].setPion(GrandPion())
+                        }
+                    }
+                }
+                if (countUnderscore(extent) in 26..30){
+                    if (countUnderscore(extent) == 26 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[0][5].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[0][5].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[0][5].setPion(GrandPion())
                         }
                     }
                     if (countUnderscore(extent) == 27 && extent[i] != '_'){
@@ -344,41 +344,6 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                     }
                     if (countUnderscore(extent) == 28 && extent[i] != '_'){
                         if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[1][6].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[1][6].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[1][6].setPion(GrandPion())
-                        }
-                    }
-                    if (countUnderscore(extent) == 29 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[1][7].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[1][7].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[1][7].setPion(GrandPion())
-                        }
-                    }
-                }
-                if (countUnderscore(extent) in 31..35){
-                    if (countUnderscore(extent) == 31 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[2][4].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[2][4].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[2][4].setPion(GrandPion())
-                        }
-                    }
-                    if (countUnderscore(extent) == 32 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
                             matricePlateau.getCases()[2][5].setPion(PetitPion())
                         }
                         if (Integer.parseInt(extent[i].toString()) == 2) {
@@ -386,6 +351,41 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                         }
                         if (Integer.parseInt(extent[i].toString()) == 3) {
                             matricePlateau.getCases()[2][5].setPion(GrandPion())
+                        }
+                    }
+                    if (countUnderscore(extent) == 29 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[3][5].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[3][5].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[3][5].setPion(GrandPion())
+                        }
+                    }
+                }
+                if (countUnderscore(extent) in 31..35){
+                    if (countUnderscore(extent) == 31 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[0][6].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[0][6].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[0][6].setPion(GrandPion())
+                        }
+                    }
+                    if (countUnderscore(extent) == 32 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[1][6].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[1][6].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[1][6].setPion(GrandPion())
                         }
                     }
                     if (countUnderscore(extent) == 33 && extent[i] != '_'){
@@ -401,41 +401,6 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                     }
                     if (countUnderscore(extent) == 34 && extent[i] != '_'){
                         if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[2][7].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[2][7].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[2][7].setPion(GrandPion())
-                        }
-                    }
-                }
-                if (countUnderscore(extent) in 36..40){
-                    if (countUnderscore(extent) == 36 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[3][4].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[3][4].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[3][4].setPion(GrandPion())
-                        }
-                    }
-                    if (countUnderscore(extent) == 37 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
-                            matricePlateau.getCases()[3][5].setPion(PetitPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 2) {
-                            matricePlateau.getCases()[3][5].setPion(MoyenPion())
-                        }
-                        if (Integer.parseInt(extent[i].toString()) == 3) {
-                            matricePlateau.getCases()[3][5].setPion(GrandPion())
-                        }
-                    }
-                    if (countUnderscore(extent) == 38 && extent[i] != '_'){
-                        if (Integer.parseInt(extent[i].toString()) == 1) {
                             matricePlateau.getCases()[3][6].setPion(PetitPion())
                         }
                         if (Integer.parseInt(extent[i].toString()) == 2) {
@@ -443,6 +408,41 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                         }
                         if (Integer.parseInt(extent[i].toString()) == 3) {
                             matricePlateau.getCases()[3][6].setPion(GrandPion())
+                        }
+                    }
+                }
+                if (countUnderscore(extent) in 36..40){
+                    if (countUnderscore(extent) == 36 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[0][7].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[0][7].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[0][7].setPion(GrandPion())
+                        }
+                    }
+                    if (countUnderscore(extent) == 37 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[1][7].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[1][7].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[1][7].setPion(GrandPion())
+                        }
+                    }
+                    if (countUnderscore(extent) == 38 && extent[i] != '_'){
+                        if (Integer.parseInt(extent[i].toString()) == 1) {
+                            matricePlateau.getCases()[2][7].setPion(PetitPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 2) {
+                            matricePlateau.getCases()[2][7].setPion(MoyenPion())
+                        }
+                        if (Integer.parseInt(extent[i].toString()) == 3) {
+                            matricePlateau.getCases()[2][7].setPion(GrandPion())
                         }
                     }
                     if (countUnderscore(extent) == 39 && extent[i] != '_'){
@@ -534,12 +534,17 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             jeu.getJoueur()[0].pionCapture = listPion1
             jeu.getJoueur()[1].pionCapture = listPion2
             jeu.plateau = matricePlateau
+            println(pionArriveDeBoolean)
             if (pionArriveDeBoolean){
-                pionArriveDeZone = matricePlateau.getCases()[Integer.parseInt(pionArriveDeString[1].toString())][Integer.parseInt(pionArriveDeString[3].toString())].getPion()
+                println(matricePlateau)
+                println(pionArriveDeString[1])
+                println(pionArriveDeString[3])
+                pionArriveDeZone = jeu.plateau.getCases()[Integer.parseInt(pionArriveDeString[1].toString())][Integer.parseInt(pionArriveDeString[3].toString())].getPion()
             }
+            println(pionArriveDeZone)
             jeu.pionArriveDeZone = pionArriveDeZone
+            println(jeu.pionArriveDeZone)
 
-            println(jeu.plateau)
             val newVue = JeuVue(Label(joueur1name),Label(joueur2name),Label(" $joueur2points points"),Label(" $joueur1points points"),
             Label(nbPetit.toString()),Label(nbMoyen.toString()),Label(nbGrand.toString()),
                 Label(nbPetit2.toString()), Label(nbMoyen2.toString()),Label(nbGrand2.toString()),
