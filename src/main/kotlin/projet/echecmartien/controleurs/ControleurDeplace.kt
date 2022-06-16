@@ -5,6 +5,7 @@ import javafx.scene.Node
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
 import javafx.scene.input.MouseEvent
+import javafx.scene.layout.CornerRadii
 import javafx.scene.layout.GridPane
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
@@ -73,21 +74,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         }
         jeu.changeJoueurCourant()
 
-        //update
-        for (i in 0 until 8){
-            for (j in 0 until 4){
-                if (jeu.plateau.getCases()[j][i].getPion() == null){
-                    vue.setAsNull(vue.grille.children[j*(vue.grille.rowCount)+i] as Circle,jeu)
-                }else{
-                    if (jeu.plateau.getCases()[j][i].getJoueur() == jeu.getJoueurCourant()){
-                        vue.fixeListenerCase(vue.grille.children[j*(vue.grille.rowCount)+i] as Circle,ControleurPlace(vue,jeu))
-                    }else{
-                        (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(vue,jeu))
-                    }
-
-                }
-            }
-        }
+        vue.update(jeu)
 
         vue.nbTour += 1
         vue.compteTour.text = "Tour ${vue.nbTour}"
@@ -151,24 +138,20 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             }
 
             if (listePrendre.size != 0){
-                var rand = Random.nextInt(0,listePrendre.size)
-                column = listePrendre[rand].getX()
-                row = listePrendre[rand].getY()
-                jeu.setCoordOrigineDeplacement(listePrendreCos[rand])
+                triPrendre(listePrendre,listePrendreCos)
             }else{
                 var rand = Random.nextInt(0,listeDeplace.size)
-                column = listeDeplace[rand].getX()
-                row = listeDeplace[rand].getY()
+                jeu.setCoordDestinationDeplacement(Coordonnee(listeDeplace[rand].getX(),listeDeplace[rand].getY()))
                 jeu.setCoordOrigineDeplacement(listeDeplaceCos[rand])
+
             }
 
             originCords = jeu.getCoordOrigineDeplacement()!!
             originColumn = originCords.getX()
             originRow = originCords.getY()
-
-            println("Origine : $originCords")
-            println("Destination ${Coordonnee(column,row)}")
-
+            var destiCords = jeu.getCoordDestinationDeplacement()!!
+            column = destiCords.getX()
+            row = destiCords.getY()
 
             type = jeu.plateau.getCases()[originColumn][originRow].getPion()!!.getScore()
             typePris = 0
@@ -177,8 +160,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 jeu.getJoueurCourant()!!.pionCapture.add(jeu.plateau.getCases()[column][row].getPion()!!)
             }
 
-
-
+            //fun contrôle IA
 
             jeu.deplacer(originColumn,originRow,column,row)
 
@@ -222,20 +204,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             }
             jeu.changeJoueurCourant()
 
-            //update
-            for (i in 0 until 8){
-                for (j in 0 until 4){
-                    if (jeu.plateau.getCases()[j][i].getPion() == null){
-                        vue.setAsNull(vue.grille.children[j*(vue.grille.rowCount)+i] as Circle,jeu)
-                    }else{
-                        if (jeu.plateau.getCases()[j][i].getJoueur() == jeu.getJoueurCourant()){
-                            vue.fixeListenerCase(vue.grille.children[j*(vue.grille.rowCount)+i] as Circle,ControleurPlace(vue,jeu))
-                        }else{
-                            (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(vue,jeu))
-                        }
-                    }
-                }
-            }
+            vue.update(jeu)
 
             vue.nbTour += 1
             vue.compteTour.text = "Tour ${vue.nbTour}"
@@ -263,5 +232,27 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         }
 
 
+    }
+
+    fun triPrendre(liste : MutableList<Coordonnee>,listeCos : MutableList<Coordonnee>){
+        var max = 1
+        var listeMax = mutableListOf<Coordonnee>()
+        var listeMaxCos = mutableListOf<Coordonnee>()
+        for (i in 0 until liste.size){
+            if (jeu.plateau.getCases()[liste[i].getX()][liste[i].getY()].getPion()!!.getScore() == max){
+                listeMax.add(liste[i])
+                listeMaxCos.add(listeCos[i])
+            }else if(jeu.plateau.getCases()[liste[i].getX()][liste[i].getY()].getPion()!!.getScore() > max){
+                listeMax = mutableListOf()
+                listeMax.add(liste[i])
+                listeMaxCos.add(listeCos[i])
+                max = jeu.plateau.getCases()[liste[i].getX()][liste[i].getY()].getPion()!!.getScore()
+            }
+        }
+        println(listeMax)
+        println(listeMaxCos)
+        var rand = Random.nextInt(0,listeMax.size)
+        jeu.setCoordDestinationDeplacement(listeMax[rand])
+        jeu.setCoordOrigineDeplacement(listeMaxCos[rand])
     }
 }
