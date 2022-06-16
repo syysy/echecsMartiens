@@ -25,7 +25,6 @@ class ControleurPlace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mous
             for(j in 0 until 4){
                 if (vue.grille.children[i*(vue.grille.columnCount)+j] is Circle){
                     try {
-                        jeu.plateau.getCases()[column][row].getPion()!!.getDeplacement(Deplacement(Coordonnee(column,row),Coordonnee(j,i)))
                         if(!jeu.deplacementPossible(column,row,j,i,jeu.plateau.getCases()[column][row].getJoueur())){
                             throw DeplacementException()
                         }

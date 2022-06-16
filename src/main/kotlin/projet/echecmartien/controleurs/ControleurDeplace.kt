@@ -257,6 +257,9 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             }
         }
         var rand = Random.nextInt(0,listeMax.size)
+
+        println("ListeMax : $listeMax")
+        println("Liste max Cos : $listeMax")
         jeu.setCoordDestinationDeplacement(listeMax[rand])
         jeu.setCoordOrigineDeplacement(listeMaxCos[rand])
     }
@@ -269,10 +272,15 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 for (k in 0 until 4){
                     if (jeu.plateau.getCases()[j][k].getPion() != null){
                         try {
-                            (jeu.plateau.getCases()[j][k].getPion()!!.getDeplacement(Deplacement(Coordonnee(j,k),liste[i])))
+                            if(!jeu.deplacementPossible(j,k,liste[i].getX(),liste[i].getY(),jeu.plateau.getCases()[liste[i].getX()][liste[i].getY()].getJoueur())){
+                                throw DeplacementException()
+                            }
                             if (liste[i] !in listePris){
                                 listePris.add(liste[i])
                                 listePrisCos.add(listeCos[i])
+                            }
+                            if (listeCos[i] == Coordonnee(1,5)){
+                                println("${jeu.plateau.getCases()[j][k].getPion()!!.getDeplacement(Deplacement(Coordonnee(j,k),liste[i]))}")
                             }
                         }catch (_: DeplacementException){
                         }
@@ -280,6 +288,8 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 }
             }
         }
+
+
         var listeDispo = mutableListOf<Coordonnee>()
         var listeDispoCos = mutableListOf<Coordonnee>()
         for (i in 0 until liste.size){
@@ -288,6 +298,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 listeDispoCos.add(listeCos[i])
             }
         }
+
         if (listeDispo.size != 0){
             var rand = Random.nextInt(0,listeDispo.size)
             jeu.setCoordDestinationDeplacement(listeDispo[rand])
@@ -332,8 +343,8 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 }
             }
         }
-        println(grandPionDanger)
-        println(grandPionDangerCos)
+        println("grand pion : $grandPionDanger")
+        println("grand Pion Cos : $grandPionDangerCos")
         return triDeplace(grandPionDanger,grandPionDangerCos)
 
     }
