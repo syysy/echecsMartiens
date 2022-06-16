@@ -24,6 +24,10 @@ class Jeu(var plateau: Plateau = Plateau()) : InterfaceJeu{
         return nombreCoupsSansPriseMax
     }
 
+
+    fun setNombreCoupSansPrise(nbCoup : Int){
+        nombreCoupsSansPrise = nbCoup
+    }
     /**
      * getter
      * @return la coordonnée origine du déplacement
