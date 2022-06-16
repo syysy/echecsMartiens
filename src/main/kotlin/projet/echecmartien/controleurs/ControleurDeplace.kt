@@ -288,7 +288,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         }else{
             var rand = Random.nextInt(0,liste.size)
             jeu.setCoordDestinationDeplacement(liste[rand])
-            jeu.setCoordOrigineDeplacement(liste[rand])
+            jeu.setCoordOrigineDeplacement(listeCos[rand])
         }
         println(listeDispo)
         println(listeDispoCos)
