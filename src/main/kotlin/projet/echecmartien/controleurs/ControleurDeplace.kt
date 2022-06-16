@@ -81,28 +81,27 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         vue.tourSansPrises.text = "Tours sans prises : ${jeu.getNombreCoupsSansPrise()}"
 
         //playerturn
-        if (Joueur(vue.joueur1.text) == jeu.getJoueurCourant()){
-            vue.joueur1.style = "-fx-font-weight : bold; -fx-text-fill : red;"
-            vue.joueur2.style = ""
-        }else{
-            vue.joueur2.style = "-fx-font-weight : bold; -fx-text-fill : red;"
-            vue.joueur1.style = ""
-        }
+        vue.changeJoueurStyl(jeu)
 
         if (jeu.arretPartie()){
-            if (jeu.joueurVainqueur()!!.nom == jeu.getJoueurCourant()!!.nom){
-                jeu.changeJoueurCourant()
-            }
             val dialog = Alert(Alert.AlertType.INFORMATION)
-            dialog.title="Fin de partie"
-            dialog.headerText="La partie est terminée"
-            if(jeu.joueurVainqueur() == Joueur("Natchouki")){
-                dialog.contentText = "GET NACHOUKED"
-            }else{
-                dialog.contentText = "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${jeu.joueurVainqueur()!!.calculerScore()} Point(s) \n " + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${jeu.getJoueurCourant()!!.calculerScore()} Point(s) "
-
+            dialog.title = "Fin de partie"
+            dialog.headerText = "La partie est terminée"
+            if (jeu.joueurVainqueur() != null) {
+                if (jeu.joueurVainqueur()!!.nom == jeu.getJoueurCourant()!!.nom) {
+                    jeu.changeJoueurCourant()
+                }
+                dialog.contentText = "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${
+                    jeu.joueurVainqueur()!!.calculerScore()
+                } Point(s) \n " + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${
+                    jeu.getJoueurCourant()!!.calculerScore()
+                } Point(s) "
+            } else {
+                dialog.contentText = "Egalité, chaque joueur avait ${jeu.getJoueurCourant()!!.calculerScore()}"
             }
             dialog.showAndWait()
+            vue.grille.isDisable = true
+            vue.endGame.isVisible = true
         }
 
 
@@ -125,6 +124,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                                     if(!jeu.deplacementPossible(column,row,j,i,jeu.plateau.getCases()[column][row].getJoueur())){
                                         throw DeplacementException()
                                     }
+                                    vue.fixeListenerCase((vue.grille.children[j*(vue.grille.rowCount)+i] as Circle),ControleurDeplace(vue,jeu))
                                     if (jeu.plateau.getCases()[j][i].getPion() == null){
                                         listeDeplace.add(Coordonnee(j,i))
                                         listeDeplaceCos.add(Coordonnee(column,row))
@@ -148,7 +148,6 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                     triDeplace(listeDeplace,listeDeplaceCos)
                 }
             }
-
 
             originCords = jeu.getCoordOrigineDeplacement()!!
             originColumn = originCords.getX()
@@ -215,13 +214,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             vue.tourSansPrises.text = "Tours sans prises : ${jeu.getNombreCoupsSansPrise()}"
 
             //playerturn
-            if (Joueur(vue.joueur1.text) == jeu.getJoueurCourant()){
-                vue.joueur1.style = "-fx-font-weight : bold;"
-                vue.joueur2.style = ""
-            }else{
-                vue.joueur2.style = "-fx-font-weight : bold;"
-                vue.joueur1.style = ""
-            }
+            vue.changeJoueurStyl(jeu)
 
             if (jeu.arretPartie()){
                 if (jeu.joueurVainqueur()!!.nom == jeu.getJoueurCourant()!!.nom){
@@ -263,7 +256,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         jeu.setCoordOrigineDeplacement(listeMaxCos[rand])
     }
 
-    fun triDeplace(liste: MutableList<Coordonnee>,listeCos : MutableList<Coordonnee>) : Boolean{
+    fun triDeplace(liste: MutableList<Coordonnee>,listeCos : MutableList<Coordonnee>){
         var listePris = mutableListOf<Coordonnee>()
         var listePrisCos = mutableListOf<Coordonnee>()
         for (i in 0 until liste.size){

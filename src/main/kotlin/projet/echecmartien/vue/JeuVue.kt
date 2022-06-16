@@ -16,7 +16,6 @@ import javafx.scene.shape.Circle
 import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
-import projet.echecmartien.controleurs.ControleurDeplace
 import projet.echecmartien.controleurs.ControleurPlace
 import projet.echecmartien.modele.*
 
@@ -40,7 +39,7 @@ class JeuVue(
     val compteTour :Label= Label("Tour 1"),
     var nbTour : Int = 1,
     val tourSansPrises :Label= Label("Tours sans prises : 0"),
-    var IActive : Boolean? = false
+    var IActive : Boolean? = false,
     ) : BorderPane() {
 
     val grille :GridPane= GridPane()
@@ -59,7 +58,7 @@ class JeuVue(
     val info2 :HBox= HBox()
     var savePseudo1 : String
     var savePseudo2 : String
-
+    var endGame : Label = Label("Partie finie, veuillez cliquer sur Reset ")
 
     init{
 
@@ -94,13 +93,15 @@ class JeuVue(
         points2box.children.addAll(pts2,point2)
         savePseudo1 = joueur1.text
         info1.children.addAll(joueur1,point1)
-        info1.spacing = 160.0
+        info1.spacing = 250.0
         info1.padding = Insets(10.0)
         savePseudo2 = joueur2.text
         info2.children.addAll(joueur2,point2)
-        info2.spacing = 160.0
+        info2.spacing = 250.0
         info2.padding = Insets(10.0)
-        centre.children.addAll(info1,grille,info2)
+        endGame.style = " -fx-font-size : 15 ;-fx-font-weight :bold; -fx-text-fill: red"
+        endGame.isVisible = false
+        centre.children.addAll(info1,grille,info2,endGame)
         centre.alignment = Pos.CENTER
         centre.padding = Insets(0.0,30.0,30.0,30.0)
         this.center = centre
@@ -170,13 +171,10 @@ class JeuVue(
         this.padding = Insets(10.0)
 
         grille.background = Background(BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))
-        this.style = ("-fx-background-color: #383344;; -fx-background-repeat: no-repeat; -fx-background-size: 500 800; -fx-background-position: center center;")
 
-        /*this.background = Background(BackgroundImage(
-            Image("https://ak.picdn.net/shutterstock/videos/1015364758/thumb/11.jpg?ip=x480"), BackgroundRepeat.NO_REPEAT,
-        BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-        BackgroundSize.DEFAULT))*/
+
         // Compte des pions sur les côtés
+
         val leftgrid = GridPane()
         val vboxLeft1 = VBox()
         val petit = Circle()
@@ -227,6 +225,7 @@ class JeuVue(
         this.right = rightgrid
 
         IActive = (joueur1.text == "BOT")
+
     }
 
 
@@ -244,7 +243,6 @@ class JeuVue(
         pion.radius = 20.0
         pion.fill = Color.WHITE
         pion.removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(this,jeu))
-        pion.removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurDeplace(this,jeu))
     }
 
     fun setAsGrandPion(pion : Circle,jeu :Jeu){
@@ -265,14 +263,11 @@ class JeuVue(
         this.fixeListenerCase(pion,ControleurPlace(this,jeu))
     }
 
-    fun update(jeu : Jeu){
+    fun update( jeu : Jeu){
         for (i in 0 until 8){
             for (j in 0 until 4){
                 if (jeu.plateau.getCases()[j][i].getPion() == null){
                     setAsNull(this.grille.children[j*(this.grille.rowCount)+i] as Circle,jeu)
-                    println("$i,$j")
-                    (this.grille.children[j*(this.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(this,jeu))
-                    (this.grille.children[j*(this.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurDeplace(this,jeu))
                 }else{
                     if (jeu.plateau.getCases()[j][i].getJoueur() == jeu.getJoueurCourant()){
                         this.fixeListenerCase(this.grille.children[j*(this.grille.rowCount)+i] as Circle,ControleurPlace(this,jeu))
@@ -287,9 +282,9 @@ class JeuVue(
                         setAsPetitPion(this.grille.children[j*(this.grille.rowCount)+i] as Circle,jeu)
                     }
                 }
+
             }
         }
-
     }
     fun chargement(jeu : Jeu,jCourant : String, plateau: Plateau, listPion1 : MutableSet<Pion>, listPion2 : MutableSet<Pion> , IActive: Boolean){
         jeu.getJoueur()[0] = Joueur(joueur1.text)
@@ -303,6 +298,24 @@ class JeuVue(
         jeu.getJoueur()[1].pionCapture = listPion2
         this.IActive = IActive
 
+    }
+
+    fun addStyle(){
+        this.styleClass.add("jeu2")
+        boutonSave.styleClass.add("bouton")
+        boutonReset.styleClass.add("bouton")
+        boutonRegles.styleClass.add("bouton")
+        boutonCharge.styleClass.add("bouton")
+    }
+
+    fun changeJoueurStyl(jeu : Jeu){
+        if (Joueur(this.joueur1.text) == jeu.getJoueurCourant()){
+            this.joueur1.style = "-fx-font-weight : bold; -fx-text-fill : red;"
+            this.joueur2.style = ""
+        }else{
+            this.joueur2.style = "-fx-font-weight : bold; -fx-text-fill : red;"
+            this.joueur1.style = ""
+        }
     }
 }
 

@@ -4,6 +4,7 @@ import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.scene.Scene
 import javafx.stage.Stage
+import projet.echecmartien.AppliJeuEchecMartien
 import projet.echecmartien.modele.Jeu
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
@@ -33,9 +34,12 @@ class ControleurRetourRulesJeu (vue: JeuVue, modele:Jeu, primaryStage: Stage): E
         new.nbPetit2.text = vue.nbPetit2.text
         new.nbMoyen2.text = vue.nbMoyen2.text
         new.nbGrand2.text = vue.nbGrand2.text
+        new.changeJoueurStyl(jeu)
         new.update(jeu)
         primaryStage.scene = Scene(new,600.0,800.0)
         primaryStage.centerOnScreen()
+        primaryStage.scene.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("/projet/echecmartien/style.css").toExternalForm())
+        new.addStyle()
         new.fixeListenerBouton(new.boutonReset,ControleurReset(MainVue(),jeu,primaryStage))
         new.fixeListenerBouton(new.boutonRegles,ControleurRulesJeu(new,jeu,primaryStage))
     }

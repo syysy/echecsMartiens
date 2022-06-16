@@ -6,6 +6,7 @@ import javafx.scene.input.MouseEvent
 import javafx.scene.layout.GridPane
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
+import javafx.stage.Stage
 import projet.echecmartien.exceptions.DeplacementException
 import projet.echecmartien.modele.Coordonnee
 import projet.echecmartien.modele.Deplacement
@@ -14,6 +15,7 @@ import projet.echecmartien.vue.JeuVue
 
 class ControleurPlace(private val vue: JeuVue, modele : Jeu) : EventHandler<MouseEvent>{
     val jeu = modele
+
     override fun handle(event: MouseEvent) {
         vue.update(jeu)
         val row = GridPane.getRowIndex(event.source as Node)
