@@ -93,46 +93,7 @@ class MainVue: BorderPane() {
         val vboxRight = VBox()
         vboxRight.padding = Insets(0.0,0.0,0.0,40.0)
         this.right = vboxRight
-        /*val input = FileInputStream("./sauvegarde/pngtree-flat-space-rocket-background-image_149296.png")
-        val img = Image(input)
-        val backgroundImage = BackgroundImage(img,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,
-            BackgroundPosition.CENTER, BackgroundSize.DEFAULT)
-        val bckgrnd = Background(backgroundImage)
-        this.background = bckgrnd*/
-        // -fx-background-image: url('sauvegarde/pngtree-flat-space-rocket-background-image_149296.png')
-        this.style = ("-fx-background-color: #383344; -fx-background-repeat: no-repeat; -fx-background-size: 500 600; -fx-background-position: center center;")
-        loadButton.style = "-fx-background-color: #222740; \n" +
-                "    -fx-font-family: \"Arial\";\n" +
-                "    -fx-text-fill: white;\n" +
-                "    -fx-font-size: 12px;\n" +
-                "    -fx-padding: 10 20 10 20;"
-        botButton.style = "-fx-background-color: #222740;\n" +
-                "    -fx-background-radius: 5,4,3,5;\n" +
-                "    -fx-background-insets: 0,1,2,0;\n" +
-                "    -fx-text-fill: white;\n" +
-                "    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );\n" +
-                "    -fx-font-family: \"Arial\";\n" +
-                "    -fx-text-fill: linear-gradient(white, #d0d0d0);\n" +
-                "    -fx-font-size: 12px;\n" +
-                "    -fx-padding: 10 20 10 20;"
-        rulesButton.style = "-fx-background-color: #222740;\n" +
-                "    -fx-background-radius: 5,4,3,5;\n" +
-                "    -fx-background-insets: 0,1,2,0;\n" +
-                "    -fx-text-fill: white;\n" +
-                "    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );\n" +
-                "    -fx-font-family: \"Arial\";\n" +
-                "    -fx-text-fill: linear-gradient(white, #d0d0d0);\n" +
-                "    -fx-font-size: 12px;\n" +
-                "    -fx-padding: 10 20 10 20;"
-        playButton.style =  "-fx-background-color: #201d27;\n" +
-                "    -fx-background-radius: 5,4,3,5;\n" +
-                "    -fx-background-insets: 0,1,2,0;\n" +
-                "    -fx-text-fill: white;\n" +
-                "    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );\n" +
-                "    -fx-font-family: \"Arial\";\n" +
-                "    -fx-text-fill: linear-gradient(white, #d0d0d0);\n" +
-                "    -fx-font-size: 18px;\n" +
-                "    -fx-padding: 10 20 10 20;"
+
     }
 
     fun fixeListenerBouton(bouton: Button, action: EventHandler<ActionEvent>) {
@@ -140,6 +101,13 @@ class MainVue: BorderPane() {
     }
 
 
+    fun addStyle(){
+        this.styleClass.add("jeu")
+        loadButton.styleClass.add("bouton")
+        botButton.styleClass.add("bouton")
+        rulesButton.styleClass.add("bouton")
+        playButton.styleClass.add("boutonPlay")
+    }
 
 
 }

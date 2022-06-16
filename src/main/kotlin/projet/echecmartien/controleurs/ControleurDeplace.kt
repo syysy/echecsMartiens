@@ -81,13 +81,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         vue.tourSansPrises.text = "Tours sans prises : ${jeu.getNombreCoupsSansPrise()}"
 
         //playerturn
-        if (Joueur(vue.joueur1.text) == jeu.getJoueurCourant()){
-            vue.joueur2.style = "-fx-font-weight : bold; -fx-text-fill : red;"
-            vue.joueur2.style = ""
-        }else{
-            vue.joueur2.style = "-fx-font-weight : bold; -fx-text-fill : red;"
-            vue.joueur1.style = ""
-        }
+        vue.changeJoueurStyl(jeu)
 
         if (jeu.arretPartie()){
             if (jeu.joueurVainqueur()!!.nom == jeu.getJoueurCourant()!!.nom){
@@ -211,13 +205,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             vue.tourSansPrises.text = "Tours sans prises : ${jeu.getNombreCoupsSansPrise()}"
 
             //playerturn
-            if (Joueur(vue.joueur1.text) == jeu.getJoueurCourant()){
-                vue.joueur1.style = "-fx-font-weight : bold;"
-                vue.joueur2.style = ""
-            }else{
-                vue.joueur2.style = "-fx-font-weight : bold;"
-                vue.joueur1.style = ""
-            }
+            vue.changeJoueurStyl(jeu)
 
             if (jeu.arretPartie()){
                 if (jeu.joueurVainqueur()!!.nom == jeu.getJoueurCourant()!!.nom){

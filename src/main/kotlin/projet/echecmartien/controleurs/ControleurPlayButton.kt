@@ -7,6 +7,7 @@ import javafx.scene.Scene
 import javafx.scene.layout.GridPane
 import javafx.scene.shape.Circle
 import javafx.stage.Stage
+import projet.echecmartien.AppliJeuEchecMartien
 import projet.echecmartien.modele.*
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
@@ -39,13 +40,7 @@ class ControleurPlayButton(oldVue: MainVue,modele : Jeu,primaryStage: Stage): Ev
         var column : Int
         jeu.initialiserPartie(Joueur(newVue.joueur1.text), Joueur(newVue.joueur2.text),jeu.getNombreCoupsMax())
         //playerturn
-        if (Joueur(newVue.joueur1.text) == jeu.getJoueurCourant()){
-            newVue.joueur1.style = "-fx-font-weight : bold; -fx-text-fill : red;"
-            newVue.joueur2.style = ""
-        }else{
-            newVue.joueur2.style = "-fx-font-weight : bold; -fx-text-fill : red;"
-            newVue.joueur1.style = ""
-        }
+        newVue.changeJoueurStyl(jeu)
         for (i in newVue.grille.children){
             if (i !is Group){
                 row = GridPane.getColumnIndex(i)
@@ -64,6 +59,8 @@ class ControleurPlayButton(oldVue: MainVue,modele : Jeu,primaryStage: Stage): Ev
                 }
             }
         }
+        scene.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("/projet/echecmartien/style.css").toExternalForm())
+        newVue.addStyle()
         newVue.fixeListenerBouton(newVue.boutonReset,ControleurReset(MainVue(),jeu,primaryStage))
         newVue.fixeListenerBouton(newVue.boutonRegles,ControleurRulesJeu(newVue,jeu,primaryStage))
         newVue.fixeListenerBouton(newVue.boutonSave,ControleurChargerSave(MainVue(),jeu,primaryStage))
