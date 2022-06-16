@@ -19,7 +19,7 @@ class ControleurBot(vue: MainVue,modele: Jeu, primaryStage: Stage): EventHandler
 
     override fun handle(p0: ActionEvent?) {
         vue.savePseudo2 = vue.textFieldPseudo2.text
-        vue.textFieldPseudo2.text = "BOT"
+        vue.textFieldPseudo2.text = "ZebuBot"
         vue.textFieldPseudo2.style = "-fx-background-color:lightgray"
         vue.textFieldPseudo2.isEditable = false
         vue.botButton.text = "Retour"
