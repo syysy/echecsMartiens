@@ -39,8 +39,7 @@ class ControleurPlace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mous
                     }catch (e : DeplacementException){
                         if (jeu.plateau.getCases()[j][i].getPion() == null){
                             (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).fill = Color.WHITE
-                            (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(vue,jeu))
-                            (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurDeplace(vue,jeu))
+
                         }
                         else{
                             vue.fixeListenerCase((vue.grille.children[j*(vue.grille.rowCount)+i] as Circle),ControleurPlace(vue,jeu))

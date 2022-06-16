@@ -17,6 +17,7 @@ import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
 import projet.echecmartien.controleurs.ControleurPlace
+import projet.echecmartien.controleurs.ControleurVide
 import projet.echecmartien.modele.*
 
 
@@ -242,7 +243,7 @@ class JeuVue(
     fun setAsNull(pion : Circle, jeu : Jeu){
         pion.radius = 20.0
         pion.fill = Color.WHITE
-        pion.removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(this,jeu))
+        this.fixeListenerCase(pion,ControleurVide())
     }
 
     fun setAsGrandPion(pion : Circle,jeu :Jeu){
@@ -278,6 +279,8 @@ class JeuVue(
                         setAsMoyenPion(this.grille.children[j*(this.grille.rowCount)+i] as Circle,jeu)
                     }else if (jeu.plateau.getCases()[j][i].getPion() is GrandPion){
                         setAsGrandPion(this.grille.children[j*(this.grille.rowCount)+i] as Circle,jeu)
+                        this.fixeListenerCase(this.grille.children[j*(this.grille.rowCount)+i] as Circle,ControleurPlace(this,jeu))
+                        (this.grille.children[j*(this.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(this,jeu))
                     }else{
                         setAsPetitPion(this.grille.children[j*(this.grille.rowCount)+i] as Circle,jeu)
                     }
