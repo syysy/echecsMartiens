@@ -39,7 +39,8 @@ class JeuVue(
     val compteTour :Label= Label("Tour 1"),
     var nbTour : Int = 1,
     val tourSansPrises :Label= Label("Tours sans prises : 0"),
-    var IActive : Boolean? = false ) : BorderPane() {
+    var IActive : Boolean? = false,
+    ) : BorderPane() {
 
     val grille :GridPane= GridPane()
 
@@ -57,7 +58,7 @@ class JeuVue(
     val info2 :HBox= HBox()
     var savePseudo1 : String
     var savePseudo2 : String
-
+    var endGame : Label = Label("Partie finie, veuillez cliquer sur Reset ")
 
     init{
 
@@ -98,7 +99,9 @@ class JeuVue(
         info2.children.addAll(joueur2,point2)
         info2.spacing = 250.0
         info2.padding = Insets(10.0)
-        centre.children.addAll(info1,grille,info2)
+        endGame.style = " -fx-font-size : 15 ;-fx-font-weight :bold; -fx-text-fill: red"
+        endGame.isVisible = false
+        centre.children.addAll(info1,grille,info2,endGame)
         centre.alignment = Pos.CENTER
         centre.padding = Insets(0.0,30.0,30.0,30.0)
         this.center = centre

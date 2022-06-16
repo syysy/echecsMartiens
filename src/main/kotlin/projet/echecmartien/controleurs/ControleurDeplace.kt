@@ -2,6 +2,7 @@ package projet.echecmartien.controleurs
 
 import javafx.event.EventHandler
 import javafx.scene.Node
+import javafx.scene.Scene
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
 import javafx.scene.input.MouseEvent
@@ -9,6 +10,8 @@ import javafx.scene.layout.CornerRadii
 import javafx.scene.layout.GridPane
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
+import javafx.stage.Stage
+import projet.echecmartien.AppliJeuEchecMartien
 import projet.echecmartien.exceptions.DeplacementException
 import projet.echecmartien.modele.*
 import projet.echecmartien.vue.JeuVue
@@ -83,16 +86,29 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         //playerturn
         vue.changeJoueurStyl(jeu)
 
+        // Conditions d'arrets
         if (jeu.arretPartie()){
-            if (jeu.joueurVainqueur()!!.nom == jeu.getJoueurCourant()!!.nom){
-                jeu.changeJoueurCourant()
-            }
-            val dialog = Alert(Alert.AlertType.INFORMATION)
-            dialog.title="Fin de partie"
-            dialog.headerText="La partie est terminée"
-            dialog.contentText = "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${jeu.joueurVainqueur()!!.calculerScore()} Point(s) \n " + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${jeu.getJoueurCourant()!!.calculerScore()} Point(s) "
-            dialog.showAndWait()
+                val dialog = Alert(Alert.AlertType.INFORMATION)
+                dialog.title = "Fin de partie"
+                dialog.headerText = "La partie est terminée"
+                if (jeu.joueurVainqueur() != null) {
+                    if (jeu.joueurVainqueur()!!.nom == jeu.getJoueurCourant()!!.nom) {
+                        jeu.changeJoueurCourant()
+                    }
+                    dialog.contentText = "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${
+                        jeu.joueurVainqueur()!!.calculerScore()
+                    } Point(s) \n " + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${
+                        jeu.getJoueurCourant()!!.calculerScore()
+                    } Point(s) "
+                } else {
+                    dialog.contentText = "Egalité, chaque joueur avait ${jeu.getJoueurCourant()!!.calculerScore()}"
+                }
+                dialog.showAndWait()
+                vue.grille.isDisable = true
+                vue.endGame.isVisible = true
         }
+
+
 
 
 
