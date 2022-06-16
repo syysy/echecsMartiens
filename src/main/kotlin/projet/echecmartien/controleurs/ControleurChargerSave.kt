@@ -561,16 +561,14 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             jeu.getJoueur()[0].pionCapture = listPion1
             jeu.getJoueur()[1].pionCapture = listPion2
             jeu.plateau = matricePlateau
-            println(pionArriveDeBoolean)
             if (pionArriveDeBoolean){
                 println(matricePlateau)
                 println(pionArriveDeString[1])
                 println(pionArriveDeString[3])
                 pionArriveDeZone = jeu.plateau.getCases()[Integer.parseInt(pionArriveDeString[1].toString())][Integer.parseInt(pionArriveDeString[3].toString())].getPion()
             }
-            println(pionArriveDeZone)
             jeu.pionArriveDeZone = pionArriveDeZone
-            println(jeu.pionArriveDeZone)
+            jeu.setNombreCoupSansPrise(nbTourSansPrise!!)
 
             val newVue = JeuVue(Label(joueur1name),Label(joueur2name),Label(" $joueur2points points"),Label(" $joueur1points points"),
             Label(nbPetit.toString()),Label(nbMoyen.toString()),Label(nbGrand.toString()),
