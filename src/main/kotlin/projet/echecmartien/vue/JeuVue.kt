@@ -281,6 +281,7 @@ class JeuVue(
                         setAsPetitPion(this.grille.children[j*(this.grille.rowCount)+i] as Circle,jeu)
                     }
                 }
+
             }
         }
     }

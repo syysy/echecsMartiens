@@ -73,21 +73,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         }
         jeu.changeJoueurCourant()
 
-        //update
-        for (i in 0 until 8){
-            for (j in 0 until 4){
-                if (jeu.plateau.getCases()[j][i].getPion() == null){
-                    vue.setAsNull(vue.grille.children[j*(vue.grille.rowCount)+i] as Circle,jeu)
-                }else{
-                    if (jeu.plateau.getCases()[j][i].getJoueur() == jeu.getJoueurCourant()){
-                        vue.fixeListenerCase(vue.grille.children[j*(vue.grille.rowCount)+i] as Circle,ControleurPlace(vue,jeu))
-                    }else{
-                        (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(vue,jeu))
-                    }
-
-                }
-            }
-        }
+        vue.update(jeu)
 
         vue.nbTour += 1
         vue.compteTour.text = "Tour ${vue.nbTour}"
@@ -222,20 +208,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             }
             jeu.changeJoueurCourant()
 
-            //update
-            for (i in 0 until 8){
-                for (j in 0 until 4){
-                    if (jeu.plateau.getCases()[j][i].getPion() == null){
-                        vue.setAsNull(vue.grille.children[j*(vue.grille.rowCount)+i] as Circle,jeu)
-                    }else{
-                        if (jeu.plateau.getCases()[j][i].getJoueur() == jeu.getJoueurCourant()){
-                            vue.fixeListenerCase(vue.grille.children[j*(vue.grille.rowCount)+i] as Circle,ControleurPlace(vue,jeu))
-                        }else{
-                            (vue.grille.children[j*(vue.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(vue,jeu))
-                        }
-                    }
-                }
-            }
+            vue.update(jeu)
 
             vue.nbTour += 1
             vue.compteTour.text = "Tour ${vue.nbTour}"
