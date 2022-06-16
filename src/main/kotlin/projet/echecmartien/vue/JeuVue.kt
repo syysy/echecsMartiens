@@ -92,11 +92,11 @@ class JeuVue(
         points2box.children.addAll(pts2,point2)
         savePseudo1 = joueur1.text
         info1.children.addAll(joueur1,point1)
-        info1.spacing = 160.0
+        info1.spacing = 250.0
         info1.padding = Insets(10.0)
         savePseudo2 = joueur2.text
         info2.children.addAll(joueur2,point2)
-        info2.spacing = 160.0
+        info2.spacing = 250.0
         info2.padding = Insets(10.0)
         centre.children.addAll(info1,grille,info2)
         centre.alignment = Pos.CENTER
@@ -168,13 +168,10 @@ class JeuVue(
         this.padding = Insets(10.0)
 
         grille.background = Background(BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))
-        this.style = ("-fx-background-color: #383344;; -fx-background-repeat: no-repeat; -fx-background-size: 500 800; -fx-background-position: center center;")
 
-        /*this.background = Background(BackgroundImage(
-            Image("https://ak.picdn.net/shutterstock/videos/1015364758/thumb/11.jpg?ip=x480"), BackgroundRepeat.NO_REPEAT,
-        BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-        BackgroundSize.DEFAULT))*/
+
         // Compte des pions sur les côtés
+
         val leftgrid = GridPane()
         val vboxLeft1 = VBox()
         val petit = Circle()
@@ -225,6 +222,7 @@ class JeuVue(
         this.right = rightgrid
 
         IActive = (joueur1.text == "BOT")
+
     }
 
 
@@ -297,6 +295,24 @@ class JeuVue(
         jeu.getJoueur()[1].pionCapture = listPion2
         this.IActive = IActive
 
+    }
+
+    fun addStyle(){
+        this.styleClass.add("jeu2")
+        boutonSave.styleClass.add("bouton")
+        boutonReset.styleClass.add("bouton")
+        boutonRegles.styleClass.add("bouton")
+        boutonCharge.styleClass.add("bouton")
+    }
+
+    fun changeJoueurStyl(jeu : Jeu){
+        if (Joueur(this.joueur1.text) == jeu.getJoueurCourant()){
+            this.joueur1.style = "-fx-font-weight : bold; -fx-text-fill : red;"
+            this.joueur2.style = ""
+        }else{
+            this.joueur2.style = "-fx-font-weight : bold; -fx-text-fill : red;"
+            this.joueur1.style = ""
+        }
     }
 }
 
