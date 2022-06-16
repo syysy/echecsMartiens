@@ -37,11 +37,6 @@
 
 .dialog{
     -fx-background-color: #383344;
-}
-.dialog:header *.header-panel *.label{
-    -fx-background-color: #383344;
-}
-.dialog:header *.header-panel *.label{
     -fx-font-family: Arial;
     -fx-text-fill: white;
     -fx-font-size: 18px;

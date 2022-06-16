@@ -15,9 +15,9 @@ import projet.echecmartien.vue.MainVue
 class ControleurPlayButton(oldVue: MainVue,modele : Jeu,primaryStage: Stage): EventHandler<ActionEvent> {
 
     val primaryStage : Stage
-    val oldVue : MainVue
+    private val oldVue : MainVue
     val jeu : Jeu
-    val newVue : JeuVue
+    private val newVue : JeuVue
 
     init {
         this.primaryStage = primaryStage
@@ -34,7 +34,7 @@ class ControleurPlayButton(oldVue: MainVue,modele : Jeu,primaryStage: Stage): Ev
         primaryStage.centerOnScreen()
         newVue.joueur1.text = oldVue.textFieldPseudo1.text
         newVue.joueur2.text = oldVue.textFieldPseudo2.text
-        newVue.IActive = oldVue.IActive
+        newVue.IActive = oldVue.iActive
         //initialisation du jeu
         var row : Int
         var column : Int

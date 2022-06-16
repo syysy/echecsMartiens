@@ -8,9 +8,7 @@ import javafx.scene.control.ButtonType
 import javafx.stage.Stage
 import projet.echecmartien.AppliJeuEchecMartien
 import projet.echecmartien.modele.Jeu
-import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
-import projet.echecmartien.vue.RulesVue
 
 class ControleurReset(vue: MainVue, modele : Jeu, primaryStage: Stage): EventHandler<ActionEvent> {
     val vue : MainVue

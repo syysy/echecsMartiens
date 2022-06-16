@@ -1,7 +1,6 @@
 package projet.echecmartien.controleurs
 
 import com.google.gson.Gson
-import java.io.FileReader
 import java.io.FileWriter
 
 open class Message (titre : String,
@@ -9,13 +8,13 @@ open class Message (titre : String,
                     ptsj1 : String, ptsj2 : String,
                     nbtour : String, jCourant : String) {
 
-    var titre : String
+    private var titre : String
     var joueur1: String
     var joueur2: String
-    var ptsj1 : String
-    var ptsj2 : String
-    var nbtour : String
-    var jCourant : String
+    private var ptsj1 : String
+    private var ptsj2 : String
+    private var nbtour : String
+    private var jCourant : String
 
     init {
         this.titre = titre
@@ -29,7 +28,7 @@ open class Message (titre : String,
 
     @Override
     override fun toString(): String {
-        return titre + " " + joueur1 + " " + ptsj1 + " " + joueur2 + " " + ptsj2 + " " + nbtour + " " + jCourant + " "
+        return "$titre $joueur1 $ptsj1 $joueur2 $ptsj2 $nbtour $jCourant "
     }
 
     fun serialiser(nomFichier: String) {
@@ -39,10 +38,4 @@ open class Message (titre : String,
         writer.close()
     }
 
-    fun deserialiserMessage(nomFichier: String): Message? {
-        val reader = FileReader(nomFichier)
-        val message = Gson().fromJson(reader, Message::class.java)
-        reader.close()
-        return message
-    }
 }

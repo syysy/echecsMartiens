@@ -37,7 +37,7 @@ open class ControleurSave(vue: JeuVue, modele : Jeu ,primaryStage: Stage): Event
          * les noms des joueurs, leurs points, le tour, le joueur courant, le plateau, les pions capturés par les joueurs
          * et le nombre de coups sans prises.
          * */
-        var titre = ""
+        val titre: String
         if (result.isPresent){
             titre = result.get()
             val message = Message(titre, "|"+vue.joueur1.text + "|", "|"+vue.joueur2.text + "|",
@@ -66,7 +66,7 @@ open class ControleurSave(vue: JeuVue, modele : Jeu ,primaryStage: Stage): Event
         return res
     }
 
-    fun arriveDeZone(): Coordonnee?{
+    private fun arriveDeZone(): Coordonnee?{
         for (i in 0 until 4){
             for (j in 0 until 8){
                 if (jeu.plateau.getCases()[i][j].getPion() === jeu.pionArriveDeZone && jeu.pionArriveDeZone is Pion){

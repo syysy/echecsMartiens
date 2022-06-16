@@ -7,7 +7,6 @@ import javafx.stage.Stage
 import projet.echecmartien.AppliJeuEchecMartien
 import projet.echecmartien.modele.Jeu
 import projet.echecmartien.vue.JeuVue
-import projet.echecmartien.vue.MainVue
 import projet.echecmartien.vue.RulesVue
 
 class ControleurRulesJeu(vue: JeuVue, modele : Jeu, primaryStage: Stage): EventHandler<ActionEvent> {

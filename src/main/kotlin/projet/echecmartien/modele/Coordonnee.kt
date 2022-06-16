@@ -1,8 +1,6 @@
 package projet.echecmartien.modele
 
-class Coordonnee(x : Int, y : Int) {
-    private var x = x
-    private var y = y
+class Coordonnee(private var x: Int, private var y: Int) {
 
 
     /**

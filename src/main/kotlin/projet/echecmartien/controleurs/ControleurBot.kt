@@ -23,7 +23,7 @@ class ControleurBot(vue: MainVue,modele: Jeu, primaryStage: Stage): EventHandler
         vue.textFieldPseudo2.style = "-fx-background-color:lightgray"
         vue.textFieldPseudo2.isEditable = false
         vue.botButton.text = "Retour"
-        vue.IActive = true
+        vue.iActive = true
         vue.fixeListenerBouton(vue.botButton,ControleurRetour(vue,jeu,primaryStage))
     }
 }

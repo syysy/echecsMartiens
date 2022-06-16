@@ -6,13 +6,11 @@ import projet.echecmartien.librairie.GeneralData
 class Plateau {
 
     private var cases : Array<Array<Case>>
-    private val tailleHorizontale : Int
-    private val tailleVerticale : Int
+    private val tailleHorizontale : Int = 4
+    private val tailleVerticale : Int = 8
 
     init {
-        this.tailleVerticale = 8
-        this.tailleHorizontale = 4
-        var caseFant : MutableList<Array<Case>> = mutableListOf()
+        val caseFant : MutableList<Array<Case>> = mutableListOf()
         var fantoche : MutableList<Case>
         for (i in 0 until tailleHorizontale){
             fantoche = mutableListOf()
@@ -29,7 +27,7 @@ class Plateau {
      */
 
     fun initialiser() {
-        var tab = GeneralData().tableau
+        val tab = GeneralData().tableau
         for(i in 0 until tailleHorizontale){
             for ( j in 0 until tailleVerticale){
                 if (tab[i][j].valeur == "M"){
@@ -76,10 +74,10 @@ class Plateau {
     override fun toString(): String {
         var printing = "┏"
         for (j in 0 until tailleHorizontale){
-            if (j == tailleHorizontale-1){
-                printing += "━┓\n"
+            printing += if (j == tailleHorizontale-1){
+                "━┓\n"
             }else{
-                printing += "━┳"
+                "━┳"
             }
         }
         for (i in 0 until tailleVerticale){
