@@ -2,12 +2,14 @@ package projet.echecmartien
 
 import javafx.application.Application
 import javafx.scene.Scene
+import javafx.scene.image.Image
 
 import javafx.stage.Stage
 import projet.echecmartien.controleurs.*
 import projet.echecmartien.modele.Jeu
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
+import java.io.FileInputStream
 
 class AppliJeuEchecMartien: Application() {
     override fun start(primaryStage: Stage) {
@@ -21,8 +23,11 @@ class AppliJeuEchecMartien: Application() {
         vue.fixeListenerBouton(vue.loadButton,ControleurChargerSave(vue,modele,primaryStage))
         val scene = Scene(vue,400.0,600.0)
         scene.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("/projet/echecmartien/style.css").toExternalForm())
+        val test = FileInputStream("src/main/resources/projet/echecmartien/logo.png")
+        val zebu = Image(test)
+        primaryStage.icons.add(zebu)
         vue.addStyle()
-        primaryStage.title="ECHECS MARTIENS"
+        primaryStage.title="ECHECS MARTIENS by ZebuShield"
         primaryStage.scene=scene
         primaryStage.show()
     }

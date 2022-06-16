@@ -1,3 +1,4 @@
+
 .jeu{
     -fx-background-image: url("mainphoto.png");
     -fx-background-repeat: no-repeat;
@@ -36,8 +37,38 @@
 }
 
 .dialog{
-    -fx-background-color: #383344;
-    -fx-font-family: Arial;
+    -fx-background-image: url("regles2.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 400 600;
+    -fx-background-position: center center;
+}
+
+.dialog > *.label.content{
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
     -fx-text-fill: white;
-    -fx-font-size: 18px;
+}
+
+.dialog2{
+    -fx-background-image: url("regles2.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 600 800;
+    -fx-background-position: center center;
+}
+.dialog2 .label.content{
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.dialog3{
+    -fx-background-image: url("regles2.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 600 800;
+    -fx-background-position: center center;
+}
+.dialog3 .label{
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
 }

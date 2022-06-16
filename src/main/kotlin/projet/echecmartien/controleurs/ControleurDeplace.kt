@@ -86,19 +86,22 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         if (jeu.arretPartie()){
             val dialog = Alert(Alert.AlertType.INFORMATION)
             dialog.title = "Fin de partie"
-            dialog.headerText = "La partie est terminée"
+            dialog.headerText = null
+            dialog.graphic = null
             if (jeu.joueurVainqueur() != null) {
                 if (jeu.joueurVainqueur()!!.nom == jeu.getJoueurCourant()!!.nom) {
                     jeu.changeJoueurCourant()
                 }
-                dialog.contentText = "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${
+                dialog.contentText = "FIN DE PARTIE \n" + "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${
                     jeu.joueurVainqueur()!!.calculerScore()
-                } Point(s) \n " + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${
+                } Point(s) \n" + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${
                     jeu.getJoueurCourant()!!.calculerScore()
                 } Point(s) "
             } else {
-                dialog.contentText = "Egalité, chaque joueur avait ${jeu.getJoueurCourant()!!.calculerScore()}"
+                dialog.contentText = "FIN DE PARTIE \n" + "Egalité, chaque joueurs avaient ${jeu.getJoueurCourant()!!.calculerScore()} Points"
             }
+            dialog.dialogPane.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("/projet/echecmartien/style.css").toExternalForm())
+            dialog.dialogPane.styleClass.add("dialog")
             dialog.showAndWait()
             vue.grille.isDisable = true
             vue.endGame.isVisible = true
@@ -223,21 +226,21 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             if (jeu.arretPartie()){
                 val dialog = Alert(Alert.AlertType.INFORMATION)
                 dialog.title = "Fin de partie"
-                dialog.headerText = "La partie est terminée"
+                dialog.headerText = null
+                dialog.graphic = null
                 if (jeu.joueurVainqueur() != null) {
                     if (jeu.joueurVainqueur()!!.nom == jeu.getJoueurCourant()!!.nom) {
                         jeu.changeJoueurCourant()
                     }
-                    dialog.contentText = "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${
+                    dialog.contentText = "FIN DE PARTIE \n" + "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${
                         jeu.joueurVainqueur()!!.calculerScore()
-                    } Point(s) \n " + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${
+                    } Point(s) \n" + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${
                         jeu.getJoueurCourant()!!.calculerScore()
                     } Point(s) "
                 } else {
-                    dialog.contentText = "Egalité, chaque joueur avait ${jeu.getJoueurCourant()!!.calculerScore()}"
+                    dialog.contentText = "FIN DE PARTIE \n" + "Egalité, chaque joueurs avaient ${jeu.getJoueurCourant()!!.calculerScore()} Points"
                 }
-                dialog.dialogPane.stylesheets.add(
-                    AppliJeuEchecMartien::class.java.getResource("/projet/echecmartien/style.css").toExternalForm())
+                dialog.dialogPane.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("/projet/echecmartien/style.css").toExternalForm())
                 dialog.dialogPane.styleClass.add("dialog")
                 dialog.showAndWait()
                 vue.grille.isDisable = true

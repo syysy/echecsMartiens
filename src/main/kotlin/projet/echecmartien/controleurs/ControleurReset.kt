@@ -8,7 +8,9 @@ import javafx.scene.control.ButtonType
 import javafx.stage.Stage
 import projet.echecmartien.AppliJeuEchecMartien
 import projet.echecmartien.modele.Jeu
+import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
+import projet.echecmartien.vue.RulesVue
 
 class ControleurReset(vue: MainVue, modele : Jeu, primaryStage: Stage): EventHandler<ActionEvent> {
     val vue : MainVue
@@ -22,8 +24,12 @@ class ControleurReset(vue: MainVue, modele : Jeu, primaryStage: Stage): EventHan
 
     override fun handle(p0: ActionEvent?) {
         val dialog = Alert(Alert.AlertType.CONFIRMATION)
-        dialog.title="boîte de dialogue de confirmation"
-        dialog.headerText="Voulez-vous vraiment reset la partie ?"
+        dialog.title="Are you sure about that ?"
+        dialog.headerText = null
+        dialog.graphic = null
+        dialog.contentText = "Voulez-vous reset ?"
+        dialog.dialogPane.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("/projet/echecmartien/style.css").toExternalForm())
+        dialog.dialogPane.styleClass.add("dialog2")
         val resultat = dialog.showAndWait()
         if (resultat.get() == ButtonType.OK){
             primaryStage.scene = Scene(vue,400.0,600.0)

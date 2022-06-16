@@ -4,6 +4,7 @@ import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.scene.control.TextInputDialog
 import javafx.stage.Stage
+import projet.echecmartien.AppliJeuEchecMartien
 import projet.echecmartien.modele.Coordonnee
 import projet.echecmartien.modele.Jeu
 import projet.echecmartien.modele.Pion
@@ -28,8 +29,11 @@ open class ControleurSave(vue: JeuVue, modele : Jeu ,primaryStage: Stage): Event
          * */
         val dialog = TextInputDialog()
         dialog.title = "Sauvegarde d'une partie"
-        dialog.headerText = "Entrez un nom pour votre sauvegarde"
-        dialog.contentText = "Nom :"
+        dialog.headerText = null
+        dialog.graphic = null
+        dialog.contentText = "Entrez un nom pour votre sauvegarde : "
+        dialog.dialogPane.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("/projet/echecmartien/style.css").toExternalForm())
+        dialog.dialogPane.styleClass.add("dialog2")
         val result = dialog.showAndWait()
 
         /**
