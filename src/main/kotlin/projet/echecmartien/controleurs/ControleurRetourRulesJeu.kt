@@ -22,7 +22,7 @@ class ControleurRetourRulesJeu (vue: JeuVue, modele:Jeu, primaryStage: Stage): E
     }
 
     override fun handle(p0: ActionEvent?) {
-        var new = JeuVue()
+        val new = JeuVue()
         new.joueur1.text = vue.savePseudo1
         new.joueur2.text = vue.savePseudo2
         new.point1.text = vue.point1.text

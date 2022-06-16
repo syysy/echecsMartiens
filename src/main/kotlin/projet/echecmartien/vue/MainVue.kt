@@ -6,17 +6,11 @@ import javafx.geometry.*
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
-import javafx.scene.image.Image
-import javafx.scene.image.ImageView
 import javafx.scene.layout.*
 import javafx.scene.paint.Color
-import javafx.scene.shape.Circle
 import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileReader
 
 
 class MainVue: BorderPane() {
@@ -29,9 +23,9 @@ class MainVue: BorderPane() {
     var savePseudo1 : String
     var savePseudo2 : String
     var playButton : Button
-    var labelTop = Label("Echecs Martiens")
+    private var labelTop = Label("Echecs Martiens")
     var buttonBottomRules  = Button("Retour")
-    var IActive : Boolean? = false
+    var iActive : Boolean? = false
 
 
     init {

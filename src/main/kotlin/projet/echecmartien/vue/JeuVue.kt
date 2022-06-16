@@ -7,8 +7,6 @@ import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.control.Button
 import javafx.scene.control.Label
-import javafx.scene.control.Labeled
-import javafx.scene.image.Image
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.*
 import javafx.scene.paint.Color
@@ -45,18 +43,18 @@ class JeuVue(
 
     val grille :GridPane= GridPane()
 
-    val bot :GridPane= GridPane()
+    private val bot :GridPane= GridPane()
 
     val boutonCharge :Button= Button("Charger")
     val boutonSave :Button= Button("Save")
     val boutonRegles :Button= Button("Règles")
     val boutonReset :Button= Button("Reset")
-    var pts1 :Label= Label("0")
-    var pts2 :Label= Label("0")
-    var labelTop :Label = Label("Echecs Martiens")
-    val centre :VBox = VBox()
-    val info1 :HBox= HBox()
-    val info2 :HBox= HBox()
+    private var pts1 :Label= Label("0")
+    private var pts2 :Label= Label("0")
+    private var labelTop :Label = Label("Echecs Martiens")
+    private val centre :VBox = VBox()
+    private val info1 :HBox= HBox()
+    private val info2 :HBox= HBox()
     var savePseudo1 : String
     var savePseudo2 : String
     var endGame : Label = Label("Partie finie, veuillez cliquer sur Reset ")
@@ -129,7 +127,7 @@ class JeuVue(
         for (i in 0 until 4){
             for (j in 0 until 8){
                 grille.style = "-fx-border-color : black;-border-width:2"
-                var cercle = Circle()
+                val cercle = Circle()
                 cercle.radius = 20.0
                 grille.add(cercle,i,j)
                 if (j == 3){

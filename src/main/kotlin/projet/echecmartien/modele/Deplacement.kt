@@ -8,9 +8,7 @@ import projet.echecmartien.exceptions.DeplacementException
  *
  */
 
-class Deplacement(origine : Coordonnee, destination : Coordonnee) {
-    private var origine = origine
-    private var destination = destination
+class Deplacement(private var origine: Coordonnee, private var destination: Coordonnee) {
 
     /**
      * dans le constructeur la validité du déplacement dans la grille est testée
@@ -66,23 +64,23 @@ class Deplacement(origine : Coordonnee, destination : Coordonnee) {
      */
     fun longueur(): Int {
         if (estHorizontal()){
-            if (estHorizontalPositif()){
-                return destination.getX() - origine.getX()
+            return if (estHorizontalPositif()){
+                destination.getX() - origine.getX()
             }else{
-                return origine.getX() - destination.getX()
+                origine.getX() - destination.getX()
             }
         }else if (estVertical()){
-            if (estVerticalPositif()){
-                return destination.getY() - origine.getY()
+            return if (estVerticalPositif()){
+                destination.getY() - origine.getY()
             }else{
-                return origine.getY() - destination.getY()
+                origine.getY() - destination.getY()
             }
         }else if (estDiagonal()){
-            if (origine.getX() > destination.getX()){
-                    return origine.getX() - destination.getX()
-                }else{
-                    return destination.getX() - origine.getX()
-                }
+            return if (origine.getX() > destination.getX()){
+                origine.getX() - destination.getX()
+            }else{
+                destination.getX() - origine.getX()
+            }
             } else{
             throw DeplacementException()
         }
@@ -152,7 +150,7 @@ class Deplacement(origine : Coordonnee, destination : Coordonnee) {
      * @throws DeplacementException est levée si le déplacement n'est pas vertical
      */
     fun getCheminVertical(): List<Coordonnee> {
-        var res = mutableListOf<Coordonnee>()
+        val res = mutableListOf<Coordonnee>()
         if (estVerticalPositif()){
             for (i in 1 until longueur()){
                 res.add(Coordonnee(origine.getX(),origine.getY()+i))
@@ -176,7 +174,7 @@ class Deplacement(origine : Coordonnee, destination : Coordonnee) {
      * @throws DeplacementException est levée si le déplacement n'est pas horizontal
      */
     fun getCheminHorizontal(): List<Coordonnee> {
-        var res = mutableListOf<Coordonnee>()
+        val res = mutableListOf<Coordonnee>()
         if (estHorizontalPositif()){
             for (i in 1 until longueur()){
                 res.add(Coordonnee(origine.getX()+i,origine.getY()))
@@ -199,7 +197,7 @@ class Deplacement(origine : Coordonnee, destination : Coordonnee) {
      * @throws DeplacementException est levée si le déplacement n'est pas diagonal
      */
     fun getCheminDiagonal(): List<Coordonnee> {
-        var res = mutableListOf<Coordonnee>()
+        val res = mutableListOf<Coordonnee>()
         if (estDiagonalNegatifXNegatifY()){
             for (i in 1 until longueur()){
                 res.add(Coordonnee(origine.getX()-i,origine.getY()-i))
