@@ -255,6 +255,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 listeMaxCos.add(listeCos[i])
             }else if(jeu.plateau.getCases()[liste[i].getX()][liste[i].getY()].getPion()!!.getScore() > max){
                 listeMax = mutableListOf()
+                listeMaxCos = mutableListOf()
                 listeMax.add(liste[i])
                 listeMaxCos.add(listeCos[i])
                 max = jeu.plateau.getCases()[liste[i].getX()][liste[i].getY()].getPion()!!.getScore()
@@ -262,7 +263,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         }
 
         println("ListeMax : $listeMax")
-        println("Liste max Cos : $listeMax")
+        println("Liste max Cos : $listeMaxCos")
         if (listeMax.size > 0){
 
             var rand = Random.nextInt(0,listeMax.size)
@@ -275,8 +276,8 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
     }
 
     fun triDeplace(liste: MutableList<Coordonnee>,listeCos : MutableList<Coordonnee>) : Boolean{
-        var listePris = mutableListOf<Coordonnee>()
-        var listePrisCos = mutableListOf<Coordonnee>()
+        val listePris = mutableListOf<Coordonnee>()
+        val listePrisCos = mutableListOf<Coordonnee>()
         for (i in 0 until liste.size){
             for (j in 0 until 4){
                 for (k in 0 until 4){
@@ -296,8 +297,8 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             }
         }
 
-        var listeDispo = mutableListOf<Coordonnee>()
-        var listeDispoCos = mutableListOf<Coordonnee>()
+        val listeDispo = mutableListOf<Coordonnee>()
+        val listeDispoCos = mutableListOf<Coordonnee>()
         for (i in 0 until liste.size){
             if (liste[i] !in listePris){
                 listeDispo.add(liste[i])
@@ -305,8 +306,8 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             }
         }
 
-        var listePasAdverse = mutableListOf<Coordonnee>()
-        var listePasAdverseCos = mutableListOf<Coordonnee>()
+        val listePasAdverse = mutableListOf<Coordonnee>()
+        val listePasAdverseCos = mutableListOf<Coordonnee>()
 
         for (i in 0 until listeDispo.size){
             if (listeDispo[i].getY() >= 4){
@@ -314,8 +315,8 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 listePasAdverseCos.add(listeDispoCos[i])
             }
         }
-        println(listePasAdverse)
-        println(listePasAdverseCos)
+        println("pas pour l'adversaire $listePasAdverse")
+        println("pas pour l'adversaire $listePasAdverseCos")
 
         if (listePasAdverse.size != 0){
             var rand = Random.nextInt(0,listePasAdverse.size)
@@ -369,8 +370,8 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         }
         println("grand pion : $grandPionDanger")
         println("grand Pion Cos : $grandPionDangerCos")
-        var grandPionDangerPrend = mutableListOf<Coordonnee>()
-        var grandPionDangerPrendCos = mutableListOf<Coordonnee>()
+        val grandPionDangerPrend = mutableListOf<Coordonnee>()
+        val grandPionDangerPrendCos = mutableListOf<Coordonnee>()
         for (i in 0 until grandPionDanger.size){
             if (jeu.plateau.getCases()[grandPionDanger[i].getX()][grandPionDanger[i].getY()].getPion() != null){
                 grandPionDangerPrend.add(Coordonnee(grandPionDanger[i].getX(),grandPionDanger[i].getY()))
@@ -378,14 +379,13 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             }
         }
         if (grandPionDangerPrend.size != 0){
-            if (!triPrendre(grandPionDangerPrend,grandPionDangerPrendCos)){
-                return triDeplace(grandPionDanger,grandPionDangerCos)
-            }else{
-                return true
-            }
-        }else{
-            return false
+            return !triPrendre(grandPionDangerPrend,grandPionDangerPrendCos)
         }
+        if (grandPionDanger.size != 0) {
+            return triDeplace(grandPionDanger,grandPionDangerCos)
+        }
+        return false
+
 
     }
 }
