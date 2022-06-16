@@ -6,7 +6,6 @@ import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.control.Button
 import javafx.scene.control.Label
-import javafx.scene.control.TextArea
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.FlowPane
 import javafx.scene.paint.Color
@@ -40,7 +39,7 @@ class RulesVue: BorderPane() {
             "\n" +
             "Le gagnant est évidement le joueur qui à le plus de points")
 
-    var labelTop = Label("Echecs Martiens")
+    private var labelTop = Label("Echecs Martiens")
 
     init {
         val flowPaneTop = FlowPane()

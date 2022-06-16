@@ -3,18 +3,13 @@ package projet.echecmartien.controleurs
 import javafx.event.EventHandler
 import javafx.scene.Node
 import javafx.scene.control.Alert
-import javafx.scene.control.ButtonType
 import javafx.scene.input.MouseEvent
-import javafx.scene.layout.CornerRadii
 import javafx.scene.layout.GridPane
-import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import projet.echecmartien.AppliJeuEchecMartien
 import projet.echecmartien.exceptions.DeplacementException
 import projet.echecmartien.modele.*
 import projet.echecmartien.vue.JeuVue
-import projet.echecmartien.vue.MainVue
-import java.util.*
 import kotlin.random.Random
 
 class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<MouseEvent>{
@@ -37,12 +32,16 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         }
         jeu.deplacer(originColumn,originRow,column,row)
         vue.setAsNull(vue.grille.children[originColumn*(vue.grille.rowCount)+originRow] as Circle,jeu)
-        if (type == 1){
-            vue.setAsPetitPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle,jeu)
-        }else if (type == 2){
-            vue.setAsMoyenPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle,jeu)
-        }else if (type == 3){
-            vue.setAsGrandPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle,jeu)
+        when (type) {
+            1 -> {
+                vue.setAsPetitPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle,jeu)
+            }
+            2 -> {
+                vue.setAsMoyenPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle,jeu)
+            }
+            3 -> {
+                vue.setAsGrandPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle,jeu)
+            }
         }
 
 
@@ -111,10 +110,10 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         //contrôle IA
 
         if (vue.IActive == true){
-            var listeDeplace = mutableListOf<Coordonnee>()
-            var listeDeplaceCos = mutableListOf<Coordonnee>()
-            var listePrendre = mutableListOf<Coordonnee>()
-            var listePrendreCos = mutableListOf<Coordonnee>()
+            val listeDeplace = mutableListOf<Coordonnee>()
+            val listeDeplaceCos = mutableListOf<Coordonnee>()
+            val listePrendre = mutableListOf<Coordonnee>()
+            val listePrendreCos = mutableListOf<Coordonnee>()
             for (row in 4 until 8){
                 for (column in 0 until 4){
                     for (i in 0 until 8){
@@ -153,7 +152,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             originCords = jeu.getCoordOrigineDeplacement()!!
             originColumn = originCords.getX()
             originRow = originCords.getY()
-            var destiCords = jeu.getCoordDestinationDeplacement()!!
+            val destiCords = jeu.getCoordDestinationDeplacement()!!
             column = destiCords.getX()
             row = destiCords.getY()
 
@@ -169,12 +168,16 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             jeu.deplacer(originColumn,originRow,column,row)
 
             vue.setAsNull(vue.grille.children[originColumn*(vue.grille.rowCount)+originRow] as Circle,jeu)
-            if (type == 1){
-                vue.setAsPetitPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle,jeu)
-            }else if (type == 2){
-                vue.setAsMoyenPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle,jeu)
-            }else if (type == 3){
-                vue.setAsGrandPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle,jeu)
+            when (type) {
+                1 -> {
+                    vue.setAsPetitPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle,jeu)
+                }
+                2 -> {
+                    vue.setAsMoyenPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle,jeu)
+                }
+                3 -> {
+                    vue.setAsGrandPion(vue.grille.children[column*(vue.grille.rowCount)+row] as Circle,jeu)
+                }
             }
 
 
@@ -245,10 +248,10 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
 
     }
 
-    fun triPrendre(liste : MutableList<Coordonnee>,listeCos : MutableList<Coordonnee>) : Boolean{
+    private fun triPrendre(liste : MutableList<Coordonnee>, listeCos : MutableList<Coordonnee>) : Boolean{
         var max = 1
         var listeMax = mutableListOf<Coordonnee>()
-        var listeMaxCos = mutableListOf<Coordonnee>()
+        val listeMaxCos = mutableListOf<Coordonnee>()
         for (i in 0 until liste.size){
             if (jeu.plateau.getCases()[liste[i].getX()][liste[i].getY()].getPion()!!.getScore() == max){
                 listeMax.add(liste[i])
@@ -263,20 +266,20 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
 
         println("ListeMax : $listeMax")
         println("Liste max Cos : $listeMax")
-        if (listeMax.size > 0){
+        return if (listeMax.size > 0){
 
-            var rand = Random.nextInt(0,listeMax.size)
+            val rand = Random.nextInt(0,listeMax.size)
             jeu.setCoordDestinationDeplacement(listeMax[rand])
             jeu.setCoordOrigineDeplacement(listeMaxCos[rand])
-            return true
+            true
         }else{
-            return false
+            false
         }
     }
 
-    fun triDeplace(liste: MutableList<Coordonnee>,listeCos : MutableList<Coordonnee>) : Boolean{
-        var listePris = mutableListOf<Coordonnee>()
-        var listePrisCos = mutableListOf<Coordonnee>()
+    private fun triDeplace(liste: MutableList<Coordonnee>, listeCos : MutableList<Coordonnee>) : Boolean{
+        val listePris = mutableListOf<Coordonnee>()
+        val listePrisCos = mutableListOf<Coordonnee>()
         for (i in 0 until liste.size){
             for (j in 0 until 4){
                 for (k in 0 until 4){
@@ -296,8 +299,8 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             }
         }
 
-        var listeDispo = mutableListOf<Coordonnee>()
-        var listeDispoCos = mutableListOf<Coordonnee>()
+        val listeDispo = mutableListOf<Coordonnee>()
+        val listeDispoCos = mutableListOf<Coordonnee>()
         for (i in 0 until liste.size){
             if (liste[i] !in listePris){
                 listeDispo.add(liste[i])
@@ -305,8 +308,8 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             }
         }
 
-        var listePasAdverse = mutableListOf<Coordonnee>()
-        var listePasAdverseCos = mutableListOf<Coordonnee>()
+        val listePasAdverse = mutableListOf<Coordonnee>()
+        val listePasAdverseCos = mutableListOf<Coordonnee>()
 
         for (i in 0 until listeDispo.size){
             if (listeDispo[i].getY() >= 4){
@@ -314,23 +317,23 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 listePasAdverseCos.add(listeDispoCos[i])
             }
         }
-        println(listePasAdverse)
-        println(listePasAdverseCos)
+        println("pas pour l'adversaire $listePasAdverse")
+        println("pas pour l'adversaire $listePasAdverseCos")
 
         if (listePasAdverse.size != 0){
-            var rand = Random.nextInt(0,listePasAdverse.size)
+            val rand = Random.nextInt(0,listePasAdverse.size)
             jeu.setCoordDestinationDeplacement(listePasAdverse[rand])
             jeu.setCoordOrigineDeplacement(listePasAdverseCos[rand])
             return true
         }
         if (listeDispo.size != 0){
-            var rand = Random.nextInt(0,listeDispo.size)
+            val rand = Random.nextInt(0,listeDispo.size)
             jeu.setCoordDestinationDeplacement(listeDispo[rand])
             jeu.setCoordOrigineDeplacement(listeDispoCos[rand])
             return true
         }
         if (liste.size != 0){
-            var rand = Random.nextInt(0,liste.size)
+            val rand = Random.nextInt(0,liste.size)
             jeu.setCoordDestinationDeplacement(liste[rand])
             jeu.setCoordOrigineDeplacement(listeCos[rand])
         }
@@ -340,17 +343,17 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
 
 
 
-    fun triDefense(liste : MutableList<Coordonnee>,listeCos : MutableList<Coordonnee>) : Boolean{
-        var listeGrandPion = mutableListOf<Coordonnee>()
-        var listeGrandPionCos = mutableListOf<Coordonnee>()
+    private fun triDefense(liste : MutableList<Coordonnee>, listeCos : MutableList<Coordonnee>) : Boolean{
+        val listeGrandPion = mutableListOf<Coordonnee>()
+        val listeGrandPionCos = mutableListOf<Coordonnee>()
         for (i in 0 until liste.size){
             if (jeu.plateau.getCases()[listeCos[i].getX()][listeCos[i].getY()].getPion()!!.getScore() == 3 ){
                 listeGrandPion.add(liste[i])
                 listeGrandPionCos.add(listeCos[i])
             }
         }
-        var grandPionDanger = mutableListOf<Coordonnee>()
-        var grandPionDangerCos = mutableListOf<Coordonnee>()
+        val grandPionDanger = mutableListOf<Coordonnee>()
+        val grandPionDangerCos = mutableListOf<Coordonnee>()
         for (i in 0 until listeGrandPionCos.size){
             for (j in 0 until 4){
                 for (k in 0 until 4){
@@ -367,25 +370,24 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 }
             }
         }
-        println("grand pion : $grandPionDanger")
-        println("grand Pion Cos : $grandPionDangerCos")
-        var grandPionDangerPrend = mutableListOf<Coordonnee>()
-        var grandPionDangerPrendCos = mutableListOf<Coordonnee>()
+        val grandPionDangerPrend = mutableListOf<Coordonnee>()
+        val grandPionDangerPrendCos = mutableListOf<Coordonnee>()
         for (i in 0 until grandPionDanger.size){
             if (jeu.plateau.getCases()[grandPionDanger[i].getX()][grandPionDanger[i].getY()].getPion() != null){
                 grandPionDangerPrend.add(Coordonnee(grandPionDanger[i].getX(),grandPionDanger[i].getY()))
                 grandPionDangerPrendCos.add(Coordonnee(grandPionDangerCos[i].getX(),grandPionDangerCos[i].getY()))
             }
         }
-        if (grandPionDangerPrend.size != 0){
+        return if (grandPionDangerPrend.size != 0){
             if (!triPrendre(grandPionDangerPrend,grandPionDangerPrendCos)){
-                return triDeplace(grandPionDanger,grandPionDangerCos)
+                triDeplace(grandPionDanger,grandPionDangerCos)
             }else{
-                return true
+                true
             }
         }else{
-            return false
+            false
         }
+
 
     }
 }

@@ -2,12 +2,10 @@ package projet.echecmartien.controleurs
 
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
-import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.stage.Stage
 import projet.echecmartien.AppliJeuEchecMartien
 import projet.echecmartien.modele.Jeu
-import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
 import projet.echecmartien.vue.RulesVue
 
