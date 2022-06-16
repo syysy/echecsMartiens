@@ -66,8 +66,8 @@ class ControleurPlayButton(oldVue: MainVue,modele : Jeu,primaryStage: Stage): Ev
         }
         newVue.fixeListenerBouton(newVue.boutonReset,ControleurReset(MainVue(),jeu,primaryStage))
         newVue.fixeListenerBouton(newVue.boutonRegles,ControleurRulesJeu(newVue,jeu,primaryStage))
-        newVue.fixeListenerBouton(newVue.boutonCharge,ControleurChargerSave(MainVue(),jeu,primaryStage))
-        newVue.fixeListenerBouton(newVue.boutonSave,ControleurSave(newVue,jeu,primaryStage))
+        newVue.fixeListenerBouton(newVue.boutonSave,ControleurChargerSave(MainVue(),jeu,primaryStage))
+        newVue.fixeListenerBouton(newVue.boutonCharge,ControleurSave(newVue,jeu,primaryStage))
 
     }
 

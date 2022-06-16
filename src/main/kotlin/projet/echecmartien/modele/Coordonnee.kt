@@ -22,7 +22,7 @@ class Coordonnee(x : Int, y : Int) {
 
 
     override fun toString():String{
-       return "x = $x,y = $y"
+       return "($x,$y)"
     }
 
     override fun equals(other: Any?): Boolean {

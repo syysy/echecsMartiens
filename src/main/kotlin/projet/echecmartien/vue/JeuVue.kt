@@ -284,7 +284,7 @@ class JeuVue(
             }
         }
     }
-    fun chargement(jeu : Jeu,jCourant : String, plateau: Plateau, listPion1 : MutableSet<Pion>, listPion2 : MutableSet<Pion> ){
+    fun chargement(jeu : Jeu,jCourant : String, plateau: Plateau, listPion1 : MutableSet<Pion>, listPion2 : MutableSet<Pion> , IActive: Boolean){
         jeu.getJoueur()[0] = Joueur(joueur1.text)
         jeu.getJoueur()[1] = Joueur(joueur2.text)
         jeu.initialiserJoueur(jeu.getJoueur()[0],jeu.getJoueur()[1])
@@ -294,6 +294,7 @@ class JeuVue(
         jeu.plateau = plateau
         jeu.getJoueur()[0].pionCapture = listPion1
         jeu.getJoueur()[1].pionCapture = listPion2
+        this.IActive = IActive
 
     }
 }

@@ -9,7 +9,7 @@ class Jeu(var plateau: Plateau = Plateau()) : InterfaceJeu{
     private var nombreCoupsSansPrise = 0
     private var nombreCoupsSansPriseMax = 10
     private var coordDest : Coordonnee? = null
-    private var pionArriveDeZone : Pion? = null
+    var pionArriveDeZone : Pion? = null
     private var joueurCourant : Joueur? = null
     private var joueur = arrayOf(Joueur(""), Joueur(""))
 
