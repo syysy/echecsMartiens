@@ -1,18 +1,21 @@
 package projet.echecmartien.modele
 
-class Joueur(nom : String) {
-    var nom : String = nom
+class Joueur(var nom: String) {
     var pionCapture : MutableSet<Pion> = mutableSetOf()
 
     fun stringPions(): String {
         var res = ""
         for (i in pionCapture){
-            if(i is PetitPion){
-                res += "1"
-            }else if (i is MoyenPion){
-                res += "2"
-            }else{
-                res += "3"
+            res += when (i) {
+                is PetitPion -> {
+                    "1"
+                }
+                is MoyenPion -> {
+                    "2"
+                }
+                else -> {
+                    "3"
+                }
             }
         }
         return res
@@ -68,9 +71,9 @@ class Joueur(nom : String) {
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other){
-            return true
-        }else return other is Joueur && this.nom == other.nom
+        return if (this === other){
+            true
+        }else other is Joueur && this.nom == other.nom
     }
 
 }

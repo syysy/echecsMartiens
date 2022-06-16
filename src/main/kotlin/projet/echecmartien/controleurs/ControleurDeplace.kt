@@ -9,6 +9,7 @@ import javafx.scene.layout.CornerRadii
 import javafx.scene.layout.GridPane
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
+import projet.echecmartien.AppliJeuEchecMartien
 import projet.echecmartien.exceptions.DeplacementException
 import projet.echecmartien.modele.*
 import projet.echecmartien.vue.JeuVue
@@ -232,6 +233,9 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 } else {
                     dialog.contentText = "Egalité, chaque joueur avait ${jeu.getJoueurCourant()!!.calculerScore()}"
                 }
+                dialog.dialogPane.stylesheets.add(
+                    AppliJeuEchecMartien::class.java.getResource("/projet/echecmartien/style.css").toExternalForm())
+                dialog.dialogPane.styleClass.add("dialog")
                 dialog.showAndWait()
                 vue.grille.isDisable = true
                 vue.endGame.isVisible = true
