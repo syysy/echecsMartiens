@@ -42,5 +42,7 @@ class ControleurRetourRulesJeu (vue: JeuVue, modele:Jeu, primaryStage: Stage): E
         new.addStyle()
         new.fixeListenerBouton(new.boutonReset,ControleurReset(MainVue(),jeu,primaryStage))
         new.fixeListenerBouton(new.boutonRegles,ControleurRulesJeu(new,jeu,primaryStage))
+        new.fixeListenerBouton(new.boutonSave,ControleurSave(new,jeu,primaryStage))
+        new.fixeListenerBouton(new.boutonCharge,ControleurChargerSave(MainVue(),jeu,primaryStage))
     }
 }

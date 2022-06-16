@@ -29,5 +29,6 @@ class ControleurRulesJeu(vue: JeuVue, modele : Jeu, primaryStage: Stage): EventH
         primaryStage.scene.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("/projet/echecmartien/style.css").toExternalForm())
         rules.addStyle()
         rules.fixeListenerBouton(rules.buttonBottomRules,ControleurRetourRulesJeu(vue,jeu,primaryStage))
+        rules.fixeListenerBouton(rules.buttonBottomRules,ControleurRetourRulesJeu(vue,jeu,primaryStage))
     }
 }

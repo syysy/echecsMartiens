@@ -25,6 +25,7 @@ class AppliJeuEchecMartien: Application() {
         scene.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("/projet/echecmartien/style.css").toExternalForm())
         val test = FileInputStream("src/main/resources/projet/echecmartien/logo.png")
         val zebu = Image(test)
+        primaryStage.isResizable = false
         primaryStage.icons.add(zebu)
         vue.addStyle()
         primaryStage.title="ECHECS MARTIENS by ZebuShield"
