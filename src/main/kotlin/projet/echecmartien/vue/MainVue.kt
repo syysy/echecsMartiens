@@ -2,19 +2,21 @@ package projet.echecmartien.vue
 
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
-import javafx.geometry.HPos
-import javafx.geometry.Insets
-import javafx.geometry.Pos
-import javafx.geometry.VPos
+import javafx.geometry.*
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
+import javafx.scene.image.Image
+import javafx.scene.image.ImageView
 import javafx.scene.layout.*
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileReader
 
 
 class MainVue: BorderPane() {
@@ -29,13 +31,15 @@ class MainVue: BorderPane() {
     var playButton : Button
     var labelTop = Label("Echecs Martiens")
     var buttonBottomRules  = Button("Retour")
+    var IActive : Boolean? = false
+
 
     init {
 
         // Titre en haut
         val flowPaneTop = FlowPane()
         labelTop.font = Font.font("Tahoma", FontWeight.BOLD, FontPosture.REGULAR, 20.0)
-        labelTop.textFill = Color.BLACK
+        labelTop.textFill = Color.WHITE
         flowPaneTop.alignment = Pos.CENTER
         labelTop.padding = Insets(30.0,0.0,30.0,0.0)
         flowPaneTop.children.add(labelTop)
@@ -73,6 +77,7 @@ class MainVue: BorderPane() {
         // Boutons en bas
         val flowPaneBoutons=FlowPane()
         flowPaneBoutons.hgap=10.0
+        flowPaneBoutons.vgap=10.0
         flowPaneBoutons.alignment = Pos.CENTER
         flowPaneBoutons.padding=Insets(30.0,0.0,40.0,0.0)
         buttonBottomRules.isDisable = true
@@ -88,12 +93,21 @@ class MainVue: BorderPane() {
         val vboxRight = VBox()
         vboxRight.padding = Insets(0.0,0.0,0.0,40.0)
         this.right = vboxRight
+
     }
 
     fun fixeListenerBouton(bouton: Button, action: EventHandler<ActionEvent>) {
         bouton.onAction = action
     }
 
+
+    fun addStyle(){
+        this.styleClass.add("jeu")
+        loadButton.styleClass.add("bouton")
+        botButton.styleClass.add("bouton")
+        rulesButton.styleClass.add("bouton")
+        playButton.styleClass.add("boutonPlay")
+    }
 
 
 }

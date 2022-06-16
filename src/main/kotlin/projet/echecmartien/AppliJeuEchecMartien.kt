@@ -8,7 +8,6 @@ import projet.echecmartien.controleurs.*
 import projet.echecmartien.modele.Jeu
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
-import projet.echecmartien.vue.RulesVue
 
 class AppliJeuEchecMartien: Application() {
     override fun start(primaryStage: Stage) {
@@ -20,8 +19,10 @@ class AppliJeuEchecMartien: Application() {
         vue.fixeListenerBouton(vue.playButton,ControleurPlayButton(vue,modele,primaryStage))
         vue.fixeListenerBouton(vue.buttonBottomRules, ControleurRetourRules(vue,modele,primaryStage))
         vue.fixeListenerBouton(vue.loadButton,ControleurChargerSave(vue,modele,primaryStage))
-        val scene = Scene(vue,400.0,500.0)
-        primaryStage.title="TD5B MVC"
+        val scene = Scene(vue,400.0,600.0)
+        scene.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("/projet/echecmartien/style.css").toExternalForm())
+        vue.addStyle()
+        primaryStage.title="ECHECS MARTIENS"
         primaryStage.scene=scene
         primaryStage.show()
     }
@@ -31,12 +32,5 @@ fun main() {
     Application.launch(AppliJeuEchecMartien::class.java)
 }
 
-//val img = Image("https://cdn-s-www.lejsl.com/images/B03DA098-E2DA-4F6A-937A-6AE2D6700B6D/NW_raw/la-galaxie-dans-laquelle-le-fluor-a-ete-detecte-se-trouve-a-12-milliards-d-annees-lumiere-image-d-illustration-pixabay-1636110175.jpg")
-//val bImg = BackgroundImage(img, BackgroundRepeat.NO_REPEAT,
-//    BackgroundRepeat.NO_REPEAT,
-//    BackgroundPosition.CENTER,
-//    BackgroundSize.DEFAULT)
-//val background = Background(bImg)
-//vue.background = background
 
 
