@@ -140,10 +140,10 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             if (listePrendre.size != 0){
                 triPrendre(listePrendre,listePrendreCos)
             }else{
+                triDeplace(listeDeplace,listeDeplaceCos)
                 var rand = Random.nextInt(0,listeDeplace.size)
                 jeu.setCoordDestinationDeplacement(Coordonnee(listeDeplace[rand].getX(),listeDeplace[rand].getY()))
                 jeu.setCoordOrigineDeplacement(listeDeplaceCos[rand])
-
             }
 
             originCords = jeu.getCoordOrigineDeplacement()!!
@@ -249,10 +249,48 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 max = jeu.plateau.getCases()[liste[i].getX()][liste[i].getY()].getPion()!!.getScore()
             }
         }
-        println(listeMax)
-        println(listeMaxCos)
         var rand = Random.nextInt(0,listeMax.size)
         jeu.setCoordDestinationDeplacement(listeMax[rand])
         jeu.setCoordOrigineDeplacement(listeMaxCos[rand])
+    }
+
+    fun triDeplace(liste: MutableList<Coordonnee>,listeCos : MutableList<Coordonnee>){
+        var listePris = mutableListOf<Coordonnee>()
+        var listePrisCos = mutableListOf<Coordonnee>()
+        for (i in 0 until liste.size){
+            for (j in 0 until 4){
+                for (k in 0 until 4){
+                    if (jeu.plateau.getCases()[j][k].getPion() != null){
+                        try {
+                            (jeu.plateau.getCases()[j][k].getPion()!!.getDeplacement(Deplacement(Coordonnee(j,k),liste[i])))
+                            if (liste[i] !in listePris){
+                                listePris.add(liste[i])
+                                listePrisCos.add(listeCos[i])
+                            }
+                        }catch (_: DeplacementException){
+                        }
+                    }
+                }
+            }
+        }
+        var listeDispo = mutableListOf<Coordonnee>()
+        var listeDispoCos = mutableListOf<Coordonnee>()
+        for (i in 0 until liste.size){
+            if (liste[i] !in listePris){
+                listeDispo.add(liste[i])
+                listeDispoCos.add(listeCos[i])
+            }
+        }
+        if (listeDispo.size != 0){
+            var rand = Random.nextInt(0,listeDispo.size)
+            jeu.setCoordDestinationDeplacement(listeDispo[rand])
+            jeu.setCoordOrigineDeplacement(listeDispoCos[rand])
+        }else{
+            var rand = Random.nextInt(0,liste.size)
+            jeu.setCoordDestinationDeplacement(liste[rand])
+            jeu.setCoordOrigineDeplacement(liste[rand])
+        }
+        println(listeDispo)
+        println(listeDispoCos)
     }
 }

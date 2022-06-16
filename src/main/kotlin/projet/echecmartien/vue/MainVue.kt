@@ -9,12 +9,14 @@ import javafx.geometry.VPos
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
+import javafx.scene.image.Image
 import javafx.scene.layout.*
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
+import java.io.FileInputStream
 
 
 class MainVue: BorderPane() {
@@ -90,8 +92,16 @@ class MainVue: BorderPane() {
         val vboxRight = VBox()
         vboxRight.padding = Insets(0.0,0.0,0.0,40.0)
         this.right = vboxRight
+        var input = FileInputStream("/home/E211459X/reseau/Perso/Documents/saeIHM/eq_4_03_baudouin-sylvain_boutet-paul_caprin-mathis/image/pngtree-flat-space-rocket-background-image_149296.png")
+        var image = Image(input)
+        val backgroundImage = BackgroundImage(image,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,
+            BackgroundPosition.CENTER, BackgroundSize.DEFAULT)
+        val background = Background(backgroundImage)
+        this.background = background
 
-        this.style = ("-fx-background-image: url('https://png.pngtree.com/thumb_back/fw800/back_our/20190625/ourmid/pngtree-deep-space-cosmic-galaxy-sci-fi-cartoon-background-illustration-image_255936.jpg'); -fx-background-repeat: no-repeat; -fx-background-size: 500 600; -fx-background-position: center center;")
+
+
+        this.style = ("-fx-background-image: url('./image/pngtree-flat-space-rocket-background-image_149296.png'); -fx-background-repeat: no-repeat; -fx-background-size: 500 600; -fx-background-position: center center;")
         loadButton.style = "-fx-background-color: #222740; \n" +
                 "    -fx-font-family: \"Arial\";\n" +
                 "    -fx-text-fill: white;\n" +
