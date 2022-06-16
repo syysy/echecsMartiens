@@ -4,6 +4,7 @@ import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.scene.control.TextInputDialog
 import javafx.stage.Stage
+import projet.echecmartien.modele.Coordonnee
 import projet.echecmartien.modele.Jeu
 import projet.echecmartien.modele.Pion
 import projet.echecmartien.vue.JeuVue
@@ -42,7 +43,7 @@ open class ControleurSave(vue: JeuVue, modele : Jeu ,primaryStage: Stage): Event
             val message = Message(titre, "|"+vue.joueur1.text + "|", "|"+vue.joueur2.text + "|",
                 vue.point1.text+ "/" ,vue.point2.text + "/" ,vue.compteTour.text+"/"+jeu.getNombreCoupsSansPrise()+"/", "|"+jeu.getJoueurCourant()!!.nom+"|" + " plateau\n"
                         + save()
-            + "#"+jeu.getJoueur()[0].stringPions()+"##"+jeu.getJoueur()[1].stringPions()+"#"+vue.IActive+"/")
+            + "#"+jeu.getJoueur()[0].stringPions()+"##"+jeu.getJoueur()[1].stringPions()+"#"+"|"+vue.IActive+"|"+"|"+arriveDeZone()+"|")
             message.serialiser("sauvegarde/$titre.json")
         }
     }
@@ -65,4 +66,14 @@ open class ControleurSave(vue: JeuVue, modele : Jeu ,primaryStage: Stage): Event
         return res
     }
 
+    fun arriveDeZone(): Coordonnee?{
+        for (i in 0 until 4){
+            for (j in 0 until 8){
+                if (jeu.plateau.getCases()[i][j].getPion() === jeu.pionArriveDeZone && jeu.pionArriveDeZone is Pion){
+                    return Coordonnee(i,j)
+                }
+            }
+        }
+        return null
+    }
 }

@@ -2,21 +2,21 @@ package projet.echecmartien.vue
 
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
-import javafx.geometry.HPos
-import javafx.geometry.Insets
-import javafx.geometry.Pos
-import javafx.geometry.VPos
+import javafx.geometry.*
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
 import javafx.scene.image.Image
+import javafx.scene.image.ImageView
 import javafx.scene.layout.*
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
+import java.io.File
 import java.io.FileInputStream
+import java.io.FileReader
 
 
 class MainVue: BorderPane() {
@@ -77,6 +77,7 @@ class MainVue: BorderPane() {
         // Boutons en bas
         val flowPaneBoutons=FlowPane()
         flowPaneBoutons.hgap=10.0
+        flowPaneBoutons.vgap=10.0
         flowPaneBoutons.alignment = Pos.CENTER
         flowPaneBoutons.padding=Insets(30.0,0.0,40.0,0.0)
         buttonBottomRules.isDisable = true
@@ -92,26 +93,20 @@ class MainVue: BorderPane() {
         val vboxRight = VBox()
         vboxRight.padding = Insets(0.0,0.0,0.0,40.0)
         this.right = vboxRight
-        var input = FileInputStream("/home/E211459X/reseau/Perso/Documents/saeIHM/eq_4_03_baudouin-sylvain_boutet-paul_caprin-mathis/image/pngtree-flat-space-rocket-background-image_149296.png")
-        var image = Image(input)
-        val backgroundImage = BackgroundImage(image,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,
+        /*val input = FileInputStream("./sauvegarde/pngtree-flat-space-rocket-background-image_149296.png")
+        val img = Image(input)
+        val backgroundImage = BackgroundImage(img,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,
             BackgroundPosition.CENTER, BackgroundSize.DEFAULT)
-        val background = Background(backgroundImage)
-        this.background = background
-
-
-
-        this.style = ("-fx-background-image: url('./image/pngtree-flat-space-rocket-background-image_149296.png'); -fx-background-repeat: no-repeat; -fx-background-size: 500 600; -fx-background-position: center center;")
+        val bckgrnd = Background(backgroundImage)
+        this.background = bckgrnd*/
+        // -fx-background-image: url('sauvegarde/pngtree-flat-space-rocket-background-image_149296.png')
+        this.style = ("-fx-background-color: #383344; -fx-background-repeat: no-repeat; -fx-background-size: 500 600; -fx-background-position: center center;")
         loadButton.style = "-fx-background-color: #222740; \n" +
                 "    -fx-font-family: \"Arial\";\n" +
                 "    -fx-text-fill: white;\n" +
                 "    -fx-font-size: 12px;\n" +
                 "    -fx-padding: 10 20 10 20;"
-        botButton.style = "-fx-background-color: \n" +
-        "        #090a0c,\n" +
-                "        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),\n" +
-                "        linear-gradient(#20262b, #191d22),\n" +
-                "        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));\n" +
+        botButton.style = "-fx-background-color: #222740;\n" +
                 "    -fx-background-radius: 5,4,3,5;\n" +
                 "    -fx-background-insets: 0,1,2,0;\n" +
                 "    -fx-text-fill: white;\n" +
@@ -120,11 +115,7 @@ class MainVue: BorderPane() {
                 "    -fx-text-fill: linear-gradient(white, #d0d0d0);\n" +
                 "    -fx-font-size: 12px;\n" +
                 "    -fx-padding: 10 20 10 20;"
-        rulesButton.style = "-fx-background-color: \n" +
-                "        #090a0c,\n" +
-                "        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),\n" +
-                "        linear-gradient(#20262b, #191d22),\n" +
-                "        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));\n" +
+        rulesButton.style = "-fx-background-color: #222740;\n" +
                 "    -fx-background-radius: 5,4,3,5;\n" +
                 "    -fx-background-insets: 0,1,2,0;\n" +
                 "    -fx-text-fill: white;\n" +
@@ -132,6 +123,15 @@ class MainVue: BorderPane() {
                 "    -fx-font-family: \"Arial\";\n" +
                 "    -fx-text-fill: linear-gradient(white, #d0d0d0);\n" +
                 "    -fx-font-size: 12px;\n" +
+                "    -fx-padding: 10 20 10 20;"
+        playButton.style =  "-fx-background-color: #201d27;\n" +
+                "    -fx-background-radius: 5,4,3,5;\n" +
+                "    -fx-background-insets: 0,1,2,0;\n" +
+                "    -fx-text-fill: white;\n" +
+                "    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );\n" +
+                "    -fx-font-family: \"Arial\";\n" +
+                "    -fx-text-fill: linear-gradient(white, #d0d0d0);\n" +
+                "    -fx-font-size: 18px;\n" +
                 "    -fx-padding: 10 20 10 20;"
     }
 

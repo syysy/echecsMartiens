@@ -42,7 +42,11 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             val matricePlateau = Plateau()
             var nbTour : Int? = null
             var nbTourSansPrise : Int? = null
-            var IActive : Boolean? = false
+            var IActive : Boolean = false
+            var IActiveStr : String = ""
+            var pionArriveDeString : String = ""
+            var pionArriveDeZone : Pion? = null
+            var pionArriveDeBoolean = false
             for (i in readJson.indices) {
                 extent += readJson[i]
                 if (countPipe(extent) == 1 && readJson[i] != '|'){
@@ -463,12 +467,20 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                 if (countSlash(extent) == 4 && nbTourSansPrise !is Int){
                     nbTourSansPrise = Integer.parseInt(extent[i-1].toString())
                 }
-                if (countSlash(extent) == 5 && IActive !is Boolean){
-                    println(countSlash(extent[i-6].toString()))
-                    if (extent[i-6] == ' '){
+                if (countPipe(extent) == 7 && extent[i] != '|'){
+                    IActiveStr += extent[i]
+                    if (IActiveStr == "true"){
                         IActive = true
-                    }else if (extent[i-7] == ' '){
+                    }else if (IActiveStr == "false"){
                         IActive = false
+                    }
+                }
+                if (countPipe(extent) == 9 && extent[i] != '|'){
+                    pionArriveDeString += extent[i]
+                    if (pionArriveDeString == "null"){
+                        pionArriveDeZone = null
+                    }else if (pionArriveDeString[pionArriveDeString.length-1] == ')'){
+                        pionArriveDeBoolean = true
                     }
                 }
             }
@@ -522,6 +534,10 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             jeu.getJoueur()[0].pionCapture = listPion1
             jeu.getJoueur()[1].pionCapture = listPion2
             jeu.plateau = matricePlateau
+            if (pionArriveDeBoolean){
+                pionArriveDeZone = matricePlateau.getCases()[Integer.parseInt(pionArriveDeString[1].toString())][Integer.parseInt(pionArriveDeString[3].toString())].getPion()
+            }
+            jeu.pionArriveDeZone = pionArriveDeZone
 
             println(jeu.plateau)
             val newVue = JeuVue(Label(joueur1name),Label(joueur2name),Label(" $joueur2points points"),Label(" $joueur1points points"),
@@ -540,7 +556,7 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             newVue.joueur1.text = joueur1name
             newVue.joueur2.text = joueur2name
             println(jeu.plateau)
-            newVue.chargement(jeu,joueurCourantName,jeu.plateau,listPion1,listPion2)
+            newVue.chargement(jeu,joueurCourantName,jeu.plateau,listPion1,listPion2,IActive)
             println(jeu.plateau)
             //playerturn
             if (Joueur(newVue.joueur1.text) == jeu.getJoueurCourant()){
