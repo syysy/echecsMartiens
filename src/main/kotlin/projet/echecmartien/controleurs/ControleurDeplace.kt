@@ -217,19 +217,24 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             vue.changeJoueurStyl(jeu)
 
             if (jeu.arretPartie()){
-                if (jeu.joueurVainqueur()!!.nom == jeu.getJoueurCourant()!!.nom){
-                    jeu.changeJoueurCourant()
-                }
                 val dialog = Alert(Alert.AlertType.INFORMATION)
-                dialog.title="Fin de partie"
-                dialog.headerText="La partie est terminée"
-                if(jeu.joueurVainqueur() == Joueur("Natchouki")){
-                    dialog.contentText = "GET NACHOUKED"
-                }else{
-                    dialog.contentText = "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${jeu.joueurVainqueur()!!.calculerScore()} Point(s) \n " + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${jeu.getJoueurCourant()!!.calculerScore()} Point(s) "
-
+                dialog.title = "Fin de partie"
+                dialog.headerText = "La partie est terminée"
+                if (jeu.joueurVainqueur() != null) {
+                    if (jeu.joueurVainqueur()!!.nom == jeu.getJoueurCourant()!!.nom) {
+                        jeu.changeJoueurCourant()
+                    }
+                    dialog.contentText = "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${
+                        jeu.joueurVainqueur()!!.calculerScore()
+                    } Point(s) \n " + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${
+                        jeu.getJoueurCourant()!!.calculerScore()
+                    } Point(s) "
+                } else {
+                    dialog.contentText = "Egalité, chaque joueur avait ${jeu.getJoueurCourant()!!.calculerScore()}"
                 }
                 dialog.showAndWait()
+                vue.grille.isDisable = true
+                vue.endGame.isVisible = true
             }
         }
 
@@ -256,7 +261,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         jeu.setCoordOrigineDeplacement(listeMaxCos[rand])
     }
 
-    fun triDeplace(liste: MutableList<Coordonnee>,listeCos : MutableList<Coordonnee>){
+    fun triDeplace(liste: MutableList<Coordonnee>,listeCos : MutableList<Coordonnee>) : Boolean{
         var listePris = mutableListOf<Coordonnee>()
         var listePrisCos = mutableListOf<Coordonnee>()
         for (i in 0 until liste.size){

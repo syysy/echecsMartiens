@@ -7,6 +7,7 @@ import javafx.scene.Scene
 import javafx.scene.control.Label
 import javafx.stage.FileChooser
 import javafx.stage.Stage
+import projet.echecmartien.AppliJeuEchecMartien
 import projet.echecmartien.modele.*
 import projet.echecmartien.vue.JeuVue
 import projet.echecmartien.vue.MainVue
@@ -578,7 +579,7 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             Label("Tours sans prises : $nbTourSansPrise"),iActive)
             newVue.update(jeu)
             println(iActive)
-            val scene = Scene(newVue,500.0,800.0)
+            val scene = Scene(newVue,600.0,900.0)
             primaryStage.scene = scene
             primaryStage.centerOnScreen()
 
@@ -588,6 +589,8 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
             newVue.joueur2.text = joueur2name
             println(jeu.plateau)
             newVue.chargement(jeu,joueurCourantName,jeu.plateau,listPion1,listPion2,iActive)
+            scene.stylesheets.add(AppliJeuEchecMartien::class.java.getResource("/projet/echecmartien/style.css").toExternalForm())
+            newVue.addStyle()
             println(jeu.plateau)
             //playerturn
             if (Joueur(newVue.joueur1.text) == jeu.getJoueurCourant()){
@@ -597,7 +600,7 @@ class ControleurChargerSave(vue: MainVue,modele : Jeu, primaryStage: Stage): Eve
                 newVue.joueur2.style = "-fx-font-weight : bold;"
                 newVue.joueur1.style = ""
             }
-
+            newVue.changeJoueurStyl(jeu)
             newVue.fixeListenerBouton(newVue.boutonReset,ControleurReset(MainVue(),jeu,primaryStage))
             newVue.fixeListenerBouton(newVue.boutonRegles,ControleurRulesJeu(newVue,jeu,primaryStage))
             newVue.fixeListenerBouton(newVue.boutonCharge,ControleurChargerSave(MainVue(),jeu,primaryStage))
