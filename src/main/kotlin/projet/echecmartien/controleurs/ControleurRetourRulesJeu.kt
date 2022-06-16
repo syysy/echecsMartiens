@@ -34,7 +34,7 @@ class ControleurRetourRulesJeu (vue: JeuVue, modele:Jeu, primaryStage: Stage): E
         new.nbMoyen2.text = vue.nbMoyen2.text
         new.nbGrand2.text = vue.nbGrand2.text
         new.update(jeu)
-        primaryStage.scene = Scene(new,500.0,800.0)
+        primaryStage.scene = Scene(new,600.0,800.0)
         primaryStage.centerOnScreen()
         new.fixeListenerBouton(new.boutonReset,ControleurReset(MainVue(),jeu,primaryStage))
         new.fixeListenerBouton(new.boutonRegles,ControleurRulesJeu(new,jeu,primaryStage))

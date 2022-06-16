@@ -168,7 +168,7 @@ class JeuVue(
         this.padding = Insets(10.0)
 
         grille.background = Background(BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))
-        this.style = ("-fx-background-image: url('https://png.pngtree.com/thumb_back/fw800/back_our/20190625/ourmid/pngtree-deep-space-cosmic-galaxy-sci-fi-cartoon-background-illustration-image_255936.jpg'); -fx-background-repeat: no-repeat; -fx-background-size: 500 800; -fx-background-position: center center;")
+        this.style = ("-fx-background-color: #383344;; -fx-background-repeat: no-repeat; -fx-background-size: 500 800; -fx-background-position: center center;")
 
         /*this.background = Background(BackgroundImage(
             Image("https://ak.picdn.net/shutterstock/videos/1015364758/thumb/11.jpg?ip=x480"), BackgroundRepeat.NO_REPEAT,
