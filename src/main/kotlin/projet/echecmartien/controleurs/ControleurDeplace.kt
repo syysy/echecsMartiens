@@ -92,11 +92,15 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 if (jeu.joueurVainqueur()!!.nom == jeu.getJoueurCourant()!!.nom) {
                     jeu.changeJoueurCourant()
                 }
-                dialog.contentText = "FIN DE PARTIE \n" + "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${
-                    jeu.joueurVainqueur()!!.calculerScore()
-                } Point(s) \n" + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${
-                    jeu.getJoueurCourant()!!.calculerScore()
-                } Point(s) "
+                if (jeu.joueurVainqueur() == Joueur("Nachouki")){
+                    dialog.contentText = "GET NACHOUKED"
+                }else{
+                    dialog.contentText = "FIN DE PARTIE \n" + "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${
+                        jeu.joueurVainqueur()!!.calculerScore()
+                    } Point(s) \n" + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${
+                        jeu.getJoueurCourant()!!.calculerScore()
+                    } Point(s) "
+                }
             } else {
                 dialog.contentText = "FIN DE PARTIE \n" + "Egalité, chaque joueurs avaient ${jeu.getJoueurCourant()!!.calculerScore()} Points"
             }
@@ -232,11 +236,18 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                     if (jeu.joueurVainqueur()!!.nom == jeu.getJoueurCourant()!!.nom) {
                         jeu.changeJoueurCourant()
                     }
-                    dialog.contentText = "FIN DE PARTIE \n" + "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${
-                        jeu.joueurVainqueur()!!.calculerScore()
-                    } Point(s) \n" + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${
-                        jeu.getJoueurCourant()!!.calculerScore()
-                    } Point(s) "
+                    if (jeu.joueurVainqueur()!!.nom == jeu.getJoueurCourant()!!.nom) {
+                        jeu.changeJoueurCourant()
+                    }
+                    if (jeu.joueurVainqueur() == Joueur("Nachouki")){
+                        dialog.contentText = "GET NACHOUKED"
+                    }else{
+                        dialog.contentText = "FIN DE PARTIE \n" + "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${
+                            jeu.joueurVainqueur()!!.calculerScore()
+                        } Point(s) \n" + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${
+                            jeu.getJoueurCourant()!!.calculerScore()
+                        } Point(s) "
+                    }
                 } else {
                     dialog.contentText = "FIN DE PARTIE \n" + "Egalité, chaque joueurs avaient ${jeu.getJoueurCourant()!!.calculerScore()} Points"
                 }
