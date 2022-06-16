@@ -16,6 +16,7 @@ import javafx.scene.shape.Circle
 import javafx.scene.text.Font
 import javafx.scene.text.FontPosture
 import javafx.scene.text.FontWeight
+import projet.echecmartien.controleurs.ControleurDeplace
 import projet.echecmartien.controleurs.ControleurPlace
 import projet.echecmartien.modele.*
 
@@ -39,7 +40,8 @@ class JeuVue(
     val compteTour :Label= Label("Tour 1"),
     var nbTour : Int = 1,
     val tourSansPrises :Label= Label("Tours sans prises : 0"),
-    var IActive : Boolean? = false ) : BorderPane() {
+    var IActive : Boolean? = false
+    ) : BorderPane() {
 
     val grille :GridPane= GridPane()
 
@@ -242,6 +244,7 @@ class JeuVue(
         pion.radius = 20.0
         pion.fill = Color.WHITE
         pion.removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(this,jeu))
+        pion.removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurDeplace(this,jeu))
     }
 
     fun setAsGrandPion(pion : Circle,jeu :Jeu){
@@ -262,11 +265,14 @@ class JeuVue(
         this.fixeListenerCase(pion,ControleurPlace(this,jeu))
     }
 
-    fun update( jeu : Jeu){
+    fun update(jeu : Jeu){
         for (i in 0 until 8){
             for (j in 0 until 4){
                 if (jeu.plateau.getCases()[j][i].getPion() == null){
                     setAsNull(this.grille.children[j*(this.grille.rowCount)+i] as Circle,jeu)
+                    println("$i,$j")
+                    (this.grille.children[j*(this.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurPlace(this,jeu))
+                    (this.grille.children[j*(this.grille.rowCount)+i] as Circle).removeEventFilter(MouseEvent.MOUSE_CLICKED, ControleurDeplace(this,jeu))
                 }else{
                     if (jeu.plateau.getCases()[j][i].getJoueur() == jeu.getJoueurCourant()){
                         this.fixeListenerCase(this.grille.children[j*(this.grille.rowCount)+i] as Circle,ControleurPlace(this,jeu))
@@ -281,9 +287,9 @@ class JeuVue(
                         setAsPetitPion(this.grille.children[j*(this.grille.rowCount)+i] as Circle,jeu)
                     }
                 }
-
             }
         }
+
     }
     fun chargement(jeu : Jeu,jCourant : String, plateau: Plateau, listPion1 : MutableSet<Pion>, listPion2 : MutableSet<Pion> , IActive: Boolean){
         jeu.getJoueur()[0] = Joueur(joueur1.text)

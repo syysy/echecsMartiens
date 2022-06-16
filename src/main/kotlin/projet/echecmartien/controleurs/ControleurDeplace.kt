@@ -82,7 +82,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
 
         //playerturn
         if (Joueur(vue.joueur1.text) == jeu.getJoueurCourant()){
-            vue.joueur2.style = "-fx-font-weight : bold; -fx-text-fill : red;"
+            vue.joueur1.style = "-fx-font-weight : bold; -fx-text-fill : red;"
             vue.joueur2.style = ""
         }else{
             vue.joueur2.style = "-fx-font-weight : bold; -fx-text-fill : red;"
@@ -96,7 +96,12 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             val dialog = Alert(Alert.AlertType.INFORMATION)
             dialog.title="Fin de partie"
             dialog.headerText="La partie est terminée"
-            dialog.contentText = "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${jeu.joueurVainqueur()!!.calculerScore()} Point(s) \n " + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${jeu.getJoueurCourant()!!.calculerScore()} Point(s) "
+            if(jeu.joueurVainqueur() == Joueur("Natchouki")){
+                dialog.contentText = "GET NACHOUKED"
+            }else{
+                dialog.contentText = "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${jeu.joueurVainqueur()!!.calculerScore()} Point(s) \n " + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${jeu.getJoueurCourant()!!.calculerScore()} Point(s) "
+
+            }
             dialog.showAndWait()
         }
 
@@ -120,7 +125,6 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                                     if(!jeu.deplacementPossible(column,row,j,i,jeu.plateau.getCases()[column][row].getJoueur())){
                                         throw DeplacementException()
                                     }
-                                    vue.fixeListenerCase((vue.grille.children[j*(vue.grille.rowCount)+i] as Circle),ControleurDeplace(vue,jeu))
                                     if (jeu.plateau.getCases()[j][i].getPion() == null){
                                         listeDeplace.add(Coordonnee(j,i))
                                         listeDeplaceCos.add(Coordonnee(column,row))
@@ -137,14 +141,14 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 }
             }
 
-            if (listePrendre.size != 0){
-                triPrendre(listePrendre,listePrendreCos)
-            }else{
-                triDeplace(listeDeplace,listeDeplaceCos)
-                var rand = Random.nextInt(0,listeDeplace.size)
-                jeu.setCoordDestinationDeplacement(Coordonnee(listeDeplace[rand].getX(),listeDeplace[rand].getY()))
-                jeu.setCoordOrigineDeplacement(listeDeplaceCos[rand])
+            if (!triDefense(listeDeplace,listeDeplaceCos)){
+                if (listePrendre.size != 0){
+                    triPrendre(listePrendre,listePrendreCos)
+                }else{
+                    triDeplace(listeDeplace,listeDeplaceCos)
+                }
             }
+
 
             originCords = jeu.getCoordOrigineDeplacement()!!
             originColumn = originCords.getX()
@@ -226,7 +230,12 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
                 val dialog = Alert(Alert.AlertType.INFORMATION)
                 dialog.title="Fin de partie"
                 dialog.headerText="La partie est terminée"
-                dialog.contentText = "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${jeu.joueurVainqueur()!!.calculerScore()} Point(s) \n " + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${jeu.getJoueurCourant()!!.calculerScore()} Point(s) "
+                if(jeu.joueurVainqueur() == Joueur("Natchouki")){
+                    dialog.contentText = "GET NACHOUKED"
+                }else{
+                    dialog.contentText = "Le gagnant est ${jeu.joueurVainqueur()!!.nom} avec ${jeu.joueurVainqueur()!!.calculerScore()} Point(s) \n " + "Le joueur ${jeu.getJoueurCourant()!!.nom} à perdu, il avait ${jeu.getJoueurCourant()!!.calculerScore()} Point(s) "
+
+                }
                 dialog.showAndWait()
             }
         }
@@ -254,7 +263,7 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
         jeu.setCoordOrigineDeplacement(listeMaxCos[rand])
     }
 
-    fun triDeplace(liste: MutableList<Coordonnee>,listeCos : MutableList<Coordonnee>){
+    fun triDeplace(liste: MutableList<Coordonnee>,listeCos : MutableList<Coordonnee>) : Boolean{
         var listePris = mutableListOf<Coordonnee>()
         var listePrisCos = mutableListOf<Coordonnee>()
         for (i in 0 until liste.size){
@@ -285,12 +294,49 @@ class ControleurDeplace(private val vue: JeuVue, modele : Jeu) : EventHandler<Mo
             var rand = Random.nextInt(0,listeDispo.size)
             jeu.setCoordDestinationDeplacement(listeDispo[rand])
             jeu.setCoordOrigineDeplacement(listeDispoCos[rand])
+            return true
         }else{
-            var rand = Random.nextInt(0,liste.size)
-            jeu.setCoordDestinationDeplacement(liste[rand])
-            jeu.setCoordOrigineDeplacement(listeCos[rand])
+            if (liste.size != 0){
+                var rand = Random.nextInt(0,liste.size)
+                jeu.setCoordDestinationDeplacement(liste[rand])
+                jeu.setCoordOrigineDeplacement(listeCos[rand])
+            }
+            return false
         }
-        println(listeDispo)
-        println(listeDispoCos)
+    }
+
+
+
+    fun triDefense(liste : MutableList<Coordonnee>,listeCos : MutableList<Coordonnee>) : Boolean{
+        var listeGrandPion = mutableListOf<Coordonnee>()
+        var listeGrandPionCos = mutableListOf<Coordonnee>()
+        for (i in 0 until liste.size){
+            if (jeu.plateau.getCases()[listeCos[i].getX()][listeCos[i].getY()].getPion()!!.getScore() == 3 ){
+                listeGrandPion.add(liste[i])
+                listeGrandPionCos.add(listeCos[i])
+            }
+        }
+        var grandPionDanger = mutableListOf<Coordonnee>()
+        var grandPionDangerCos = mutableListOf<Coordonnee>()
+        for (i in 0 until listeGrandPionCos.size){
+            for (j in 0 until 4){
+                for (k in 0 until 4){
+                    if (jeu.plateau.getCases()[j][k].getPion() != null){
+                        try {
+                            (jeu.plateau.getCases()[j][k].getPion()!!.getDeplacement(Deplacement(Coordonnee(j,k),listeGrandPionCos[i])))
+                            if (liste[i] !in grandPionDanger){
+                                grandPionDanger.add(listeGrandPion[i])
+                                grandPionDangerCos.add(listeGrandPionCos[i])
+                            }
+                        }catch (_: DeplacementException){
+                        }
+                    }
+                }
+            }
+        }
+        println(grandPionDanger)
+        println(grandPionDangerCos)
+        return triDeplace(grandPionDanger,grandPionDangerCos)
+
     }
 }
